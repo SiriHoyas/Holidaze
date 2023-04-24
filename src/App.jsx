@@ -1,35 +1,66 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./fonts.css";
+
+import { ThemeProvider, createTheme } from "@mui/material";
+
+import Router from "./Router/Router.jsx";
+
+const theme = createTheme({
+  palette: {
+    common: {
+      white: "#FCFCFC",
+    },
+    primary: {
+      main: "#1A488E",
+      light: "#385E97",
+      dark: "#113264",
+      contrastText: "#FCFCFC",
+    },
+    secondary: {
+      main: "#F7B115",
+      light: "#FFD169",
+      dark: "#CF9515",
+      contrastText: "#FCFCFC",
+    },
+    text: {
+      primary: "#113264",
+    },
+    background: {
+      paper: "#FCFCFC",
+      default: "#FCFCFC",
+    },
+  },
+  typography: {
+    fontFamily: "'Nunito', sans-serif",
+    h1: {
+      fontFamily: "'Comfortaa', cursive",
+      fontWeight: "700",
+    },
+    h2: {
+      fontFamily: "'Comfortaa', cursive",
+      fontWeight: "700",
+    },
+    h3: {
+      fontFamily: "'Comfortaa', cursive",
+      fontWeight: "500",
+    },
+    body1: {
+      fontFamily: "'Nunito', sans-serif",
+      fontWeight: "500",
+    },
+    button: {
+      fontFamily: "'Comfortaa', cursive",
+      fontWeight: "100",
+      textTransform: "none",
+    },
+  },
+});
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <ThemeProvider theme={theme}>
+      <Router />
+    </ThemeProvider>
+  );
 }
 
-export default App
+export default App;

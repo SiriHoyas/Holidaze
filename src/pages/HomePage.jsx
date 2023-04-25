@@ -1,5 +1,7 @@
+import Search from "../components/Search";
+
 function HomePage() {
-  return <>HomePage</>;
+  return <Search />;
 }
 
 export default HomePage;

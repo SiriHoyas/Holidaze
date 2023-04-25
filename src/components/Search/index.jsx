@@ -1,4 +1,4 @@
-import { Grid, Button as MuiButton, TextField } from "@mui/material";
+import { Grid, Button as MuiButton, TextField, Typography } from "@mui/material";
 
 import Button from "../UI/Button";
 import DateRangePicker from "../DatePicker";
@@ -15,7 +15,8 @@ function Search() {
   }
 
   return (
-    <Grid container direction="column">
+    <Grid container direction="column" sx={{ mt: "5rem" }}>
+      <Typography variant="h6">Where do you want to go?</Typography>
       <TextField
         id="outlined-basic"
         label="Where to?"

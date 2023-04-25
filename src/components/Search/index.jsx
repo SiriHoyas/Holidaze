@@ -1,10 +1,19 @@
-import { Grid, TextField } from "@mui/material";
+import { Grid, Button as MuiButton, TextField } from "@mui/material";
 
+import Button from "../UI/Button";
 import DateRangePicker from "../DatePicker";
+import Link from "@mui/material/Link";
+import MoreChoices from "./MoreChoices";
 import { useState } from "react";
 
 function Search() {
   const [location, setLocation] = useState("Anywhere");
+  const [showMoreChoices, setShowMoreChoices] = useState(false);
+
+  function openChoices() {
+    setShowMoreChoices((prev) => !prev);
+  }
+
   return (
     <Grid container direction="column">
       <TextField
@@ -16,6 +25,11 @@ function Search() {
         variant="outlined"
       />
       <DateRangePicker />
+      <Link sx={{ marginTop: "10px" }} variant="body2" onClick={openChoices}>
+        More choices
+      </Link>
+      {showMoreChoices && <MoreChoices />}
+      <Button label="Search" size={"large"} sx={{ marginTop: "15px" }} />
     </Grid>
   );
 }

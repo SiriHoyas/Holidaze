@@ -5,6 +5,7 @@ import "dayjs/locale/zh-cn";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { Grid } from "@mui/material";
 import dayjs from "dayjs";
 import { useState } from "react";
 
@@ -15,7 +16,7 @@ function DateRangePicker() {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DatePicker value={checkInDate} onChange={(newValue) => setcheckInDate(newValue)} label="Check in" />
+      <DatePicker value={checkInDate} onChange={(newValue) => setcheckInDate(newValue)} label="Check in" sx={{ marginBottom: "15px", marginTop: "15px" }} />
       <DatePicker value={checkOutDate} onChange={(newValue) => setcheckOutDate(newValue)} label="Check out" />
     </LocalizationProvider>
   );

@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { styled } from "@mui/system";
 
 const ShapedButton = styled(MuiButton)(({ squared }) => ({
-  // width: "100%",
   borderRadius: squared ? "6px" : "30px",
 }));
 

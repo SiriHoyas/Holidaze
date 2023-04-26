@@ -16,8 +16,12 @@ function DateRangePicker() {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DatePicker disablePast={true} value={checkInDate} onChange={(newValue) => setcheckInDate(newValue)} label="Check in *" />
-      <DatePicker disablePast={true} value={checkOutDate} onChange={(newValue) => setcheckOutDate(newValue)} label="Check out *" />
+      <Grid item rowGap={2} columnGap={2}>
+        <DatePicker disablePast={true} value={checkInDate} onChange={(newValue) => setcheckInDate(newValue)} label="Check in *" />
+      </Grid>
+      <Grid item rowGap={2} columnGap={2}>
+        <DatePicker disablePast={true} value={checkOutDate} onChange={(newValue) => setcheckOutDate(newValue)} label="Check out *" />
+      </Grid>
     </LocalizationProvider>
   );
 }

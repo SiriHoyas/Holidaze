@@ -1,4 +1,4 @@
-import { Grid, Button as MuiButton, TextField, Typography } from "@mui/material";
+import { Grid, TextField, Typography } from "@mui/material";
 
 import Button from "../UI/Button";
 import DateRangePicker from "../DatePicker";
@@ -15,8 +15,10 @@ function Search() {
   }
 
   return (
-    <Grid container direction="column" sx={{ mt: "5rem" }}>
-      <Typography variant="h6">Where do you want to go?</Typography>
+    <Grid container direction={{ xs: "column", md: "row" }} xs={11} md={12} rowGap={2} columnGap={2} sx={{ mt: "5rem" }}>
+      <Grid container sx={12}>
+        <Typography variant="h6">Where do you want to go?</Typography>
+      </Grid>
       <Grid item>
         <TextField
           id="outlined-basic"
@@ -26,12 +28,14 @@ function Search() {
           }}
           variant="outlined"
         />
-        <DateRangePicker />
-        <Link sx={{ marginTop: "10px" }} variant="body2" onClick={openChoices}>
-          More choices
-        </Link>
+      </Grid>
+      <DateRangePicker />
+      <Link sx={{ marginTop: "10px" }} variant="body2" onClick={openChoices} alignContent={"flex-start"}>
+        More choices
+      </Link>
+      <Button label="Search" size={"large"} />
+      <Grid container direction={{ xs: "column", md: "row" }}>
         {showMoreChoices && <MoreChoices />}
-        <Button label="Search" size={"large"} sx={{ marginTop: "15px" }} />
       </Grid>
     </Grid>
   );

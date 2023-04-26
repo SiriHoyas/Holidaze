@@ -1,6 +1,6 @@
 import { Grid, TextField, Typography } from "@mui/material";
 
-import Button from "../UI/Button";
+import Button from "../Button";
 import DateRangePicker from "../DatePicker";
 import Link from "@mui/material/Link";
 import MoreChoices from "./MoreChoices";

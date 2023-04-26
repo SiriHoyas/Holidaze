@@ -1,6 +1,6 @@
 import { FormControl, Grid, Switch, TextField } from "@mui/material";
 
-import Button from "../UI/Button";
+import Button from "../Button";
 import { useState } from "react";
 
 function RegisterForm() {

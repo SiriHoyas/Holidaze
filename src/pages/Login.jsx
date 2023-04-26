@@ -1,6 +1,6 @@
 import { FormControl, Grid, TextField } from "@mui/material";
 
-import Button from "../components/UI/Button";
+import Button from "../components/Button";
 import { useState } from "react";
 
 function Login() {

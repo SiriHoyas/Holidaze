@@ -1,5 +1,11 @@
+import { Switch } from "@mui/material";
+
 function Register() {
-  return <>Register</>;
+  return (
+    <>
+      <Switch {...label} />
+    </>
+  );
 }
 
 export default Register;

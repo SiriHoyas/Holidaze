@@ -17,10 +17,10 @@ function DateRangePicker() {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Grid item rowGap={2} columnGap={2}>
-        <DatePicker disablePast={true} value={checkInDate} onChange={(newValue) => setcheckInDate(newValue)} label="Check in *" />
+        <DatePicker disablePast={true} value={checkInDate} onChange={(newValue) => setcheckInDate(newValue)} label="Check in *" slotProps={{ textField: { fullWidth: true } }} />
       </Grid>
       <Grid item rowGap={2} columnGap={2}>
-        <DatePicker disablePast={true} value={checkOutDate} onChange={(newValue) => setcheckOutDate(newValue)} label="Check out *" />
+        <DatePicker disablePast={true} value={checkOutDate} onChange={(newValue) => setcheckOutDate(newValue)} label="Check out *" slotProps={{ textField: { fullWidth: true } }} />
       </Grid>
     </LocalizationProvider>
   );

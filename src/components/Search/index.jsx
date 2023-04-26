@@ -21,6 +21,7 @@ function Search() {
       </Grid>
       <Grid item>
         <TextField
+          fullWidth
           id="outlined-basic"
           label="Where to?"
           onChange={(e) => {

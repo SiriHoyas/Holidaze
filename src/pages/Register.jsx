@@ -5,6 +5,7 @@ function Register() {
   return (
     <>
       <RegisterForm />
+      {/* if response.ok -> render */}
       <UploadProfileImage />
     </>
   );

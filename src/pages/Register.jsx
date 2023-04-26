@@ -1,9 +1,11 @@
-import { Switch } from "@mui/material";
+import RegisterForm from "../components/RegisterForm";
+import UploadProfileImage from "../components/UploadProfileImage";
 
 function Register() {
   return (
     <>
-      <Switch {...label} />
+      <RegisterForm />
+      <UploadProfileImage />
     </>
   );
 }

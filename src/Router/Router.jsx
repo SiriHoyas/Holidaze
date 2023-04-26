@@ -17,7 +17,6 @@ function Router() {
         <Route path="venues" element={<Venues />}>
           <Route path=":venueID" element={<VenuePage />} />
         </Route>
-        <Route path="auth" element={<Authentication />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="profile" element={<Profile />} />

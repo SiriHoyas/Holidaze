@@ -16,8 +16,8 @@ function DateRangePicker() {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DatePicker value={checkInDate} onChange={(newValue) => setcheckInDate(newValue)} label="Check in *" sx={{ marginBottom: "15px", marginTop: "15px" }} />
-      <DatePicker value={checkOutDate} onChange={(newValue) => setcheckOutDate(newValue)} label="Check out *" />
+      <DatePicker disablePast={true} value={checkInDate} onChange={(newValue) => setcheckInDate(newValue)} label="Check in *" />
+      <DatePicker disablePast={true} value={checkOutDate} onChange={(newValue) => setcheckOutDate(newValue)} label="Check out *" />
     </LocalizationProvider>
   );
 }

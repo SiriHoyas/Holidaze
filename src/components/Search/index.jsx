@@ -17,20 +17,22 @@ function Search() {
   return (
     <Grid container direction="column" sx={{ mt: "5rem" }}>
       <Typography variant="h6">Where do you want to go?</Typography>
-      <TextField
-        id="outlined-basic"
-        label="Where to?"
-        onChange={(e) => {
-          setLocation(e.target.value);
-        }}
-        variant="outlined"
-      />
-      <DateRangePicker />
-      <Link sx={{ marginTop: "10px" }} variant="body2" onClick={openChoices}>
-        More choices
-      </Link>
-      {showMoreChoices && <MoreChoices />}
-      <Button label="Search" size={"large"} sx={{ marginTop: "15px" }} />
+      <Grid item>
+        <TextField
+          id="outlined-basic"
+          label="Where to?"
+          onChange={(e) => {
+            setLocation(e.target.value);
+          }}
+          variant="outlined"
+        />
+        <DateRangePicker />
+        <Link sx={{ marginTop: "10px" }} variant="body2" onClick={openChoices}>
+          More choices
+        </Link>
+        {showMoreChoices && <MoreChoices />}
+        <Button label="Search" size={"large"} sx={{ marginTop: "15px" }} />
+      </Grid>
     </Grid>
   );
 }

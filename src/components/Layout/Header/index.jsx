@@ -1,6 +1,6 @@
 import { AppBar, Toolbar } from "@mui/material";
 
-import LogoHorizontal from "../../UI/brand/LogoHorizontal";
+import LogoHorizontal from "../../../assets/brand/LogoHorizontal";
 import MenuIcon from "../../UI/icons/MenuIcon";
 
 function Header() {

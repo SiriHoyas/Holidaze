@@ -30,7 +30,7 @@ function VenuePage() {
   ];
   return (
     <Grid container>
-      <ImgCarousel />
+      <ImgCarousel data={items} />
     </Grid>
   );
 }

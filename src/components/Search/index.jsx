@@ -31,7 +31,7 @@ function Search() {
         />
       </Grid>
       <DateRangePicker />
-      <Link sx={{ marginTop: "10px" }} variant="body2" onClick={openChoices} alignContent={"flex-start"}>
+      <Link sx={{ marginTop: "10px", cursor: "pointer" }} variant="body2" onClick={openChoices} alignContent={"flex-start"}>
         More choices
       </Link>
       <Button label="Search" size={"large"} />

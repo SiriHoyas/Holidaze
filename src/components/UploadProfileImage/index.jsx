@@ -14,7 +14,7 @@ function UploadProfileImage() {
             <TextField fullWidth id="imageUrl" label="Image URL" variant="outlined" onChange={(e) => setImageUrl(e.target.value)} />
           </Grid>
           <Grid item xs={12}>
-            {/* {imageUrl.length > 0 && <img src={imageUrl}></img>} */}
+            {imageUrl?.length > 0 && <img src={imageUrl}></img>}
           </Grid>
           <Grid item xs={12}>
             <Button fullWidth type="submit" label={"Set profile image"} />

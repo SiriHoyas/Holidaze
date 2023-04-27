@@ -22,6 +22,7 @@ function UseApi(url, options) {
         setIsLoading(false);
       }
     }
+    getData();
   }, [url]);
   return { data, isLoading, isError };
 }

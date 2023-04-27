@@ -13,9 +13,9 @@ function Router() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
-        <Route path="venues" element={<Venues />}>
-          <Route path=":venueID" element={<VenuePage />} />
-        </Route>
+        <Route path="venues" element={<Venues />} />
+        <Route path="venues/:venueID" element={<VenuePage />} />
+
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="profile" element={<Profile />} />

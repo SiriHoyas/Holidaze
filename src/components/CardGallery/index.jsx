@@ -34,7 +34,7 @@ function CardGallery({ heading }) {
     },
   ];
   return (
-    <Grid container direction={"column"} lg={10}>
+    <Grid container direction={"column"}>
       <Typography variant="h5">{heading}</Typography>
       <ImageList variant="quilted" cols={4} rowHeight={121}>
         {itemData.map((item) => (

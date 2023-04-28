@@ -3,6 +3,7 @@ import "./fonts.css";
 import { ThemeProvider, createTheme } from "@mui/material";
 
 import Router from "./Router/Router.jsx";
+import { useEffect } from "react";
 
 const theme = createTheme({
   palette: {
@@ -56,6 +57,20 @@ const theme = createTheme({
 });
 
 function App() {
+  useEffect(() => {
+    window.addEventListener("beforeunload", handleRefresh);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleRefresh);
+    };
+  }, []);
+
+  function handleRefresh() {
+    localStorage.setItem("Refreshing", "Refresh");
+  }
+
+  console.log("object");
+
   return (
     <ThemeProvider theme={theme}>
       <Router />

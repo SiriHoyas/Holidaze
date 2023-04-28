@@ -6,7 +6,7 @@ const ShapedButton = styled(MuiButton)(({ squared }) => ({
   borderRadius: squared ? "6px" : "30px",
 }));
 
-function Button({ label, onClick, link, squared = false, ...props }) {
+function Button({ label, onClick, link, squared = "false", ...props }) {
   if (link) {
     return (
       <ShapedButton variant="contained" to={link} component={Link} squared={squared} {...props}>

@@ -1,6 +1,7 @@
 import "./fonts.css";
 
 import { ThemeProvider, createTheme } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 
 import Router from "./Router/Router.jsx";
 import { useEffect } from "react";
@@ -63,13 +64,18 @@ function App() {
     return () => {
       window.removeEventListener("beforeunload", handleRefresh);
     };
-  }, []);
+  });
 
-  function handleRefresh() {
-    localStorage.setItem("Refreshing", "Refresh");
+  const dispatch = useDispatch();
+  const { userName } = useSelector((store) => store.user);
+
+  function updateUserInfo(user) {
+    dispatch(setUserInfo(user));
   }
 
-  console.log("object");
+  function handleRefresh() {
+    localStorage.setItem("Wee", "weee");
+  }
 
   return (
     <ThemeProvider theme={theme}>

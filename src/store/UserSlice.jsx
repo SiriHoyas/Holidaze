@@ -20,7 +20,7 @@ const userSlice = createSlice({
   },
 });
 
-console.log(userSlice);
+// console.log(userSlice);
 export const { setUserInfo } = userSlice.actions;
 
 export default userSlice.reducer;

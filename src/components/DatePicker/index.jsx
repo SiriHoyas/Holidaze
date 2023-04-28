@@ -12,7 +12,6 @@ import { useState } from "react";
 function DateRangePicker() {
   const [checkInDate, setcheckInDate] = useState(dayjs);
   const [checkOutDate, setcheckOutDate] = useState(dayjs);
-  console.log(checkInDate.$d.toISOString());
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>

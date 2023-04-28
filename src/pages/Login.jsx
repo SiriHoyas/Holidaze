@@ -4,7 +4,7 @@ import { Checkbox, Grid, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 
 import Button from "./../components/Button";
-import UploadProfileImage from "../components/UploadProfileImage";
+import UploadProfileImage from "../components/UploadProfileMedia";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";

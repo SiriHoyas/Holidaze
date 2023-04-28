@@ -1,5 +1,5 @@
+import { Avatar, FormControl, Grid, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
-import { FormControl, Grid, TextField } from "@mui/material";
 
 import Button from "../Button";
 import { useNavigate } from "react-router-dom";
@@ -43,7 +43,7 @@ function UploadProfileImage() {
     } catch (error) {}
   }
   return (
-    <Grid container xs={12} sx={{ mt: "6rem" }}>
+    <Grid container sx={{ mt: "6rem" }}>
       <form onSubmit={handleSubmit(submitHandler)}>
         <Grid container gap={1}>
           <Grid item xs={12}>
@@ -66,7 +66,7 @@ function UploadProfileImage() {
             />
           </Grid>
           <Grid item xs={12}>
-            {imageUrl?.length > 0 && <img src={imageUrl}></img>}
+            {imageUrl?.length > 0 && <Avatar sx={{ width: "100px", height: "100px" }} src={imageUrl} />}
           </Grid>
           <Grid item xs={12}>
             <Button fullWidth type="submit" label={"Set profile image"} />

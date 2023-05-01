@@ -1,6 +1,9 @@
 import { Grid, ImageList, ImageListItem, ImageListItemBar, Typography } from "@mui/material";
 
+import { useState } from "react";
+
 function CardGallery({ heading, data }) {
+  const [showItemBar, setShowItemBar] = useState(false);
   function srcset(image, size, rows = 1, cols = 1) {
     return {
       src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
@@ -20,13 +23,13 @@ function CardGallery({ heading, data }) {
   });
 
   return (
-    <Grid container direction={"column"}>
+    <Grid container direction={"column"} lg={8} item={true}>
       <Typography variant="h5">{heading}</Typography>
       <ImageList variant="quilted" cols={4} rowHeight={121}>
         {itemData.map((item) => (
           <ImageListItem key={item.id} cols={item.cols || 1} rows={item.rows || 1}>
             <img {...srcset(item.img, 121, item.rows, item.cols)} alt={item.title} loading="lazy" />
-            <ImageListItemBar sx={{ height: "4rem", backgroundColor: "black" }} title={item.title} subtitle={item.description} />
+            <ImageListItemBar sx={{ height: "6rem", background: "linear-gradient(0deg, #091d3b 40%, rgba(255,255,255,0) 100%);" }} title={item.title} subtitle={item.description} />
           </ImageListItem>
         ))}
       </ImageList>

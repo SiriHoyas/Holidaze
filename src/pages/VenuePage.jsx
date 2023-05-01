@@ -1,38 +1,33 @@
+import BookingCalendar from "../components/BookingCalendar";
 import { Grid } from "@mui/material";
 import ImgCarousel from "../components/ImgCarousel";
+import UseApi from "../hooks/UseApi";
+import { useParams } from "react-router-dom";
 
 function VenuePage() {
-  const items = [
-    {
-      img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-      title: "Breakfast",
-      rows: 2,
-      cols: 3,
+  const { venueID } = useParams();
+
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
     },
-    {
-      img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-      title: "Burger",
-      rows: 2,
-      cols: 1,
-    },
-    {
-      img: "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
-      title: "Camera",
-      rows: 2,
-      cols: 1,
-    },
-    {
-      img: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
-      title: "Coffee",
-      rows: 2,
-      cols: 3,
-    },
-  ];
-  return (
-    <Grid container>
-      <ImgCarousel data={items} />
-    </Grid>
-  );
+  };
+
+  const { data } = UseApi(`https://api.noroff.dev/api/v1/holidaze/venues/${venueID}?_owner=true&_bookings=true`, options);
+
+  console.log(data);
+
+  if (data) {
+    return (
+      <Grid container>
+        <Grid container>
+          <ImgCarousel data={data.media} title={data.name} />
+        </Grid>
+        <BookingCalendar bookings={data.bookings} />
+      </Grid>
+    );
+  }
 }
 
 export default VenuePage;

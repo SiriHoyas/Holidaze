@@ -1,7 +1,7 @@
-function disableDates(date) {
-  const dateString = date.$d.toDateString();
-  console.log(dateString);
+export function disableDates(date, bookedDates) {
+  console.log(bookedDates);
 
-  const bookedDates = getBookedDates("2023-05-03T22:00:00.000Z", "2023-05-07T22:00:00.000Z");
+  const dateString = date.$d.toDateString();
+
   return bookedDates.includes(dateString);
 }

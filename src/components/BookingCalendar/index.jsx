@@ -1,0 +1,5 @@
+function BookingCalendar() {
+  return <DateRangeCalendar defaultValue={[dayjs("2022-04-17"), dayjs("2022-04-21")]} slots={{ day: DateRangePickerDay }} />;
+}
+
+export default BookingCalendar;

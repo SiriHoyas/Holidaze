@@ -16,7 +16,7 @@ function CardGallery({ heading, data }) {
       cols = 1;
     }
 
-    return { id: item.id, img: item.media[0], title: item.name, description: item.description, rows: 3, cols: cols };
+    return { id: item.id, img: item.media[0], title: item.name, description: item.description, rows: 2, cols: cols };
   });
 
   return (

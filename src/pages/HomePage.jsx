@@ -6,6 +6,7 @@ function HomePage() {
   const { data } = UseApi("https://api.noroff.dev/api/v1/holidaze/venues", { method: "GET" });
 
   let recommendedData = [];
+  let allowPetsData = [];
 
   const filterByMedia = data.filter((item) => {
     if (item.media.length > 0) {
@@ -19,12 +20,23 @@ function HomePage() {
     }
   }
 
-  console.log(recommendedData);
+  const filterByPets = data.filter((item) => {
+    if (item.meta.pets) {
+      return item;
+    }
+  });
+
+  for (let i = 0; i < filterByPets.length; i++) {
+    if (i <= 3) {
+      allowPetsData.push(filterByPets[i]);
+    }
+  }
 
   return (
     <>
       <Search />
       <CardGallery heading="Recommended" data={recommendedData} />
+      <CardGallery heading="Bring your furry friends!" data={allowPetsData} />
     </>
   );
 }

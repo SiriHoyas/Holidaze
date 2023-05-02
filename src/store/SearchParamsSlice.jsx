@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const initialState = {
   keyword: "",
@@ -16,9 +16,17 @@ const searchParamsSlice = createSlice({
   initialState,
   reducers: {
     setSearchParams: (state, action) => {},
+    updateGuestCount: (state, action) => {
+      console.log(current(state));
+      console.log(action);
+      state.guestCount = action.payload.guestCount;
+      state.pets = action.payload.pets;
+    },
   },
 });
 
-export const { setSearchParams } = searchParamsSlice.actions;
+console.log(searchParamsSlice);
+
+export const { setSearchParams, updateGuestCount } = searchParamsSlice.actions;
 
 export default searchParamsSlice.reducer;

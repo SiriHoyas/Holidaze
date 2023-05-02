@@ -1,19 +1,25 @@
 import { Box, Checkbox, Divider, FormControlLabel, Grid, IconButton, Menu, MenuItem, Typography } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 import Button from "../Button";
 import MinusIcon from "../../assets/icons/MinusIcon";
 import PlusIcon from "../../assets/icons/PlusIcon";
-import { useState } from "react";
+import { updateGuestCount } from "../../store/SearchParamsSlice";
 
 function GuestCountPicker() {
   const [adultCount, setAdultCount] = useState(2);
   const [childrenCount, setChildrenCount] = useState(0);
   const [bringPet, setBringPet] = useState(false);
 
-  const guestCount = adultCount + childrenCount;
-  console.log(guestCount);
-  console.log(bringPet);
+  const guestCountSum = adultCount + childrenCount;
+  const dispatch = useDispatch();
 
+  useEffect(() => {});
+
+  function handleSubmit() {
+    dispatch(updateGuestCount({ guestCount: guestCountSum, pets: bringPet }));
+  }
   //On click på done, oppdater redux
 
   return (
@@ -81,7 +87,7 @@ function GuestCountPicker() {
           }}
           label="I'm bringing a pet"
         />
-        <Button label={"Done"} />
+        <Button label={"Done"} onClick={handleSubmit} />
       </Grid>
     </Menu>
   );

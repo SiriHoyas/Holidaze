@@ -1,6 +1,9 @@
+import { Grid, Typography } from "@mui/material";
+
 import CardGallery from "../components/CardGallery";
 import Search from "../components/Search";
 import UseApi from "../hooks/UseApi";
+import VenueCard from "../components/VenueCard";
 
 function HomePage() {
   const { data } = UseApi("https://api.noroff.dev/api/v1/holidaze/venues", { method: "GET" });
@@ -36,7 +39,12 @@ function HomePage() {
     <>
       <Search />
       <CardGallery heading="Recommended" data={recommendedData} />
-      <CardGallery heading="Bring your furry friends!" data={allowPetsData} />
+      <Grid container direction={"column"} rowGap={5}>
+        <Typography variant="h5">Bring your furry friends</Typography>
+        {allowPetsData.map((venue) => {
+          return <VenueCard key={venue.id} id={venue.id} name={venue.name} description={venue.description} img={venue.media[0]} />;
+        })}
+      </Grid>
     </>
   );
 }

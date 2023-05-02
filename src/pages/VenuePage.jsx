@@ -1,11 +1,17 @@
+import { Accordion, AccordionDetails, AccordionSummary, Box, Grid, Modal, Typography } from "@mui/material";
+
 import BookingCalendar from "../components/BookingCalendar";
-import { Grid } from "@mui/material";
+import BookingModal from "../components/BookingModal";
+import Button from "../components/Button";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ImgCarousel from "../components/ImgCarousel";
 import UseApi from "../hooks/UseApi";
 import { useParams } from "react-router-dom";
+import { useState } from "react";
 
 function VenuePage() {
   const { venueID } = useParams();
+  const [expanded, setExpanded] = useState("panel1");
 
   const options = {
     method: "GET",
@@ -18,13 +24,36 @@ function VenuePage() {
 
   console.log(data);
 
+  const handleChange = (panel) => (event, newExpanded) => {
+    setExpanded(newExpanded ? panel : false);
+  };
   if (data) {
     return (
-      <Grid container>
+      <Grid container direction={"column"} sx={{ mt: "6rem" }}>
         <Grid container>
           <ImgCarousel data={data.media} title={data.name} />
         </Grid>
-        <BookingCalendar bookings={data.bookings} />
+        <Grid item>
+          <BookingModal data={data} />
+        </Grid>
+        <Grid item>
+          <Accordion variant="outlined" disableGutters={true} expanded={expanded === "panel1"} onChange={handleChange("panel1")}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1d-content" id="panel1d-header">
+              <Typography>Description</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>{data.description}</Typography>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion variant="outlined" disableGutters={true} expanded={expanded === "panel2"} onChange={handleChange("panel2")}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel2d-content" id="panel2d-header">
+              <Typography>We offer</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>Venue meta</Typography>
+            </AccordionDetails>
+          </Accordion>
+        </Grid>
       </Grid>
     );
   }

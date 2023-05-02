@@ -1,6 +1,7 @@
 import { Grid, Typography } from "@mui/material";
 
 import CardGallery from "../components/CardGallery";
+import HorizontalCardList from "../components/HorizontalCardList/HorizontalCardList";
 import Search from "../components/Search";
 import UseApi from "../hooks/UseApi";
 import VenueCard from "../components/VenueCard";
@@ -38,6 +39,7 @@ function HomePage() {
   return (
     <>
       <Search />
+      <HorizontalCardList data={recommendedData} heading={"Recommended"} />
       <CardGallery heading="Recommended" data={recommendedData} />
       <Grid container direction={"column"} rowGap={5}>
         <Typography variant="h5">Bring your furry friends</Typography>

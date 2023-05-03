@@ -6,7 +6,7 @@ function ImgCarousel({ data, isError, isLoading, title }) {
   if (data) {
     return (
       <Grid container sx={{ mt: "6rem" }}>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={12}>
           <Carousel duration={600} autoPlay={false} height={"300px"} navButtonsAlwaysVisible={true}>
             {data.map((item) => (
               <ImageListItem>

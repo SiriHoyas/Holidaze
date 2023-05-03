@@ -27,9 +27,9 @@ const searchParamsSlice = createSlice({
       state.dateTo = action.payload.dateTo;
     },
     updateGuestCount: (state, action) => {
-      console.log(current(state));
       state.guestCount = action.payload.guestCount;
       state.pets = action.payload.pets;
+      console.log(current(state));
     },
     updateWifi: (state, action) => {
       state.wifi = action.payload.wifi;

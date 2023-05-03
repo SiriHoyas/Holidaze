@@ -1,12 +1,19 @@
 import "./fonts.css";
 
-import { ThemeProvider, createTheme } from "@mui/material";
+import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 
 import Router from "./Router/Router.jsx";
 import { useEffect } from "react";
 
 const theme = createTheme({
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {},
+      },
+    },
+  },
   palette: {
     common: {
       white: "#FCFCFC",
@@ -79,6 +86,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <Router />
     </ThemeProvider>
   );

@@ -48,7 +48,7 @@ function HomePage() {
 
   if (smScreen) {
     return (
-      <Grid container>
+      <Grid container sm={9} sx={{ margin: "0 auto" }}>
         <Search />
         {data && (
           <Grid container>
@@ -72,7 +72,7 @@ function HomePage() {
   }
 
   return (
-    <Grid container>
+    <Grid container xs={11} sx={{ margin: "0 auto" }}>
       <Search />
       <HorizontalCardList data={recommendedData} heading={"Recommended"} />
       <HorizontalCardList data={allowPetsData} heading={"Bring your furry friends!"} />

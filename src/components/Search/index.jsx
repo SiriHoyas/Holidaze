@@ -16,7 +16,7 @@ function Search() {
   }
 
   return (
-    <Grid container direction={{ xs: "column", md: "row" }} rowGap={2} columnGap={2} sx={{ mt: "5rem" }}>
+    <Grid container direction={{ xs: "column", md: "row" }} rowGap={2} columnGap={2} sx={{ mt: "5rem" }} item={true}>
       <Grid container>
         <Typography variant="h6">Where do you want to go?</Typography>
       </Grid>

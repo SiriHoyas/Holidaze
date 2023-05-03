@@ -1,14 +1,13 @@
-import { Box, Checkbox, Divider, FormControlLabel, Grid, IconButton, Menu, MenuItem, TextField, Typography } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { Checkbox, Divider, FormControlLabel, Grid, IconButton, Menu, Typography } from "@mui/material";
 
 import Button from "../Button";
-import GuestIcon from "../../assets/icons/GuestsIcon";
 import MinusIcon from "../../assets/icons/MinusIcon";
 import { Button as MuiButton } from "@mui/material";
 import PersonAddAlt1RoundedIcon from "@mui/icons-material/PersonAddAlt1Rounded";
 import PlusIcon from "../../assets/icons/PlusIcon";
 import { updateGuestCount } from "../../store/SearchParamsSlice";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
 
 function GuestCountPicker() {
   const [adultCount, setAdultCount] = useState(2);
@@ -26,8 +25,6 @@ function GuestCountPicker() {
 
   const guestCountSum = adultCount + childrenCount;
   const dispatch = useDispatch();
-
-  useEffect(() => {});
 
   function handleSubmit() {
     dispatch(updateGuestCount({ guestCount: guestCountSum, pets: bringPet }));
@@ -106,7 +103,7 @@ function GuestCountPicker() {
             }}
             label="I'm bringing a pet"
           />
-          <Button label={"Done"} onClick={handleClose} />
+          <Button label={"Done"} onClick={handleSubmit} />
         </Grid>
       </Menu>
     </Grid>

@@ -9,4 +9,5 @@ export const store = configureStore({
     searchParams: searchParamsReducer,
     favourites: FavouritesReducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });

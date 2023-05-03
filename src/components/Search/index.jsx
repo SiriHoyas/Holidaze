@@ -2,6 +2,7 @@ import { Grid, TextField, Typography } from "@mui/material";
 
 import Button from "../Button";
 import DateRangePicker from "../DatePicker";
+import GuestCountPicker from "../GuestCountPicker/GuestCountPicker";
 import Link from "@mui/material/Link";
 import MoreChoices from "./MoreChoices";
 import { useState } from "react";
@@ -29,6 +30,9 @@ function Search() {
           }}
           variant="outlined"
         />
+      </Grid>
+      <Grid item>
+        <GuestCountPicker />
       </Grid>
       <DateRangePicker />
       <Link sx={{ marginTop: "10px", cursor: "pointer" }} variant="body2" onClick={openChoices} alignContent={"flex-start"}>

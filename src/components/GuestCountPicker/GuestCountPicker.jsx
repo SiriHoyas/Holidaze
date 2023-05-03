@@ -20,7 +20,6 @@ function GuestCountPicker() {
   function handleSubmit() {
     dispatch(updateGuestCount({ guestCount: guestCountSum, pets: bringPet }));
   }
-  //On click på done, oppdater redux
 
   return (
     <Menu

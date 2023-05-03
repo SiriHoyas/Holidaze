@@ -2,7 +2,6 @@ import { Grid, ImageList, ImageListItem, Typography } from "@mui/material";
 
 function HorizontalCardList({ data, heading }) {
   if (data) {
-    console.log(data);
     return (
       <Grid container>
         <Typography variant="h6">{heading}</Typography>

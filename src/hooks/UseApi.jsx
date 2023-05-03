@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 function UseApi(url, options) {
   const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {

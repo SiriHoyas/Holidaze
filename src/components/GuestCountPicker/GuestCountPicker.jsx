@@ -33,8 +33,8 @@ function GuestCountPicker() {
   }
 
   return (
-    <Grid container sx={{ width: "20%" }}>
-      <MuiButton sx={{ height: "40px" }} fullWidth variant="outlined" startIcon={<PersonAddAlt1RoundedIcon />} size="large" id="guest-picker" aria-controls={open ? "guest-picker" : undefined} aria-haspopup="true" aria-expanded={open ? "true" : undefined} onClick={handleClick}>
+    <Grid container>
+      <MuiButton sx={{ height: "56px" }} fullWidth variant="outlined" startIcon={<PersonAddAlt1RoundedIcon />} size="large" id="guest-picker" aria-controls={open ? "guest-picker" : undefined} aria-haspopup="true" aria-expanded={open ? "true" : undefined} onClick={handleClick}>
         {guestCountSum} Guests
       </MuiButton>
       <Menu

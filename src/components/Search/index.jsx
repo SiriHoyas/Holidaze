@@ -35,10 +35,11 @@ function Search() {
         <GuestCountPicker />
       </Grid>
       <DateRangePicker />
-      <Link sx={{ marginTop: "10px", cursor: "pointer" }} variant="body2" onClick={openChoices} alignContent={"flex-start"}>
+
+      <Button label="Search" size={"large"} />
+      <Link sx={{ cursor: "pointer" }} variant="body2" onClick={openChoices} alignContent={"flex-start"}>
         More choices
       </Link>
-      <Button label="Search" size={"large"} />
       <Grid container direction={{ xs: "column", md: "row" }}>
         {showMoreChoices && <MoreChoices />}
       </Grid>

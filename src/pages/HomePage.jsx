@@ -48,7 +48,7 @@ function HomePage() {
 
   if (smScreen) {
     return (
-      <Grid container sm={9} sx={{ margin: "0 auto" }}>
+      <Grid container sm={9} sx={{ margin: "0 auto" }} item={true}>
         <Grid item sx={{ mt: "9rem" }} xs={12}>
           <Search />
         </Grid>
@@ -57,9 +57,9 @@ function HomePage() {
             <Grid item xs={12} sx={{ mt: "5rem" }}>
               <Carousel indicators={false} duration={500} autoPlay={true} height={"500px"}>
                 {recommendedData.map((item) => (
-                  <Grid item sx={{ height: "100%", display: "flex" }} direction={"row"}>
+                  <Grid key={item.id} item sx={{ height: "100%", display: "flex" }}>
                     <ImageListItem key={item.id} sx={{ width: "100%" }}>
-                      <Box square={false} sx={{ width: "100%", height: "20%", p: "1rem", boxShadow: "0", backgroundColor: "#0000008f", zIndex: "100", position: "absolute", bottom: "0" }}>
+                      <Box sx={{ width: "100%", height: "20%", p: "1rem", boxShadow: "0", backgroundColor: "#0000008f", zIndex: "100", position: "absolute", bottom: "0" }}>
                         <Typography sx={{ color: "white" }}>{item.name}</Typography>
                       </Box>
                       <img src={`${item.media[0]}`} alt={item.name} loading="lazy" />
@@ -88,7 +88,7 @@ function HomePage() {
   }
 
   return (
-    <Grid container xs={11} sx={{ margin: "0 auto" }}>
+    <Grid container xs={11} sx={{ margin: "0 auto" }} item={true}>
       <Grid item sx={{ mt: "6rem" }}>
         <Search />
       </Grid>

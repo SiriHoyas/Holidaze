@@ -1,4 +1,5 @@
 import { Checkbox, Divider, FormControlLabel, Grid, IconButton, Menu, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 
 import Button from "../Button";
 import MinusIcon from "../../assets/icons/MinusIcon";
@@ -7,14 +8,26 @@ import PersonAddAlt1RoundedIcon from "@mui/icons-material/PersonAddAlt1Rounded";
 import PlusIcon from "../../assets/icons/PlusIcon";
 import { updateGuestCount } from "../../store/SearchParamsSlice";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
 
-function GuestCountPicker() {
+function GuestCountPicker({ state, setSearchParams }) {
   const [adultCount, setAdultCount] = useState(2);
   const [childrenCount, setChildrenCount] = useState(0);
   const [bringPet, setBringPet] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+
   const open = Boolean(anchorEl);
+
+  const guestCountSum = adultCount + childrenCount;
+
+  useEffect(() => {
+    const updatedValue = { guestCount: guestCountSum, pets: bringPet };
+    console.log(updatedValue);
+
+    setSearchParams((guests) => ({
+      ...guests,
+      ...updatedValue,
+    }));
+  }, [adultCount, childrenCount, bringPet]);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -22,15 +35,6 @@ function GuestCountPicker() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  const guestCountSum = adultCount + childrenCount;
-  console.log(guestCountSum);
-  console.log(bringPet);
-  const dispatch = useDispatch();
-
-  function handleSubmit() {
-    dispatch(updateGuestCount({ guestCount: guestCountSum, pets: bringPet }));
-  }
 
   return (
     <Grid container>
@@ -105,7 +109,7 @@ function GuestCountPicker() {
             }}
             label="I'm bringing a pet"
           />
-          <Button label={"Done"} onClick={handleSubmit} />
+          <Button label={"Done"} onClick={handleClose} />
         </Grid>
       </Menu>
     </Grid>

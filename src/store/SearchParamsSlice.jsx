@@ -48,6 +48,6 @@ const searchParamsSlice = createSlice({
 
 console.log(searchParamsSlice);
 
-export const { updateGuestCount, updateDateFrom, updateDateTo } = searchParamsSlice.actions;
+export const { updateGuestCount, updateDateFrom, updateDateTo, updateBreakfast, updateKeyword, updateParking, updatePets, updateWifi } = searchParamsSlice.actions;
 
 export default searchParamsSlice.reducer;

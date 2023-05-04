@@ -29,12 +29,10 @@ function CardGallery({ heading, data }) {
       <Typography variant="h5">{heading}</Typography>
       <ImageList variant="quilted" cols={4} rowHeight={121}>
         {itemData.map((item) => (
-          <LazyMotion features={domAnimation}>
-            <ImageListItem component={Link} to={`venues/${item.id}`} key={item.id} cols={item.cols || 1} rows={item.rows || 1}>
-              <img {...srcset(item.img, 121, item.rows, item.cols)} alt={item.title} loading="lazy" />
-              <ImageListItemBar sx={{ height: "6rem", background: "linear-gradient(0deg, #091d3b 40%, rgba(255,255,255,0) 100%);" }} title={item.title} subtitle={item.description} />
-            </ImageListItem>
-          </LazyMotion>
+          <ImageListItem key={item.id} component={Link} to={`venues/${item.id}`} cols={item.cols || 1} rows={item.rows || 1}>
+            <img {...srcset(item.img, 121, item.rows, item.cols)} alt={item.title} loading="lazy" />
+            <ImageListItemBar sx={{ height: "6rem", background: "linear-gradient(0deg, #091d3b 40%, rgba(255,255,255,0) 100%);" }} title={item.title} subtitle={item.description} />
+          </ImageListItem>
         ))}
       </ImageList>
     </Grid>

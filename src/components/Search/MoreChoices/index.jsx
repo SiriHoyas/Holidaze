@@ -1,6 +1,13 @@
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 
-function MoreChoices() {
+function MoreChoices({ state, setSearchParams }) {
+  const updatedValue = { guestCount: guestCountSum };
+  console.log(updatedValue);
+
+  setSearchParams((choices) => ({
+    ...choices,
+    ...updatedValue,
+  }));
   return (
     <>
       <FormControlLabel control={<Checkbox />} label="Parking" />

@@ -1,13 +1,13 @@
 import { Grid, TextField, Typography } from "@mui/material";
+import Link from "@mui/material/Link";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import Button from "../Button";
 import DateRangePicker from "../DatePicker";
 import GuestCountPicker from "../GuestCountPicker/GuestCountPicker";
-import Link from "@mui/material/Link";
 import MoreChoices from "./MoreChoices";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 function Search() {
   const [showMoreChoices, setShowMoreChoices] = useState(false);

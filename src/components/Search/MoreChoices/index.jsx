@@ -1,19 +1,62 @@
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
+import { useEffect, useState } from "react";
 
 function MoreChoices({ state, setSearchParams }) {
-  const updatedValue = { guestCount: guestCountSum };
+  const [parking, setParking] = useState(false);
+  const [pets, setPets] = useState(false);
+  const [wifi, setWifi] = useState(false);
+  const [breakfast, setBreakfast] = useState(false);
+
+  console.log(parking);
+
+  const updatedValue = { wifi: wifi, parking: parking, breakfast: breakfast, pets: pets };
   console.log(updatedValue);
 
-  setSearchParams((choices) => ({
-    ...choices,
-    ...updatedValue,
-  }));
+  useEffect(() => {
+    setSearchParams((choices) => ({
+      ...choices,
+      ...updatedValue,
+    }));
+  }, [parking, pets, wifi, breakfast]);
+
   return (
     <>
-      <FormControlLabel control={<Checkbox />} label="Parking" />
-      <FormControlLabel control={<Checkbox />} label="Pets allowed" />
-      <FormControlLabel control={<Checkbox />} label="WiFi" />
-      <FormControlLabel control={<Checkbox />} label="Breakfast Included" />
+      <FormControlLabel
+        onChange={() =>
+          setParking((prev) => {
+            return !prev;
+          })
+        }
+        control={<Checkbox />}
+        label="Parking"
+      />
+      <FormControlLabel
+        onChange={() =>
+          setPets((prev) => {
+            return !prev;
+          })
+        }
+        control={<Checkbox />}
+        label="Pets allowed"
+      />
+      <FormControlLabel
+        onChange={() =>
+          setWifi((prev) => {
+            return !prev;
+          })
+        }
+        control={<Checkbox />}
+        label="WiFi"
+      />
+      <FormControlLabel
+        onChange={() =>
+          setBreakfast((prev) => {
+            return !prev;
+          })
+        }
+        control={<Checkbox />}
+        label="Breakfast Included"
+      />
     </>
   );
 }

@@ -44,8 +44,8 @@ function Search() {
   }
 
   return (
-    <Grid container xs={12}>
-      <Grid container xs={12} rowGap={2} columnGap={2} direction={{ xs: "column", lg: "row" }}>
+    <Grid container xs={12} item={true}>
+      <Grid container xs={12} rowGap={2} columnGap={2} direction={{ xs: "column", lg: "row" }} item={true}>
         <Grid container direction={"column"}>
           <Typography variant="h6">Where do you want to go?</Typography>
         </Grid>

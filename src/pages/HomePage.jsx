@@ -8,7 +8,7 @@ import HorizontalCardList from "../components/HorizontalCardList/HorizontalCardL
 import ImgCarousel from "../components/ImgCarousel";
 import Search from "../components/Search";
 import VenueCard from "../components/VenueCard";
-import UseApi from "../hooks/UseApi";
+import UseApi from "../hooks/useApi";
 import { API_ROOT } from "../js/constants";
 
 function HomePage() {

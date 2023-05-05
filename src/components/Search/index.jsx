@@ -36,12 +36,13 @@ function Search() {
   }
 
   return (
-    <Grid container sx={{ m: "0 auto" }}>
-      <Grid container direction={{ xs: "column", lg: "row" }} rowGap={2} columnGap={2} sx={{ mt: "5rem" }} item={true}>
-        <Grid container>
+    <Grid container xs={12}>
+      <Grid container xs={12} rowGap={2} columnGap={2} direction={{ xs: "column", lg: "row" }}>
+        <Grid container direction={"column"}>
           <Typography variant="h6">Where do you want to go?</Typography>
         </Grid>
         <TextField
+          sx={{ flexGrow: 1 }}
           id="outlined-basic"
           label="Where to?"
           onChange={(e) => {

@@ -1,13 +1,12 @@
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Grid, TextField } from "@mui/material";
+import { Controller, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 
-import { Checkbox, Grid, TextField } from "@mui/material";
-import { Controller, useForm } from "react-hook-form";
-
 import Button from "./../components/Button";
-import UploadProfileImage from "../components/UploadProfileMedia";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { setUserInfo } from "../store/UserSlice";
 
 const schema = yup.object().shape({
   email: yup
@@ -19,6 +18,7 @@ const schema = yup.object().shape({
 });
 
 function Login() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
     control,
@@ -48,13 +48,25 @@ function Login() {
   async function userLogin(url, options) {
     try {
       const response = await fetch(url, options);
-      console.log(response);
 
       if (response.ok) {
         const json = await response.json();
         console.log(json);
+
+        let venueManager = json.venueManager;
+        if (json.venueManager === null) {
+          venueManager = false;
+        }
+
+        const userInfo = {
+          userName: json.name,
+          email: json.email,
+          avatar: json.avatar,
+          venueManager: venueManager,
+        };
         localStorage.setItem("userName", json.name);
         localStorage.setItem("accessToken", json.accessToken);
+        dispatch(setUserInfo(userInfo));
         navigate("/");
       }
     } catch (error) {}

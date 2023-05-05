@@ -1,9 +1,11 @@
-import { Grid, TextField, Typography } from "@mui/material";
+import { Filter } from "@mui/icons-material";
+import { Grid, IconButton, TextField, Typography, useMediaQuery, useTheme, useThemeProps } from "@mui/material";
 import Link from "@mui/material/Link";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+import FilterIcon from "../../assets/icons/FilterIcon";
 import Button from "../Button";
 import DateRangePicker from "../DatePicker";
 import GuestCountPicker from "../GuestCountPicker/GuestCountPicker";
@@ -13,6 +15,10 @@ function Search() {
   const [showMoreChoices, setShowMoreChoices] = useState(false);
   const [searchParams, setSearchParams] = useState({});
   const [location, setLocation] = useState("Anywhere");
+
+  const theme = useTheme();
+  const laptopScreen = useMediaQuery(theme.breakpoints.up("lg"));
+  const mobileScreen = useMediaQuery(theme.breakpoints.down("lg"));
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -54,12 +60,20 @@ function Search() {
           <GuestCountPicker state={searchParams} setSearchParams={setSearchParams} />
         </Grid>
         <DateRangePicker state={searchParams} setSearchParams={setSearchParams} />
+        {laptopScreen && (
+          <IconButton onClick={openChoices}>
+            <FilterIcon />
+          </IconButton>
+        )}
+        {mobileScreen && (
+          <Link sx={{ cursor: "pointer" }} variant="body2" onClick={openChoices} alignContent={"flex-start"}>
+            More choices
+          </Link>
+        )}
+
         <Button sx={{ flexGrow: 1 }} label="Search" size={"large"} onClick={sendSearch} />
       </Grid>
       <Grid>
-        <Link sx={{ cursor: "pointer" }} variant="body2" onClick={openChoices} alignContent={"flex-start"}>
-          More choices
-        </Link>
         <Grid container direction={{ xs: "column", md: "row" }}>
           {showMoreChoices && <MoreChoices state={searchParams} setSearchParams={setSearchParams} />}
         </Grid>

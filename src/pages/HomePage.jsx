@@ -1,17 +1,18 @@
 import { Box, Card, CircularProgress, Grid, IconButton, ImageListItem, ImageListItemBar, Paper, Skeleton, Typography, useMediaQuery } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import { LazyMotion, domAnimation, motion } from "framer-motion";
+import Carousel from "react-material-ui-carousel";
 
 import CardGallery from "../components/CardGallery";
-import Carousel from "react-material-ui-carousel";
 import HorizontalCardList from "../components/HorizontalCardList/HorizontalCardList";
 import ImgCarousel from "../components/ImgCarousel";
 import Search from "../components/Search";
-import UseApi from "../hooks/UseApi";
 import VenueCard from "../components/VenueCard";
-import { useTheme } from "@mui/material/styles";
+import UseApi from "../hooks/UseApi";
+import { API_ROOT } from "../js/constants";
 
 function HomePage() {
-  const { data, isLoading, isError } = UseApi("https://api.noroff.dev/api/v1/holidaze/venues", { method: "GET" });
+  const { data, isLoading, isError } = UseApi(`${API_ROOT}/venues?sortOrder=asc`, { method: "GET" });
 
   const theme = useTheme();
   const smScreen = useMediaQuery(theme.breakpoints.up("sm"));
@@ -89,9 +90,7 @@ function HomePage() {
 
   return (
     <Grid container xs={11} sx={{ margin: "0 auto" }} item={true}>
-      <Grid item sx={{ mt: "6rem" }}>
-        <Search />
-      </Grid>
+      <Search />
       <HorizontalCardList data={recommendedData} heading={"Recommended"} />
       <HorizontalCardList data={allowPetsData} heading={"Bring your furry friends!"} />
     </Grid>

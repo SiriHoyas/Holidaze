@@ -1,5 +1,5 @@
+import { FormControl, Grid, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
-import { Grid, TextField } from "@mui/material";
 
 import Button from "../Button";
 
@@ -35,11 +35,11 @@ function EditProfileMedia() {
     } catch (error) {}
   }
   return (
-    <Grid container sx={{ mt: "6rem" }}>
+    <Grid container xs={12} item={true} sx={{ width: "100%" }}>
       <form onSubmit={handleSubmit(submitHandler)}>
         <Grid container gap={1}>
           <Grid item xs={12}>
-            <Controller name="avatar" control={control} render={({ field }) => <TextField {...field} fullWidth id="imageUrl" label="Image URL" variant="outlined" />} />
+            <Controller name="avatar" control={control} render={({ field }) => <TextField {...field} size="small" fullWidth id="imageUrl" label="Image URL" variant="outlined" />} />
           </Grid>
           <Grid item xs={12}>
             <Button fullWidth type="submit" label={"Set profile image"} />

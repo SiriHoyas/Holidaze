@@ -37,10 +37,12 @@ export const theme = createTheme({
     h1: {
       fontFamily: "'Comfortaa', cursive",
       fontWeight: "700",
+      fontSize: "2rem",
     },
     h2: {
       fontFamily: "'Comfortaa', cursive",
       fontWeight: "700",
+      fontSize: "1rem",
     },
     h3: {
       fontFamily: "'Comfortaa', cursive",

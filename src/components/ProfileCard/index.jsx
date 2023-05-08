@@ -1,6 +1,7 @@
 import { Avatar, Box, Card, CardContent, Grid, IconButton, Tooltip, Typography } from "@mui/material";
 
 import EditIcon from "../../assets/icons/EditIcon";
+import EditProfileMedia from "../EditProfileMedia";
 
 function ProfileCard({ avatar, userName, email, onClick }) {
   return (
@@ -10,13 +11,8 @@ function ProfileCard({ avatar, userName, email, onClick }) {
         <Box component={"span"} sx={{ ml: "1rem" }}>
           <Box component={"span"} sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <Typography variant="h5">{userName}</Typography>
-            <Tooltip title="Edit" sx={{ alignSelf: "end" }} onClick={onClick}>
-              <IconButton>
-                <EditIcon />
-              </IconButton>
-            </Tooltip>
           </Box>
-
+          <EditProfileMedia />
           <Typography variant="body2">{email}</Typography>
         </Box>
       </CardContent>

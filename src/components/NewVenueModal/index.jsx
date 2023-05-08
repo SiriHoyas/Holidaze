@@ -1,4 +1,4 @@
-import { Box, FormControlLabel, FormGroup, Grid, Modal, Switch, TextField, Typography } from "@mui/material";
+import { FormControlLabel, FormGroup, Grid, Modal, Switch, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 
 import Button from "../Button";

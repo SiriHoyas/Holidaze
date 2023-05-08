@@ -54,7 +54,7 @@ export const theme = createTheme({
     },
     button: {
       fontFamily: "'Comfortaa', cursive",
-      fontWeight: "100",
+      fontWeight: "500",
       textTransform: "none",
     },
   },

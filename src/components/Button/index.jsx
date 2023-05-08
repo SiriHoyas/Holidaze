@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const ShapedButton = styled(MuiButton)(({ shape }) => ({
   borderRadius: shape === "square" ? "6px" : "30px",
   boxShadow: "none",
+  backgroundColor: "#385E97",
 }));
 
 function Button({ label, onClick, link, ...props }) {

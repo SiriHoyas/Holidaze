@@ -40,7 +40,7 @@ function Profile() {
 
   if (isVenueManager) {
     return (
-      <Grid container columnGap={2} xs={11} md={12} direction={{ xs: "column", md: "row" }} sx={{ mt: "6rem", justifyContent: "space-evenly" }}>
+      <Grid container columnGap={2} rowGap={1} xs={11} md={12} direction={{ xs: "column", md: "row" }} sx={{ justifyContent: "space-evenly", m: "0 auto", mt: "6rem" }}>
         <Grid container xs={12} md={3} item={true} rowGap={2} sx={{ height: "fit-content" }}>
           <Typography variant="h1" sx={{}}>
             Hello, {userName}!
@@ -49,7 +49,7 @@ function Profile() {
           <NewVenueModal />
           {editMediaActive && <EditProfileMedia />}
         </Grid>
-        <Divider orientation="vertical" flexItem />
+        <Divider orientation={{ xs: "horizontal", lg: "vertical" }} sx={{ mt: { xs: "1rem", lg: "0" }, mb: { xs: "1rem", lg: "0" } }} flexItem />
         <Grid container rowGap={2} xs={12} md={6} item={true}>
           <Grid container columnGap={3}>
             <Chip label="My Venues" variant="outlined" onClick={showVenues} />

@@ -1,12 +1,11 @@
-import * as yup from "yup";
-
+import { yupResolver } from "@hookform/resolvers/yup";
 import { Checkbox, Grid, TextField } from "@mui/material";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import * as yup from "yup";
 
 import Button from "./../components/Button";
 import UploadProfileImage from "../components/UploadProfileMedia";
-import { useState } from "react";
-import { yupResolver } from "@hookform/resolvers/yup";
 
 const schema = yup.object().shape({
   name: yup
@@ -40,7 +39,6 @@ function Register() {
   });
 
   function onSubmit(data) {
-    console.log(data);
     const options = {
       method: "POST",
       body: JSON.stringify(data),
@@ -55,16 +53,13 @@ function Register() {
   async function registerUser(url, options) {
     try {
       const response = await fetch(url, options);
-      console.log(response);
 
       if (response.ok) {
         setRegistered(true);
         const json = await response.json();
-        console.log(json);
       }
     } catch (error) {}
   }
-  console.log(registered);
   if (registered) {
     return <UploadProfileImage />;
   }

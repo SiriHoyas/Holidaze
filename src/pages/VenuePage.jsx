@@ -1,13 +1,13 @@
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Accordion, AccordionDetails, AccordionSummary, Box, Grid, Modal, Typography } from "@mui/material";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 import BookingCalendar from "../components/BookingCalendar";
 import BookingModal from "../components/BookingModal";
 import Button from "../components/Button";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ImgCarousel from "../components/ImgCarousel";
 import UseApi from "../hooks/UseApi";
-import { useParams } from "react-router-dom";
-import { useState } from "react";
 
 function VenuePage() {
   const { venueID } = useParams();
@@ -21,8 +21,6 @@ function VenuePage() {
   };
 
   const { data } = UseApi(`https://api.noroff.dev/api/v1/holidaze/venues/${venueID}?_owner=true&_bookings=true`, options);
-
-  console.log(data);
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);

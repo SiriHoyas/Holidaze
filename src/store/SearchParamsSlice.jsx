@@ -19,17 +19,14 @@ const searchParamsSlice = createSlice({
       state.keyword = action.payload.keyword;
     },
     updateDateFrom: (state, action) => {
-      console.log(current(state));
       state.dateFrom = action.payload.dateFrom;
     },
     updateDateTo: (state, action) => {
-      console.log(current(state));
       state.dateTo = action.payload.dateTo;
     },
     updateGuestCount: (state, action) => {
       state.guestCount = action.payload.guestCount;
       state.pets = action.payload.pets;
-      console.log(current(state));
     },
     updateWifi: (state, action) => {
       state.wifi = action.payload.wifi;
@@ -45,8 +42,6 @@ const searchParamsSlice = createSlice({
     },
   },
 });
-
-console.log(searchParamsSlice);
 
 export const { updateGuestCount, updateDateFrom, updateDateTo, updateBreakfast, updateKeyword, updateParking, updatePets, updateWifi } = searchParamsSlice.actions;
 

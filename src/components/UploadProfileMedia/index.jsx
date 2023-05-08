@@ -1,9 +1,9 @@
 import { Avatar, FormControl, Grid, TextField } from "@mui/material";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 import Button from "../Button";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
 function UploadProfileImage() {
   const [imageUrl, setImageUrl] = useState();
@@ -33,11 +33,10 @@ function UploadProfileImage() {
   async function editProfileImage(url, options) {
     try {
       const response = await fetch(url, options);
-      console.log(response);
 
       if (response.ok) {
         const json = await response.json();
-        console.log(json);
+
         navigate("/");
       }
     } catch (error) {}

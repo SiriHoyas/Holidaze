@@ -11,7 +11,6 @@ function Venues() {
   const isFromSearch = false;
 
   const { data } = UseApi(`${API_ROOT}/venues`, { method: "GET" });
-  console.log(data);
 
   if (isFromSearch) {
     return (

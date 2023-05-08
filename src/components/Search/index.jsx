@@ -33,10 +33,8 @@ function Search() {
   }, [location]);
 
   function sendSearch() {
-    console.log(searchParams);
     // navigate("/venues");
     dispatch(setSearchParams(searchParams));
-    console.log(searchParams);
   }
 
   function openChoices() {

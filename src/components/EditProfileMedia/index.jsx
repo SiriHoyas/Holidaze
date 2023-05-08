@@ -16,7 +16,7 @@ function EditProfileMedia() {
       avatar: "",
     },
   });
-  console.log(ACCESS_TOKEN);
+
   function submitHandler(data) {
     const options = {
       method: "PUT",
@@ -37,7 +37,6 @@ function EditProfileMedia() {
 
       if (response.ok) {
         const json = await response.json();
-        console.log(json);
         handleClose();
       }
     } catch (error) {}

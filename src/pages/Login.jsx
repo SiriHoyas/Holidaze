@@ -33,7 +33,6 @@ function Login() {
   });
 
   function onSubmit(data) {
-    console.log(data);
     const options = {
       method: "POST",
       body: JSON.stringify(data),
@@ -51,7 +50,6 @@ function Login() {
 
       if (response.ok) {
         const json = await response.json();
-        console.log(json);
 
         let venueManager = json.venueManager;
         if (json.venueManager === null) {

@@ -10,7 +10,6 @@ function MoreChoices({ state, setSearchParams }) {
   console.log(parking);
 
   const updatedValue = { wifi: wifi, parking: parking, breakfast: breakfast, pets: pets };
-  console.log(updatedValue);
 
   useEffect(() => {
     setSearchParams((choices) => ({

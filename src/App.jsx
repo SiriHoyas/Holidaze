@@ -22,7 +22,6 @@ function App() {
 
   const userName = localStorage.getItem("userName");
   const accessToken = localStorage.getItem("accessToken");
-  console.log(userName);
 
   async function getUserInfo() {
     const options = {

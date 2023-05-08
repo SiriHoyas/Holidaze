@@ -1,31 +1,33 @@
-import { Card, Chip, Divider, Grid, Typography } from "@mui/material";
-import { useState } from "react";
+import { Card, Chip, Divider, Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 import EditProfileMedia from "../components/EditProfileMedia";
 import NewVenueModal from "../components/NewVenueModal";
 import ProfileCard from "../components/ProfileCard";
 import UseApi from "../hooks/UseApi";
+import { ACCESS_TOKEN, USER_NAME } from "../js/constants";
 
 function Profile() {
   const [editMediaActive, setEditMediaActive] = useState(false);
   const [venuesActive, setVenuesActive] = useState(true);
   const [bookingsActive, setBookingsActive] = useState(false);
-  const isVenueManager = true;
-  const accessToken = localStorage.getItem("accessToken");
-  const userName = localStorage.getItem("userName");
-  const email = "elmo@elmo.com";
-  const avatar = "https://i.pinimg.com/564x/27/af/e4/27afe49bf4fd979eb5a2bccde60d01d1.jpg";
 
   const options = {
     method: "GET",
     headers: {
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `Bearer ${ACCESS_TOKEN}`,
       "Content-type": "application/json; charset=UTF-8",
     },
   };
-  const { data, isLoading, isError } = UseApi(`https://api.noroff.dev/api/v1/holidaze/profiles/${userName}?_bookings=true`, options);
 
-  console.log(data.bookings);
+  const { data, isLoading, isError } = UseApi(`https://api.noroff.dev/api/v1/holidaze/profiles/${USER_NAME}?_bookings=true`, options);
+
+  const { userName, email, avatar, venueManager } = useSelector((store) => {
+    return store.user;
+  });
+
+  const theme = useTheme();
 
   const showBookings = () => {
     setBookingsActive((prev) => !prev);
@@ -36,20 +38,18 @@ function Profile() {
     setBookingsActive((prev) => !prev);
   };
 
-  console.log(venuesActive);
-
-  if (isVenueManager) {
+  if (venueManager) {
     return (
       <Grid container columnGap={2} rowGap={1} xs={11} md={12} direction={{ xs: "column", md: "row" }} sx={{ justifyContent: "space-evenly", m: "0 auto", mt: "6rem" }}>
-        <Grid container xs={12} md={3} item={true} rowGap={2} sx={{ height: "fit-content" }}>
+        <Grid container xs={12} md={3} item={true} rowGap={2} sx={{ height: "fit-content", position: { md: "sticky", xs: "static" }, top: "6rem" }}>
           <Typography variant="h1" sx={{}}>
-            Hello, {userName}!
+            Hello, {USER_NAME}!
           </Typography>
-          <ProfileCard userName={userName} email={email} avatar={avatar} onClick={() => setEditMediaActive((prev) => !prev)} />
+          <ProfileCard userName={USER_NAME} email={email} avatar={avatar} onClick={() => setEditMediaActive((prev) => !prev)} />
           <NewVenueModal />
           {editMediaActive && <EditProfileMedia />}
         </Grid>
-        <Divider orientation={{ xs: "horizontal", lg: "vertical" }} sx={{ mt: { xs: "1rem", lg: "0" }, mb: { xs: "1rem", lg: "0" } }} flexItem />
+        <Divider orientation={useMediaQuery(theme.breakpoints.down("md")) ? "horizontal" : "vertical"} sx={{ mt: { xs: "1rem", lg: "0" }, mb: { xs: "1rem", lg: "0" } }} flexItem />
         <Grid container rowGap={2} xs={12} md={6} item={true}>
           <Grid container columnGap={3}>
             <Chip label="My Venues" variant="outlined" onClick={showVenues} />
@@ -76,14 +76,6 @@ function Profile() {
       </Grid>
     );
   }
-
-  return (
-    <>
-      <ProfileCard userName={userName} email={email} avatar={avatar} onClick={() => setEditMediaActive((prev) => !prev)} />
-      {editMediaActive && <EditProfileMedia />}
-      {data && console.log(data.bookings)}
-    </>
-  );
 }
 
 export default Profile;

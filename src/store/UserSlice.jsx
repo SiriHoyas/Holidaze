@@ -23,20 +23,3 @@ const userSlice = createSlice({
 export const { setUserInfo } = userSlice.actions;
 
 export default userSlice.reducer;
-
-//UPDATE USER INFO
-
-// const dispatch = useDispatch();
-// const { userName } = useSelector((store) => store.user);
-// console.log(userName);
-
-// function updateUserInfo() {
-//   const user = {
-//     userName: "Siri",
-//     email: "siri@skjervold.me",
-//     avatar: "bilde",
-//     venueManage: true,
-//   };
-//   dispatch(setUserInfo(user));
-//   console.log(userName);
-// }

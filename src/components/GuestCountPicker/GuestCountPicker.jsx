@@ -1,13 +1,13 @@
-import { Checkbox, Divider, FormControlLabel, Grid, IconButton, Menu, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
-
-import Button from "../Button";
-import MinusIcon from "../../assets/icons/MinusIcon";
-import { Button as MuiButton } from "@mui/material";
 import PersonAddAlt1RoundedIcon from "@mui/icons-material/PersonAddAlt1Rounded";
+import { Checkbox, Divider, FormControlLabel, Grid, IconButton, Menu, Typography } from "@mui/material";
+import { Button as MuiButton } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+
+import MinusIcon from "../../assets/icons/MinusIcon";
 import PlusIcon from "../../assets/icons/PlusIcon";
 import { updateGuestCount } from "../../store/SearchParamsSlice";
-import { useDispatch } from "react-redux";
+import Button from "../Button";
 
 function GuestCountPicker({ state, setSearchParams }) {
   const [adultCount, setAdultCount] = useState(2);
@@ -21,7 +21,6 @@ function GuestCountPicker({ state, setSearchParams }) {
 
   useEffect(() => {
     const updatedValue = { guestCount: guestCountSum, pets: bringPet };
-    console.log(updatedValue);
 
     setSearchParams((guests) => ({
       ...guests,

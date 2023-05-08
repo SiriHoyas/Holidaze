@@ -1,18 +1,16 @@
-import { Box, Card, CircularProgress, Grid, IconButton, ImageListItem, ImageListItemBar, Paper, Skeleton, Typography, useMediaQuery } from "@mui/material";
+import { Box, Grid, ImageListItem, Skeleton, Typography, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { LazyMotion, domAnimation, motion } from "framer-motion";
 import Carousel from "react-material-ui-carousel";
 
 import CardGallery from "../components/CardGallery";
 import HorizontalCardList from "../components/HorizontalCardList/HorizontalCardList";
-import ImgCarousel from "../components/ImgCarousel";
 import Search from "../components/Search";
 import VenueCard from "../components/VenueCard";
-import UseApi from "../hooks/useApi";
+import useApi from "../hooks/UseApi";
 import { API_ROOT } from "../js/constants";
 
 function HomePage() {
-  const { data, isLoading, isError } = UseApi(`${API_ROOT}/venues?sortOrder=asc`, { method: "GET" });
+  const { data, isLoading, isError } = useApi(`${API_ROOT}/venues?sortOrder=asc`, { method: "GET" });
 
   const theme = useTheme();
   const smScreen = useMediaQuery(theme.breakpoints.up("sm"));
@@ -49,8 +47,8 @@ function HomePage() {
 
   if (smScreen) {
     return (
-      <Grid container sm={9} sx={{ margin: "0 auto" }} item={true}>
-        <Grid item sx={{ mt: "9rem" }} xs={12}>
+      <Grid container sm={9} sx={{ m: "0 auto", mt: "6rem" }} item={true}>
+        <Grid item xs={12}>
           <Search />
         </Grid>
         {data && (
@@ -89,7 +87,7 @@ function HomePage() {
   }
 
   return (
-    <Grid container xs={11} sx={{ margin: "0 auto" }} item={true}>
+    <Grid container xs={11} sx={{ margin: "0 auto", mt: "6rem" }} item={true}>
       <Search />
       <HorizontalCardList data={recommendedData} heading={"Recommended"} />
       <HorizontalCardList data={allowPetsData} heading={"Bring your furry friends!"} />

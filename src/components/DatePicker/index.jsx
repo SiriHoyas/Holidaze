@@ -12,8 +12,6 @@ function DateRangePicker({ state, setSearchParams }) {
   const [checkInDate, setcheckInDate] = useState(dayjs);
   const [checkOutDate, setcheckOutDate] = useState(dayjs);
 
-  console.log(checkOutDate);
-
   useEffect(() => {
     const updatedValue = { dateFrom: checkInDate, dateTo: checkOutDate };
 

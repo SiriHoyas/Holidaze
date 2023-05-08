@@ -7,8 +7,6 @@ function MoreChoices({ state, setSearchParams }) {
   const [wifi, setWifi] = useState(false);
   const [breakfast, setBreakfast] = useState(false);
 
-  console.log(parking);
-
   const updatedValue = { wifi: wifi, parking: parking, breakfast: breakfast, pets: pets };
 
   useEffect(() => {

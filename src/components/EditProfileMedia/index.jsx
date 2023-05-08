@@ -33,7 +33,6 @@ function EditProfileMedia() {
   async function editProfileImage(url, options) {
     try {
       const response = await fetch(url, options);
-      console.log(response);
 
       if (response.ok) {
         const json = await response.json();

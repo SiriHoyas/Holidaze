@@ -3,7 +3,10 @@ import { Box, Grid, ImageList, ImageListItem, Typography } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+import MetaIcons from "../MetaIcons";
+
 function CardGallery({ heading, data }) {
+  console.log(data);
   const [showItemBar, setShowItemBar] = useState(false);
   function srcset(image, size, rows = 1, cols = 1) {
     return {
@@ -20,7 +23,7 @@ function CardGallery({ heading, data }) {
       cols = 1;
     }
 
-    return { id: item.id, img: item.media[0], title: item.name, description: item.description, rows: 2, cols: cols };
+    return { id: item.id, img: item.media[0], title: item.name, meta: item.meta, description: item.description, rows: 2, cols: cols };
   });
 
   return (
@@ -57,7 +60,7 @@ function CardGallery({ heading, data }) {
                       {item.title}
                     </Typography>
                     <Typography variant="h6" noWrap sx={{ color: "white" }}>
-                      ICONS
+                      <MetaIcons metaData={item.meta} />
                     </Typography>
                   </Grid>
                 </Box>

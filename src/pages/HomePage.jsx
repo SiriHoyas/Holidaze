@@ -71,7 +71,7 @@ function HomePage() {
             <Grid container direction={"column"} rowGap={5}>
               <Typography variant="h5">Bring your furry friends</Typography>
               {allowPetsData.map((venue) => {
-                return <VenueCard key={venue.id} id={venue.id} name={venue.name} description={venue.description} img={venue.media[0]} />;
+                return <VenueCard key={venue.id} id={venue.id} name={venue.name} description={venue.description} img={venue.media[0]} meta={venue.meta} />;
               })}
             </Grid>
           </Grid>

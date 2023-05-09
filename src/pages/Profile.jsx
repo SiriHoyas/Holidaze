@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import EditProfileMedia from "../components/EditProfileMedia";
 import NewVenueModal from "../components/NewVenueModal";
 import ProfileCard from "../components/ProfileCard";
-import UseApi from "../hooks/UseApi";
+import useApi from "../hooks/UseApi";
 import { ACCESS_TOKEN, USER_NAME } from "../js/constants";
 
 function Profile() {
@@ -21,7 +21,7 @@ function Profile() {
     },
   };
 
-  const { data, isLoading, isError } = UseApi(`https://api.noroff.dev/api/v1/holidaze/profiles/${USER_NAME}?_bookings=true`, options);
+  const { data, isLoading, isError } = useApi(`https://api.noroff.dev/api/v1/holidaze/profiles/${USER_NAME}?_bookings=true`, options);
 
   const { userName, email, avatar, venueManager } = useSelector((store) => {
     return store.user;
@@ -40,7 +40,7 @@ function Profile() {
 
   if (venueManager) {
     return (
-      <Grid container columnGap={2} rowGap={1} xs={11} md={12} direction={{ xs: "column", md: "row" }} sx={{ justifyContent: "space-evenly", m: "0 auto", mt: "6rem" }}>
+      <Grid container columnGap={2} rowGap={1} xs={11} md={12} direction={{ xs: "column", md: "row" }} sx={{ justifyContent: "space-evenly", m: "0 auto", mt: "6rem" }} item={true}>
         <Grid container xs={12} md={3} item={true} rowGap={2} sx={{ height: "fit-content", position: { md: "sticky", xs: "static" }, top: "6rem" }}>
           <Typography variant="h1" sx={{}}>
             Hello, {USER_NAME}!

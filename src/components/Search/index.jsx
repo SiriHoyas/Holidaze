@@ -32,11 +32,6 @@ function Search() {
     }));
   }, [location]);
 
-  function sendSearch() {
-    // navigate("/venues");
-    dispatch(setSearchParams(searchParams));
-  }
-
   function openChoices() {
     setShowMoreChoices((prev) => !prev);
   }
@@ -71,7 +66,15 @@ function Search() {
           </Link>
         )}
 
-        <Button sx={{ flexGrow: 1 }} label="Search" size={"large"} onClick={sendSearch} />
+        <Button
+          sx={{ flexGrow: 1 }}
+          label="Search"
+          size={"large"}
+          onClick={() => {
+            dispatch(setSearchParams(searchParams));
+            navigate("/venues");
+          }}
+        />
       </Grid>
       <Grid>
         <Grid container direction={{ xs: "column", md: "row" }}>

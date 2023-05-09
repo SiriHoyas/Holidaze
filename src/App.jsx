@@ -2,7 +2,7 @@ import "./fonts.css";
 
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { API_ROOT } from "./js/constants";
 import Router from "./Router/Router.jsx";

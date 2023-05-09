@@ -3,7 +3,7 @@ import { Grid, ImageList, ImageListItem, Typography } from "@mui/material";
 function HorizontalCardList({ data, heading }) {
   if (data) {
     return (
-      <Grid container xs={12}>
+      <Grid container xs={12} item={true}>
         <Typography variant="h6">{heading}</Typography>
         <ImageList
           sx={{

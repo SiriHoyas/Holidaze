@@ -52,7 +52,7 @@ function CardGallery({ heading, data }) {
                     alignSelf: "flex-end",
                   }}
                 >
-                  <Grid>
+                  <Grid item>
                     <Typography variant="h6" noWrap sx={{ color: "white" }}>
                       {item.title}
                     </Typography>

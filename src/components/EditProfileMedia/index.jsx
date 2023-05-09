@@ -48,7 +48,7 @@ function EditProfileMedia() {
         </IconButton>
       </Tooltip>
       <Modal open={open} onClose={handleClose} sx={{ overflow: "scroll", p: "1rem" }}>
-        <Grid container rowGap={2} direction={"column"} sx={{ overflow: "scroll", backgroundColor: "white", display: "flex", m: "0 auto", p: "1rem" }}>
+        <Grid container rowGap={2} direction={"column"} sx={{ overflow: "scroll", backgroundColor: "white", display: "flex", m: "0 auto", p: "1rem" }} item={true}>
           <Typography variant="h2">New profile image</Typography>
           <form onSubmit={handleSubmit(submitHandler)}>
             <Grid container gap={1}>

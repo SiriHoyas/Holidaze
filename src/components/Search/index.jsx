@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import FilterIcon from "../../assets/icons/FilterIcon";
+import { sendSearchParams } from "../../store/SearchParamsSlice";
 import Button from "../Button";
 import DateRangePicker from "../DatePicker";
 import GuestCountPicker from "../GuestCountPicker/GuestCountPicker";
@@ -71,8 +72,8 @@ function Search() {
           label="Search"
           size={"large"}
           onClick={() => {
-            dispatch(setSearchParams(searchParams));
-            navigate("/venues");
+            dispatch(sendSearchParams(searchParams));
+            // navigate("/venues");
           }}
         />
       </Grid>

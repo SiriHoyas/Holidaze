@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 
 import MinusIcon from "../../assets/icons/MinusIcon";
 import PlusIcon from "../../assets/icons/PlusIcon";
-import { updateGuestCount } from "../../store/SearchParamsSlice";
 import Button from "../Button";
 
 function GuestCountPicker({ state, setSearchParams }) {

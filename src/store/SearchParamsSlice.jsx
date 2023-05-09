@@ -15,34 +15,19 @@ const searchParamsSlice = createSlice({
   name: "serachParams",
   initialState,
   reducers: {
-    updateKeyword: (state, action) => {
+    sendSearchParams: (state, action) => {
       state.keyword = action.payload.keyword;
-    },
-    updateDateFrom: (state, action) => {
       state.dateFrom = action.payload.dateFrom;
-    },
-    updateDateTo: (state, action) => {
       state.dateTo = action.payload.dateTo;
-    },
-    updateGuestCount: (state, action) => {
       state.guestCount = action.payload.guestCount;
-      state.pets = action.payload.pets;
-    },
-    updateWifi: (state, action) => {
       state.wifi = action.payload.wifi;
-    },
-    updateParking: (state, action) => {
       state.parking = action.payload.parking;
-    },
-    updateBreakfast: (state, action) => {
       state.breakfast = action.payload.breakfast;
-    },
-    updatePets: (state, action) => {
       state.pets = action.payload.pets;
     },
   },
 });
 
-export const { updateGuestCount, updateDateFrom, updateDateTo, updateBreakfast, updateKeyword, updateParking, updatePets, updateWifi } = searchParamsSlice.actions;
+export const { sendSearchParams } = searchParamsSlice.actions;
 
 export default searchParamsSlice.reducer;

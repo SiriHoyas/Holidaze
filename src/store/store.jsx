@@ -1,5 +1,6 @@
-import FavouritesReducer from "./FavouritesSlice";
 import { configureStore } from "@reduxjs/toolkit";
+
+import FavouritesReducer from "./FavouritesSlice";
 import searchParamsReducer from "./SearchParamsSlice";
 import userReducer from "./UserSlice";
 
@@ -9,5 +10,11 @@ export const store = configureStore({
     searchParams: searchParamsReducer,
     favourites: FavouritesReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: ["serachParams/sendSearchParams"],
+        ignoredPaths: ["searchParams.dateFrom", "searchParams.dateTo"],
+      },
+    }),
 });

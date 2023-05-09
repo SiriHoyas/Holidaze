@@ -1,4 +1,3 @@
-import { Filter } from "@mui/icons-material";
 import { Grid, IconButton, TextField, Typography, useMediaQuery, useTheme, useThemeProps } from "@mui/material";
 import Link from "@mui/material/Link";
 import { useEffect, useState } from "react";

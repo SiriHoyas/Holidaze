@@ -1,17 +1,22 @@
-import { Grid, ImageListItem } from "@mui/material";
-
+import { Grid, ImageListItem, useMediaQuery } from "@mui/material";
 import Carousel from "react-material-ui-carousel";
 
-function ImgCarousel({ data, isError, isLoading, title }) {
+import { theme } from "../../theme";
+
+function ImgCarousel({ data, isError, isLoading, title, id }) {
+  const isMobileScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
   if (data) {
     return (
-      <Grid container sx={{ mt: "6rem" }}>
+      <Grid container sx={{ mt: { xs: "2rem", md: "6rem" } }} item={true}>
         <Grid item xs={12} md={12}>
-          <Carousel duration={600} autoPlay={false} height={"300px"} navButtonsAlwaysVisible={true}>
+          <Carousel duration={600} height={isMobileScreen ? "200px" : "400px"} indicators={false} autoPlay={false} navButtonsAlwaysVisible={true} navButtonsAlwaysInvisible={data.length > 0 ? false : true}>
             {data.map((item) => (
-              <ImageListItem>
-                <img src={`${item}`} alt={title} loading="lazy" />
-              </ImageListItem>
+              <Grid key={id}>
+                <ImageListItem>
+                  <img src={`${item}`} alt={title} loading="lazy" />
+                </ImageListItem>
+              </Grid>
             ))}
           </Carousel>
         </Grid>

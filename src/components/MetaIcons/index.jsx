@@ -2,6 +2,7 @@ import { Grid } from "@mui/material";
 
 import ArrowIcon from "../../assets/icons/ArrowIcon";
 import BreakfastIcon from "../../assets/icons/BreakfastIcon";
+import ParkingIcon from "../../assets/icons/ParkingIcon";
 import PetIcon from "../../assets/icons/PetIcon";
 import WifiIcon from "../../assets/icons/WifiIcon";
 
@@ -13,8 +14,8 @@ function MetaIcons({ metaData }) {
     const wifi = metaData.wifi;
 
     return (
-      <Grid container columnGap={2}>
-        {parking && <ArrowIcon />}
+      <Grid container columnGap={1}>
+        {parking && <ParkingIcon />}
         {breakfast && <BreakfastIcon />}
         {pets && <PetIcon />}
         {wifi && <WifiIcon />}

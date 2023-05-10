@@ -2,6 +2,7 @@ import { Box, Grid, ImageListItem, Skeleton, Typography, useMediaQuery } from "@
 import { useTheme } from "@mui/material/styles";
 import Carousel from "react-material-ui-carousel";
 
+import banner from "./../assets/brand/banner.jpg";
 import CardGallery from "../components/CardGallery";
 import HorizontalCardList from "../components/HorizontalCardList/HorizontalCardList";
 import Search from "../components/Search";
@@ -47,41 +48,53 @@ function HomePage() {
 
   if (smScreen) {
     return (
-      <Grid container sm={9} sx={{ m: "0 auto", mt: "6rem" }} item={true}>
-        <Grid item xs={12}>
-          <Search />
+      <Grid container direction={"column"} sx={{ m: "0 auto" }}>
+        <Grid container direction="column" xs={12} sx={{ backgroundImage: `url(${banner})`, backgroundSize: "100%", pt: "10rem" }}>
+          <Grid container direction="column" xs={9} alignSelf="center">
+            <Typography variant="h1" sx={{ mb: "6rem", color: "text.secondary" }} align="center">
+              Experience the world
+            </Typography>
+            <Grid item sm={6} sx={{ boxShadow: 3, backgroundColor: "white", p: "1rem", borderRadius: "6px", position: "relative", transform: "translateY(40px)" }} item={true}>
+              <Search />
+            </Grid>
+          </Grid>
         </Grid>
-        {data && (
-          <Grid container>
-            <Grid item xs={12} sx={{ mt: "5rem" }}>
-              <Carousel indicators={false} duration={500} autoPlay={true} height={"500px"}>
-                {recommendedData.map((item) => (
-                  <Grid key={item.id} item sx={{ height: "100%", display: "flex" }}>
-                    <ImageListItem key={item.id} sx={{ width: "100%" }}>
-                      <Box sx={{ width: "100%", height: "20%", p: "1rem", boxShadow: "0", backgroundColor: "#0000008f", zIndex: "100", position: "absolute", bottom: "0" }}>
-                        <Typography sx={{ color: "white" }}>{item.name}</Typography>
-                      </Box>
-                      <img src={`${item.media[0]}`} alt={item.name} loading="lazy" />
-                    </ImageListItem>
-                  </Grid>
-                ))}
-              </Carousel>
+        <Grid container sm={9} sx={{ m: "0 auto", mt: "6rem" }} item={true}>
+          {data && (
+            <Grid container sm={9} sx={{ m: "0 auto", mt: "1rem" }}>
+              <Grid item xs={12}>
+                <Typography variant="h5" sx={{ mb: "1rem" }}>
+                  This is lovely heading
+                </Typography>
+                <Carousel indicators={false} duration={500} autoPlay={true} height={"500px"}>
+                  {recommendedData.map((item) => (
+                    <Grid key={item.id} item sx={{ height: "100%", display: "flex" }}>
+                      <ImageListItem key={item.id} sx={{ width: "100%" }}>
+                        <Box sx={{ width: "100%", height: "20%", p: "1rem", boxShadow: "0", backgroundColor: "#0000008f", zIndex: "100", position: "absolute", bottom: "0" }}>
+                          <Typography sx={{ color: "white" }}>{item.name}</Typography>
+                        </Box>
+                        <img src={`${item.media[0]}`} alt={item.name} loading="lazy" />
+                      </ImageListItem>
+                    </Grid>
+                  ))}
+                </Carousel>
+              </Grid>
+              <CardGallery heading="Recommended" data={recommendedData} />
+              <Grid container sm={9} direction={"column"} rowGap={5} item={true}>
+                {/* <Typography variant="h5">Bring your furry friends</Typography>
+                {allowPetsData.map((venue) => {
+                  return <VenueCard data={venue} />;
+                })} */}
+              </Grid>
             </Grid>
-            <CardGallery heading="Recommended" data={recommendedData} />
-            <Grid container direction={"column"} rowGap={5}>
-              <Typography variant="h5">Bring your furry friends</Typography>
-              {allowPetsData.map((venue) => {
-                return <VenueCard key={venue.id} id={venue.id} name={venue.name} description={venue.description} img={venue.media[0]} meta={venue.meta} />;
-              })}
+          )}
+          {isLoading && (
+            <Grid container>
+              <Skeleton variant="rectangular" width={210} height={118} />
             </Grid>
-          </Grid>
-        )}
-        {isLoading && (
-          <Grid container>
-            <Skeleton variant="rectangular" width={210} height={118} />
-          </Grid>
-        )}
-        {isError && <Grid>ERROR</Grid>}
+          )}
+          {isError && <Grid>ERROR</Grid>}
+        </Grid>
       </Grid>
     );
   }

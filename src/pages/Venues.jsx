@@ -2,6 +2,7 @@ import { Divider, Grid, Typography } from "@mui/material";
 import { eachDayOfInterval, isBefore, parseISO } from "date-fns";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import Search from "../components/Search";
 import VenueCard from "../components/VenueCard";
@@ -84,12 +85,14 @@ function Venues() {
   if (searchResults) {
     return (
       <Grid container xs={11} lg={8} rowGap={2} direction={"column"} sx={{ m: "0 auto", mt: "6rem", mb: "6rem" }} item={true}>
+        <Link to={"/"}>Back</Link>
         <Search />
         <Divider />
-
-        {searchResults.map((venue) => {
-          return <VenueCard id={venue.id} img={venue.media[0]} name={venue.name} description={venue.description} meta={venue.meta} />;
-        })}
+        <Grid container spacing={2}>
+          {searchResults.map((venue) => {
+            return <VenueCard data={venue} />;
+          })}
+        </Grid>
       </Grid>
     );
   }

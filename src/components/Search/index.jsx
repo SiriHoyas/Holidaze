@@ -72,7 +72,7 @@ function Search() {
           size={"large"}
           onClick={() => {
             dispatch(sendSearchParams(searchParams));
-            // navigate("/venues");
+            navigate("/venues");
           }}
         />
       </Grid>

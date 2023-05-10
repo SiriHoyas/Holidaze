@@ -1,45 +1,52 @@
-import { useEffect } from "react";
+import { Grid, Typography } from "@mui/material";
+import { eachDayOfInterval, isBefore, parseISO } from "date-fns";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
+import VenueCard from "../components/VenueCard";
 import { API_ROOT, MAX_SEARCH_OFFSET, VENUES_PER_BATCH, VENUES_RESULT_SIZE } from "../js/constants";
 
 function filterVenues(venues, searchParams) {
-  const { guestCount, pets, parking, wifi, breakfast, keyword } = searchParams;
+  const { guestCount, pets, parking, wifi, breakfast, keyword, dateFrom, dateTo } = searchParams;
   return venues.filter((venue) => {
     if (venue.maxGuests < guestCount) return false;
     if (pets && !venue.meta.pets) return false;
     if (parking && !venue.meta.parking) return false;
     if (wifi && !venue.meta.wifi) return false;
     if (breakfast && !venue.meta.breakfast) return false;
-    if (keyword && !venue.name.includes(keyword)) return false;
-    // return areDatesAvailable(venue.bookings, dateFrom, dateTo);
-    return true;
+    // if (keyword && !venue.name.includes(keyword)) return false;
+    return areDatesAvailable(venue.bookings, dateFrom, dateTo);
   });
 }
-//   function areDatesAvailable(bookings, requestedFrom, requestedTo) {
-//     const requestedDates = eachDayOfInterval({ start: requestedFrom, end: requestedTo });
-//     return !bookings.some((booking) => requestedDates.some((date) => isDateDuringBooking(date, booking)));
-//   }
+function areDatesAvailable(bookings, requestedFrom, requestedTo) {
+  const fromDate = new Date(requestedFrom);
+  const toDate = new Date(requestedTo);
+  const formattedTo = toDate.toISOString();
+  const formattedFrom = fromDate.toISOString();
 
-//   function isDateDuringBooking(date, booking) {
-//     const { dateFrom, dateTo } = booking;
-//     const occupiedDates = eachDayOfInterval({ start: startDate, end: endDate });
-//     return occupiedDates.includes(date);
-//   }
-//
+  const requestedDates = eachDayOfInterval({ start: parseISO(formattedFrom), end: parseISO(formattedTo) });
+  return !bookings.some((booking) => requestedDates.some((date) => isDateDuringBooking(date, booking)));
+}
+
+function isDateDuringBooking(date, booking) {
+  const { dateFrom, dateTo } = booking;
+
+  const dateFromDateObj = new Date(dateFrom);
+  const dateFromFormatted = dateFromDateObj.toDateString();
+  const dateToDateObj = new Date(dateTo);
+  const dateToFormatted = dateToDateObj.toDateString();
+
+  if (isBefore(parseISO(dateFromFormatted), parseISO(dateToFormatted))) {
+    const occupiedDates = eachDayOfInterval({ start: parseISO(dateFrom), end: parseISO(dateTo) });
+    return occupiedDates.includes(date);
+  } else {
+  }
+}
 
 function Venues() {
-  // const searchParams = {
-  //   keyword: "",
-  //   dateFrom: "2023-05-25T00:00:00.000Z",
-  //   dateTo: "2023-05-31T00:00:00.000Z",
-  //   guestCount: 1,
-  //   wifi: true,
-  //   parking: false,
-  //   breakfast: true,
-  //   pets: false,
-  // };
   const searchParams = useSelector((state) => state.searchParams);
+  const [searchResults, setSearchResults] = useState();
+  console.log(searchParams);
 
   useEffect(() => {
     async function getVenues(offset) {
@@ -53,7 +60,6 @@ function Venues() {
         return await result.json();
       }
     }
-    // getVenues(10).then((result) => console.log(result));
 
     async function searchVenues(searchParams) {
       let venues = [];
@@ -65,23 +71,25 @@ function Venues() {
           ...venues,
           ...filterVenues(batch, searchParams)
             .slice(0, requiredCount)
-            .map((v) => ({ ...v, offset })),
+            .map((venue) => ({ ...venue, offset })),
         ];
         offset += VENUES_PER_BATCH;
       }
-      return venues;
+      setSearchResults(venues);
     }
 
-    searchVenues(searchParams).then((res) =>
-      console.log(
-        "searchREsult",
-        res
-        // res.map((v) => ({ wifi: v.meta.wifi, offset: v.offset }))
-      )
-    );
-  });
+    searchVenues(searchParams);
+  }, [searchParams]);
 
-  return <></>;
+  if (searchResults) {
+    return (
+      <Grid container xs={11} lg={7} rowGap={2} direction={"column"} sx={{ m: "0 auto", mt: "6rem", mb: "6rem" }} item={true}>
+        {searchResults.map((venue) => {
+          return <VenueCard id={venue.id} img={venue.media[0]} name={venue.name} description={venue.description} meta={venue.meta} />;
+        })}
+      </Grid>
+    );
+  }
 }
 
 export default Venues;

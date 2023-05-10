@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import BookingModal from "../components/BookingModal";
 import Button from "../components/Button";
 import ImgCarousel from "../components/ImgCarousel";
+import MetaIcons from "../components/MetaIcons";
 import UseApi from "../hooks/UseApi";
 
 function VenuePage() {
@@ -21,10 +22,9 @@ function VenuePage() {
   };
 
   const { data } = UseApi(`https://api.noroff.dev/api/v1/holidaze/venues/${venueID}?_owner=true&_bookings=true`, options);
-  console.log(data);
   if (data) {
     return (
-      <Grid container rowGap={2} xs={11} md={7} direction={"column"} sx={{ m: "0 auto", mt: "5rem" }} item={true}>
+      <Grid container rowGap={2} xs={11} md={7} direction={"column"} sx={{ m: "0 auto", mt: "5rem", mb: "5rem" }} item={true}>
         <Grid container>
           <ImgCarousel data={data.media} title={data.name} id={data.id} />
         </Grid>
@@ -46,6 +46,7 @@ function VenuePage() {
         <Divider />
         <Grid>
           <Typography variant="h5">We offer</Typography>
+          <MetaIcons metaData={data.meta} />
         </Grid>
       </Grid>
     );

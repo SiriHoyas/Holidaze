@@ -12,7 +12,6 @@ function VenueCard({ id, img, name, description, meta }) {
         </Grid>
         <Grid item xs={10} sx={{ p: "1rem" }}>
           <Typography variant="h4">{name}</Typography>
-
           <MetaIcons metaData={meta} />
           <Typography paragraph variant="body1" noWrap={true} sx={{ width: "400px" }}>
             {description}

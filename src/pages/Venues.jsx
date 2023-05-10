@@ -1,8 +1,9 @@
-import { Grid, Typography } from "@mui/material";
+import { Divider, Grid, Typography } from "@mui/material";
 import { eachDayOfInterval, isBefore, parseISO } from "date-fns";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
+import Search from "../components/Search";
 import VenueCard from "../components/VenueCard";
 import { API_ROOT, MAX_SEARCH_OFFSET, VENUES_PER_BATCH, VENUES_RESULT_SIZE } from "../js/constants";
 
@@ -46,7 +47,6 @@ function isDateDuringBooking(date, booking) {
 function Venues() {
   const searchParams = useSelector((state) => state.searchParams);
   const [searchResults, setSearchResults] = useState();
-  console.log(searchParams);
 
   useEffect(() => {
     async function getVenues(offset) {
@@ -83,7 +83,10 @@ function Venues() {
 
   if (searchResults) {
     return (
-      <Grid container xs={11} lg={7} rowGap={2} direction={"column"} sx={{ m: "0 auto", mt: "6rem", mb: "6rem" }} item={true}>
+      <Grid container xs={11} lg={8} rowGap={2} direction={"column"} sx={{ m: "0 auto", mt: "6rem", mb: "6rem" }} item={true}>
+        <Search />
+        <Divider />
+
         {searchResults.map((venue) => {
           return <VenueCard id={venue.id} img={venue.media[0]} name={venue.name} description={venue.description} meta={venue.meta} />;
         })}

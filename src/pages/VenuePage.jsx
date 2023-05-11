@@ -1,18 +1,22 @@
 import { Divider, Grid, Typography } from "@mui/material";
-import { useState } from "react";
+import { el } from "date-fns/locale";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import BookingModal from "../components/BookingModal";
 import Button from "../components/Button";
+import EditVenueModal from "../components/EditVenueModal";
 import ImgCarousel from "../components/ImgCarousel";
 import MetaIcons from "../components/MetaIcons";
-import UseApi from "../hooks/UseApi";
+import useApi from "../hooks/UseApi";
 
 function VenuePage() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const { venueID } = useParams();
+  const { userName } = useSelector((store) => store.user);
 
   const options = {
     method: "GET",
@@ -21,8 +25,15 @@ function VenuePage() {
     },
   };
 
-  const { data } = UseApi(`https://api.noroff.dev/api/v1/holidaze/venues/${venueID}?_owner=true&_bookings=true`, options);
+  const { data } = useApi(`https://api.noroff.dev/api/v1/holidaze/venues/${venueID}?_owner=true&_bookings=true`, options);
+
   if (data) {
+    let isMyVenue = false;
+
+    if (data.owner.name === userName) {
+      isMyVenue = true;
+    }
+
     return (
       <Grid container rowGap={2} xs={11} md={7} direction={"column"} sx={{ m: "0 auto", mt: "5rem", mb: "5rem" }} item={true}>
         <Grid container>
@@ -34,10 +45,18 @@ function VenuePage() {
             € {data.price} / night
           </Typography>
         </Grid>
-        <Grid item>
-          <Button shape="square" onClick={handleOpen} label={"Book"} />
-          <BookingModal handleClose={handleClose} open={open} bookings={data.bookings} />
-        </Grid>
+        {!isMyVenue && (
+          <Grid item>
+            <Button shape="square" onClick={handleOpen} label={"Book"} />
+            <BookingModal handleClose={handleClose} open={open} bookings={data.bookings} />
+          </Grid>
+        )}
+        {isMyVenue && (
+          <Grid item>
+            <Button shape="square" onClick={handleOpen} label={"Edit venue"} />
+            <EditVenueModal venue={data} handleClose={handleClose} open={open} />
+          </Grid>
+        )}
         <Divider sx={{ mt: "1rem" }} />
         <Grid item>
           <Typography variant="h5">Description</Typography>

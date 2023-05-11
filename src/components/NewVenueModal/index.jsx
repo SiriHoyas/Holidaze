@@ -13,8 +13,9 @@ function NewVenueModal({ data }) {
       <Modal open={open} onClose={handleClose} sx={{ overflow: "scroll", p: "1rem" }}>
         <Grid container rowGap={2} direction={"column"} sx={{ overflow: "scroll", backgroundColor: "white", display: "flex", m: "0 auto", p: "1rem" }}>
           <Typography variant="h2">Add new venue</Typography>
-          <form>
-            <Grid container rowGap={2} direction={"column"}>
+
+          <Grid container rowGap={2} direction={"column"}>
+            <form>
               <TextField fullWidth variant="outlined" label="Venue name" size="small" />
               <TextField fullWidth label="Description" multiline maxRows={4} size="small" />
               <Typography>ADD MEDIA</Typography>
@@ -28,8 +29,8 @@ function NewVenueModal({ data }) {
                 <FormControlLabel control={<Switch />} label="Pets" />
               </FormGroup>
               <Button label="Add venue" />
-            </Grid>
-          </form>
+            </form>
+          </Grid>
         </Grid>
       </Modal>
     </>

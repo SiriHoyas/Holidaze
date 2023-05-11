@@ -50,7 +50,7 @@ function HomePage() {
     if (smScreen) {
       return (
         <Grid container direction={"column"} sx={{ m: "0 auto" }}>
-          <Grid container direction="column" xs={12} sx={{ backgroundImage: `url(${banner})`, backgroundSize: "100%", pt: "10rem" }}>
+          <Grid container direction="column" xs={12} sx={{ backgroundImage: `url(${banner})`, backgroundSize: { sm: "200%", lg: "100%" }, pt: { sm: "6rem", lg: "10rem" } }}>
             <Grid container direction="column" xs={9} alignSelf="center">
               <Typography variant="h1" sx={{ mb: "6rem", color: "text.secondary" }} align="center">
                 Experience the world

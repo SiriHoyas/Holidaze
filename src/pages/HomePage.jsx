@@ -55,7 +55,7 @@ function HomePage() {
               <Typography variant="h1" sx={{ mb: "6rem", color: "text.secondary" }} align="center">
                 Experience the world
               </Typography>
-              <Grid item sm={6} sx={{ boxShadow: 3, backgroundColor: "white", p: "1rem", borderRadius: "6px", position: "relative", transform: "translateY(40px)" }}>
+              <Grid item sm={6} sx={{ boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.34);", backgroundColor: "white", p: "1rem", borderRadius: "6px", position: "relative", transform: "translateY(40px)" }}>
                 <Search />
               </Grid>
             </Grid>

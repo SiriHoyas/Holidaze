@@ -12,7 +12,10 @@ import VenueIcon from "../../../assets/icons/VenueIcon";
 import NavbarActions from "../NavbarActions";
 
 function Header() {
-  const trigger = useScrollTrigger();
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+  });
+
   const { userName, avatar } = useSelector((store) => {
     return store.user;
   });
@@ -21,7 +24,6 @@ function Header() {
     isLoggedIn = true;
   }
 
-  console.log(isLoggedIn);
   return (
     <AppBar elevation={trigger ? 1 : 0} sx={{ px: "1rem", backgroundColor: trigger ? "rgba(255, 255, 255, 0.95)" : "transparent", transition: "background-color 200ms ease-in" }}>
       <Toolbar sx={{ justifyContent: "space-between", display: "flex" }}>

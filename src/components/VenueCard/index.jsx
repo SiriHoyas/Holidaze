@@ -1,9 +1,10 @@
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Grid, ImageListItem, Paper, Rating, Typography } from "@mui/material";
+import { LocationOnOutlined } from "@mui/icons-material";
+import { Box, Button, Card, CardActions, CardContent, CardMedia, Grid, ImageList, ImageListItem, ImageListItemBar, Paper, Rating, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
 import MetaIcons from "../MetaIcons";
 
-function VenueCard({ data }) {
+function VenueCard({ data, path }) {
   console.log(data);
   let city;
   if (data.location.city !== "") {
@@ -15,21 +16,24 @@ function VenueCard({ data }) {
     city = "Lockwood Village";
   }
   return (
-    <Grid item xs={12} sm={6} md={4}>
-      <Card component={Link} to={data.id} sx={{ maxWidth: 345 }}>
-        <CardMedia sx={{ height: 140 }} image={data.media[0]} title={data.name} />
-        <CardContent sx={{ display: "flex", flexDirection: "column", alignContent: "space-between" }}>
-          <Typography noWrap variant="h5" component="div">
+    <Grid item xs={12} sm={6} md={4} component={Link} to={path} sx={{ textDecoration: "none" }}>
+      <Card sx={{ height: 300 }}>
+        <CardMedia sx={{ height: 140 }} image={data.media[0]} title="green iguana" />
+        <CardContent>
+          <Typography noWrap variant="h5">
             {data.name}
           </Typography>
-          <Typography sx={{ color: "text.secondary", textTransform: "capitalize" }}>{city}</Typography>
+          <Typography gutterBottom variant="body1" component="div" color="text.secondary">
+            <LocationOnOutlined sx={{ height: "15px" }} />
+            {city}
+          </Typography>
           <Typography noWrap variant="body2" color="text.secondary">
             {data.description}
           </Typography>
-          <Grid container direction={"row"}>
-            <Typography variant="body1">€ {data.price} / night</Typography>
-          </Grid>
         </CardContent>
+        <CardActions>
+          <MetaIcons metaData={data.meta} />
+        </CardActions>
       </Card>
     </Grid>
   );

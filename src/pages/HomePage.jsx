@@ -11,7 +11,7 @@ import useApi from "../hooks/UseApi";
 import { API_ROOT } from "../js/constants";
 
 function HomePage() {
-  const { data, isLoading, isError } = useApi(`${API_ROOT}/venues?sortOrder=asc`, { method: "GET" });
+  const { data, isLoading, isError } = useApi(`${API_ROOT}/venues?sortOrder=asc&sort=created`, { method: "GET" });
 
   const theme = useTheme();
   const smScreen = useMediaQuery(theme.breakpoints.up("sm"));
@@ -19,12 +19,13 @@ function HomePage() {
   let recommendedData = [];
   let allowPetsData = [];
 
-  if (data && data.length) {
+  if (data && data.length && data.name != "") {
     const filterByMedia = data.filter((item) => {
       if (item.media.length > 0) {
         return item;
       }
     });
+    console.log(filterByMedia);
     for (let i = 0; i < filterByMedia.length; i++) {
       if (i <= 3 && smScreen) {
         recommendedData.push(filterByMedia[i]);
@@ -39,7 +40,7 @@ function HomePage() {
       }
     });
     for (let i = 0; i < filterByPets.length; i++) {
-      if (i <= 3 && smScreen) {
+      if (i <= 8 && smScreen) {
         allowPetsData.push(filterByPets[i]);
       }
       if (i <= 9 && !smScreen) {
@@ -81,11 +82,13 @@ function HomePage() {
                   </Carousel>
                 </Grid>
                 <CardGallery heading="Recommended" data={recommendedData} />
-                <Grid container sm={9} direction={"column"} rowGap={5} item={true}>
-                  {/* <Typography variant="h5">Bring your furry friends</Typography>
-                {allowPetsData.map((venue) => {
-                  return <VenueCard data={venue} />;
-                })} */}
+                <Typography variant="h5" sx={{ mt: "4rem", mb: "1rem" }}>
+                  Bring your furry friends!
+                </Typography>
+                <Grid container spacing={6}>
+                  {allowPetsData.map((venue) => {
+                    return <VenueCard data={venue} path={`venues/${venue.id}`} />;
+                  })}
                 </Grid>
               </Grid>
             )}

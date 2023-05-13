@@ -39,16 +39,16 @@ function NavbarActions() {
         }}
       >
         {isLoggedIn && (
-          <>
+          <Grid>
             <MenuItem onClick={handleClose}>Profile</MenuItem>
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
-          </>
+          </Grid>
         )}
         {!isLoggedIn && (
-          <>
+          <Grid>
             <MenuItem onClick={handleClose}>Log in</MenuItem>
             <MenuItem onClick={handleLogout}>Register account</MenuItem>
-          </>
+          </Grid>
         )}
       </Menu>
     </Grid>

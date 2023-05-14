@@ -14,6 +14,7 @@ function NewVenueModal() {
   const handleClose = () => setOpen(false);
   const [addUrl, setAddUrl] = useState("");
   const [imageUrls, setImageUrls] = useState([]);
+  const [formData, setFormData] = useState([]);
 
   function deleteItem(id) {
     const newArray = imageUrls.filter((item) => item.id !== id);
@@ -34,8 +35,6 @@ function NewVenueModal() {
     setImageUrls((list) => [...list, item]);
     setAddUrl("");
   }
-
-  console.log(imageUrls);
 
   const schema = yup.object().shape({
     name: yup.string().required(),
@@ -70,6 +69,15 @@ function NewVenueModal() {
       pets: false,
     },
   });
+
+  const options = {
+    method: "POST",
+    body: JSON.stringify(formData),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  };
+
   return (
     <>
       <Button fullWidth shape="square" onClick={handleOpen} label={"Add new venue"} />
@@ -79,7 +87,13 @@ function NewVenueModal() {
 
           <form
             onSubmit={handleSubmit((data) => {
-              console.log(data);
+              const imageArray = [];
+              imageUrls.forEach((url) => {
+                imageArray.push(url.value);
+              });
+
+              setFormData({ ...data, media: imageArray });
+              console.log(formData);
             })}
           >
             <Grid container rowGap={2} direction={"column"}>

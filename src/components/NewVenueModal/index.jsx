@@ -1,5 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Checkbox, FormControlLabel, FormGroup, Grid, Modal, Switch, TextField, Typography } from "@mui/material";
+import { Add, AddToPhotos, Delete, Image } from "@mui/icons-material";
+import ImageIcon from "@mui/icons-material/Image";
+import { Avatar, Checkbox, FormControlLabel, FormGroup, Grid, IconButton, List, ListItem, ListItemAvatar, ListItemText, Modal, Switch, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -10,6 +12,30 @@ function NewVenueModal() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [addUrl, setAddUrl] = useState("");
+  const [imageUrls, setImageUrls] = useState([]);
+
+  function deleteItem(id) {
+    const newArray = imageUrls.filter((item) => item.id !== id);
+    setImageUrls(newArray);
+  }
+
+  function addItem() {
+    if (!addUrl) {
+      console.log("empty field");
+      return;
+    }
+
+    const item = {
+      id: Math.floor(Math.random() * 1000),
+      value: addUrl,
+    };
+
+    setImageUrls((list) => [...list, item]);
+    setAddUrl("");
+  }
+
+  console.log(imageUrls);
 
   const schema = yup.object().shape({
     name: yup.string().required(),
@@ -57,16 +83,40 @@ function NewVenueModal() {
             })}
           >
             <Grid container rowGap={2} direction={"column"}>
-              <Controller name="name" control={control} render={({ field }) => <TextField helperText={errors.name?.message} {...field} fullWidth required id="venueName" label="Venue name" variant="outlined" />} />
-              <Controller name="description" control={control} render={({ field }) => <TextField helperText={errors.description?.message} {...field} fullWidth required id="venueDescription" label="Description" variant="outlined" />} />
-              <Controller name="price" control={control} render={({ field }) => <TextField helperText={errors.price?.message} {...field} fullWidth type="number" required id="venuePrice" label="Price" variant="outlined" />} />
-              <Controller name="guests" control={control} render={({ field }) => <TextField helperText={errors.guests?.message} {...field} fullWidth type="number" required id="venueMaxGuest" label="Max Guests" variant="outlined" />} />
-              <Controller name="address" control={control} render={({ field }) => <TextField helperText={errors.address?.message} {...field} fullWidth required id="venueAddress" label="Address" variant="outlined" />} />
-              <Controller name="city" control={control} render={({ field }) => <TextField helperText={errors.city?.message} {...field} fullWidth required id="venueCity" label="City" variant="outlined" />} />
-              <Controller name="wifi" control={control} render={({ field }) => <Checkbox {...field} />} />
-              <Controller name="parking" control={control} render={({ field }) => <Checkbox {...field} />} />
-              <Controller name="breakfast" control={control} render={({ field }) => <Checkbox {...field} />} />
-              <Controller name="pets" control={control} render={({ field }) => <Checkbox {...field} />} />
+              <Controller name="name" control={control} render={({ field }) => <TextField helperText={errors.name?.message} {...field} size="small" fullWidth required id="venueName" label="Venue name" variant="outlined" />} />
+              <Controller name="description" control={control} render={({ field }) => <TextField helperText={errors.description?.message} {...field} size="small" fullWidth required id="venueDescription" label="Description" variant="outlined" />} />
+              <Controller name="price" control={control} render={({ field }) => <TextField helperText={errors.price?.message} {...field} size="small" fullWidth type="number" required id="venuePrice" label="Price" variant="outlined" />} />
+              <Controller name="guests" control={control} render={({ field }) => <TextField helperText={errors.guests?.message} {...field} size="small" fullWidth type="number" required id="venueMaxGuest" label="Max Guests" variant="outlined" />} />
+              <Controller name="address" control={control} render={({ field }) => <TextField helperText={errors.address?.message} {...field} size="small" fullWidth required id="venueAddress" label="Address" variant="outlined" />} />
+              <Controller name="city" control={control} render={({ field }) => <TextField helperText={errors.city?.message} {...field} size="small" fullWidth required id="venueCity" label="City" variant="outlined" />} />
+              <Grid container columnGap={2} direction={"row"}>
+                <TextField placeholder="Add an image..." value={addUrl} onChange={(e) => setAddUrl(e.target.value)} size="small" variant="outlined" label="Image URL" sx={{ flexGrow: 1 }} />
+                <Button disabled={imageUrls.length === 8 ? true : false} onClick={() => addItem()} label={<Add />} shape="square" />
+              </Grid>
+              <List>
+                {imageUrls.map((url) => {
+                  return (
+                    <ListItem
+                      sx={{ pl: 0 }}
+                      secondaryAction={
+                        <IconButton edge="end" onClick={() => deleteItem(url.id)}>
+                          <Delete />
+                        </IconButton>
+                      }
+                    >
+                      <ListItemAvatar sx={{ display: "flex" }}>
+                        <ImageIcon />
+                      </ListItemAvatar>
+                      <ListItemText sx={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", width: "50px" }} primary={url.value} />
+                    </ListItem>
+                  );
+                })}
+              </List>
+              <FormControlLabel control={<Controller name={"wifi"} control={control} render={({ field: props }) => <Checkbox {...props} checked={props.value} onChange={(e) => props.onChange(e.target.checked)} />} />} label={"Wifi"} />
+              <FormControlLabel control={<Controller name={"parking"} control={control} render={({ field: props }) => <Checkbox {...props} checked={props.value} onChange={(e) => props.onChange(e.target.checked)} />} />} label={"Parking"} />
+              <FormControlLabel control={<Controller name={"breakfast"} control={control} render={({ field: props }) => <Checkbox {...props} checked={props.value} onChange={(e) => props.onChange(e.target.checked)} />} />} label={"Breakfast"} />
+              <FormControlLabel control={<Controller name={"pets"} control={control} render={({ field: props }) => <Checkbox {...props} checked={props.value} onChange={(e) => props.onChange(e.target.checked)} />} />} label={"Pets allowed"} />
+
               <Button type="submit" label="Add venue" />
             </Grid>
           </form>

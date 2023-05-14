@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 
+import { ACCESS_TOKEN } from "../../js/constants";
 import Button from "../Button";
 
 function NewVenueModal() {
@@ -78,6 +79,19 @@ function NewVenueModal() {
     },
   };
 
+  async function newVenue(url, options) {
+    try {
+      const response = await fetch(url, options);
+
+      if (response.ok) {
+        const json = await response.json();
+        console.log(json);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <>
       <Button fullWidth shape="square" onClick={handleOpen} label={"Add new venue"} />
@@ -92,8 +106,34 @@ function NewVenueModal() {
                 imageArray.push(url.value);
               });
 
-              setFormData({ ...data, media: imageArray });
-              console.log(formData);
+              setFormData({
+                name: data.name,
+                description: data.description,
+                media: imageArray,
+                price: data.price,
+                maxGuests: data.guests,
+                meta: {
+                  wifi: data.wifi,
+                  parking: data.parking,
+                  breakfast: data.breakfast,
+                  pets: data.pets,
+                },
+                location: {
+                  address: data.address,
+                  city: data.city,
+                },
+              });
+              console.log("FORMDATA", formData);
+
+              const options = {
+                method: "POST",
+                body: JSON.stringify(formData),
+                headers: {
+                  Authorization: `Bearer ${ACCESS_TOKEN}`,
+                  "Content-type": "application/json; charset=UTF-8",
+                },
+              };
+              newVenue("https://api.noroff.dev/api/v1/holidaze/venues", options);
             })}
           >
             <Grid container rowGap={2} direction={"column"}>
@@ -111,6 +151,7 @@ function NewVenueModal() {
                 {imageUrls.map((url) => {
                   return (
                     <ListItem
+                      key={url.id}
                       sx={{ pl: 0 }}
                       secondaryAction={
                         <IconButton edge="end" onClick={() => deleteItem(url.id)}>

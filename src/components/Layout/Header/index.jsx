@@ -44,7 +44,8 @@ function Header() {
             </Typography>
           </Grid>
         </Grid>
-        {isLoggedIn && <NavbarActions />}
+
+        <NavbarActions />
       </Toolbar>
     </AppBar>
   );

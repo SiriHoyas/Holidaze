@@ -25,7 +25,7 @@ function HomePage() {
         return item;
       }
     });
-    console.log(filterByMedia);
+
     for (let i = 0; i < filterByMedia.length; i++) {
       if (i <= 3 && smScreen) {
         recommendedData.push(filterByMedia[i]);
@@ -57,7 +57,7 @@ function HomePage() {
                 Experience the world
               </Typography>
               <Grid item sm={6} sx={{ boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.34);", backgroundColor: "white", p: "1rem", borderRadius: "6px", position: "relative", transform: "translateY(40px)" }}>
-                <Search />
+                <Search params="true" />
               </Grid>
             </Grid>
           </Grid>
@@ -105,7 +105,7 @@ function HomePage() {
 
     return (
       <Grid container xs={11} sx={{ margin: "0 auto", mt: "6rem" }} item={true}>
-        <Search />
+        <Search params="true" />
         <HorizontalCardList data={recommendedData} heading={"Recommended"} />
         <HorizontalCardList data={allowPetsData} heading={"Bring your furry friends!"} />
       </Grid>

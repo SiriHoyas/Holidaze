@@ -11,7 +11,7 @@ import DateRangePicker from "../DatePicker";
 import GuestCountPicker from "../GuestCountPicker/GuestCountPicker";
 import MoreChoices from "./MoreChoices";
 
-function Search() {
+function Search({ params }) {
   const [showMoreChoices, setShowMoreChoices] = useState(false);
   const [searchParams, setSearchParams] = useState({});
   const [location, setLocation] = useState("Anywhere");
@@ -72,7 +72,7 @@ function Search() {
           size={"large"}
           onClick={() => {
             dispatch(sendSearchParams(searchParams));
-            navigate("/venues");
+            navigate(params ? `/venues/?search=${params}` : "/venues");
           }}
         />
       </Grid>

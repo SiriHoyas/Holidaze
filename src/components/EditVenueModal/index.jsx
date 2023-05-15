@@ -6,7 +6,6 @@ import Button from "../Button";
 
 function EditVenueModal({ venue, open, handleClose }) {
   if (venue) {
-    console.log(venue);
     const [venueName, setVenueName] = useState(venue.name);
     const [venueDescription, setVenueDescription] = useState(venue.description);
     const [venuePrice, setVenuePrice] = useState(venue.price);

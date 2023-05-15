@@ -85,11 +85,8 @@ function NewVenueModal() {
 
       if (response.ok) {
         const json = await response.json();
-        console.log(json);
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   }
 
   return (
@@ -123,7 +120,6 @@ function NewVenueModal() {
                   city: data.city,
                 },
               });
-              console.log("FORMDATA", formData);
 
               const options = {
                 method: "POST",

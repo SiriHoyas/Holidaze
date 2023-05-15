@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import MetaIcons from "../MetaIcons";
 
 function CardGallery({ heading, data }) {
-  console.log(data);
   const [showItemBar, setShowItemBar] = useState(false);
   function srcset(image, size, rows = 1, cols = 1) {
     return {

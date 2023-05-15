@@ -19,7 +19,6 @@ function BookingModal({ bookings, open, handleClose }) {
   const [guestCount, setGuestCount] = useState();
   const allBookedDates = getAllBookedDates(bookings);
   function disableDates(date) {
-    console.log(date, allBookedDates);
     const dateString = date.$d.toDateString();
 
     return allBookedDates.includes(dateString);

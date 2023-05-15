@@ -1,11 +1,14 @@
 import { Button, Grid, IconButton, Menu, MenuItem } from "@mui/material";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 import LikeIcon from "../../../assets/icons/LikeIcon";
 import ProfileIcon from "../../../assets/icons/ProfileIcon";
+import getAuth from "../../../js/getAuth";
 
 function NavbarActions() {
   const [anchorEl, setAnchorEl] = useState(null);
+  const navigate = useNavigate();
   const open = anchorEl;
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -14,11 +17,12 @@ function NavbarActions() {
     setAnchorEl(null);
   };
 
-  const isLoggedIn = false;
+  const isLoggedIn = getAuth();
 
   function handleLogout() {
     localStorage.removeItem("userName");
     localStorage.removeItem("accessToken");
+    navigate("/");
   }
 
   return (
@@ -40,14 +44,20 @@ function NavbarActions() {
       >
         {isLoggedIn && (
           <Grid>
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
+            <MenuItem component={Link} to={"profile"} onClick={handleClose}>
+              Profile
+            </MenuItem>
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </Grid>
         )}
         {!isLoggedIn && (
           <Grid>
-            <MenuItem onClick={handleClose}>Log in</MenuItem>
-            <MenuItem onClick={handleLogout}>Register account</MenuItem>
+            <MenuItem component={Link} to={"login"} onClick={handleClose}>
+              Log in
+            </MenuItem>
+            <MenuItem component={Link} to={"register"} onClick={handleClose}>
+              Register account
+            </MenuItem>
           </Grid>
         )}
       </Menu>

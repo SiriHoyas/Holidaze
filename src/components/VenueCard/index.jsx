@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import MetaIcons from "../MetaIcons";
 
 function VenueCard({ data, path }) {
-  console.log(data);
   let city;
   if (data.location.city !== "") {
     city = data.location.city;

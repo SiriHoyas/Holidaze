@@ -43,9 +43,9 @@ function Profile() {
       <Grid container columnGap={2} rowGap={1} xs={11} md={12} direction={{ xs: "column", md: "row" }} sx={{ justifyContent: "space-evenly", m: "0 auto", mt: "6rem" }} item={true}>
         <Grid container xs={12} md={3} item={true} rowGap={2} sx={{ height: "fit-content", position: { md: "sticky", xs: "static" }, top: "6rem" }}>
           <Typography variant="h1" sx={{}}>
-            Hello, {USER_NAME}!
+            Hello, {userName}!
           </Typography>
-          <ProfileCard userName={USER_NAME} email={email} avatar={avatar} onClick={() => setEditMediaActive((prev) => !prev)} />
+          <ProfileCard userName={userName} email={email} avatar={avatar} onClick={() => setEditMediaActive((prev) => !prev)} />
           <NewVenueModal />
           {editMediaActive && <EditProfileMedia />}
         </Grid>

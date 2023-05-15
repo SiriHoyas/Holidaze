@@ -32,10 +32,10 @@ export const theme = createTheme({
       default: "#FCFCFC",
     },
   },
-  shadows: {
-    0: "none",
-    1: "0px 1px 15px -11px rgba(0,0,0,0.51);",
-  },
+  // shadows: {
+  //   0: "none",
+  //   1: "0px 1px 15px -11px rgba(0,0,0,0.51);",
+  // },
   typography: {
     fontFamily: "'Nunito', sans-serif",
     h1: {

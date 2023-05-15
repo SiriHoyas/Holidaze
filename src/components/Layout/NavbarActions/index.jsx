@@ -9,7 +9,7 @@ import getAuth from "../../../js/getAuth";
 function NavbarActions() {
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
-  const open = anchorEl;
+  const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };

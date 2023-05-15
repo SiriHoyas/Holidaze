@@ -11,11 +11,11 @@ import Button from "../../Button";
 
 function Footer() {
   return (
-    <Grid container direction={"column"} sx={{ backgroundColor: "#f3f3f3", p: "1.5rem", mt: "6rem" }}>
-      <Grid container direction={"row"} justifyContent={"space-between"}>
-        <Grid container direction={"column"} rowGap={2} xs={4}>
+    <Grid container direction={"column"} sx={{ backgroundColor: "#f3f3f3", p: "1.5rem", mt: "6rem" }} item={true}>
+      <Grid container direction={"row"} justifyContent={"space-between"} item={true}>
+        <Grid container direction={"column"} rowGap={2} xs={4} item={true}>
           <LogoGray />
-          <Grid item direction={"row"} justifyContent={"center"}>
+          <Grid container direction={"row"} justifyContent={"center"}>
             <IconButton sx={{ pl: "0" }}>
               <FacebookRounded />
             </IconButton>
@@ -41,7 +41,7 @@ function Footer() {
             +34 (555) 555-1212
           </Typography>
         </Grid>
-        <Grid item xs={4} rowGap={1} direction={"column"} sx={{ display: "flex" }}>
+        <Grid container xs={4} rowGap={1} direction={"column"} sx={{ display: "flex" }} item={true}>
           <Typography variant="body2" color={"text.secondary"}>
             NEWSLETTER
           </Typography>

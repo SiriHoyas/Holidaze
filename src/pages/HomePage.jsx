@@ -51,8 +51,8 @@ function HomePage() {
     if (smScreen) {
       return (
         <Grid container direction={"column"} sx={{ m: "0 auto" }}>
-          <Grid container direction="column" xs={12} sx={{ backgroundImage: `url(${banner})`, backgroundSize: { sm: "200%", lg: "100%" }, pt: { sm: "6rem", lg: "10rem" } }}>
-            <Grid container direction="column" xs={9} alignSelf="center">
+          <Grid container direction="column" xs={12} sx={{ backgroundImage: `url(${banner})`, backgroundSize: { sm: "200%", lg: "100%" }, pt: { sm: "6rem", lg: "10rem" } }} item={true}>
+            <Grid container direction="column" xs={9} alignSelf="center" item={true}>
               <Typography variant="h1" sx={{ mb: "6rem", color: "text.secondary" }} align="center">
                 Experience the world
               </Typography>
@@ -63,7 +63,7 @@ function HomePage() {
           </Grid>
           <Grid container sm={9} sx={{ m: "0 auto", mt: "6rem" }} item={true}>
             {data && (
-              <Grid container sm={9} sx={{ m: "0 auto", mt: "1rem" }}>
+              <Grid container sm={9} sx={{ m: "0 auto", mt: "1rem" }} item={true}>
                 <Grid item xs={12}>
                   <Typography variant="h5" sx={{ mb: "1rem" }}>
                     This is lovely heading
@@ -87,7 +87,7 @@ function HomePage() {
                 </Typography>
                 <Grid container spacing={6}>
                   {allowPetsData.map((venue) => {
-                    return <VenueCard data={venue} path={`venues/${venue.id}`} />;
+                    return <VenueCard key={venue.id} data={venue} path={`venues/${venue.id}`} />;
                   })}
                 </Grid>
               </Grid>

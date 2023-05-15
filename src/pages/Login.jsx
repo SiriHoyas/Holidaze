@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 
-import background from "./../assets/background.png";
 import Button from "./../components/Button";
 import getAuth from "../js/getAuth";
 import { setUserInfo } from "../store/UserSlice";

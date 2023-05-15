@@ -34,6 +34,7 @@ function VenuePage() {
       isMyVenue = true;
     }
 
+    console.log(isMyVenue);
     return (
       <Grid container rowGap={2} xs={11} md={7} direction={"column"} sx={{ m: "0 auto", mt: "5rem", mb: "5rem" }} item={true}>
         <Grid container>

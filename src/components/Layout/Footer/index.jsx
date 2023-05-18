@@ -11,11 +11,11 @@ import Button from "../../Button";
 
 function Footer() {
   return (
-    <Grid container direction={"column"} sx={{ backgroundColor: "#f3f3f3", p: "1.5rem", mt: "6rem" }} item={true}>
-      <Grid container direction={"row"} justifyContent={"space-between"} item={true}>
-        <Grid container direction={"column"} rowGap={2} xs={4} item={true}>
+    <Grid container direction={{ xs: "column", md: "row" }} sx={{ backgroundColor: "#f3f3f3", p: "1.5rem", mt: "6rem" }} item={true}>
+      <Grid rowGap={2} container justifyContent={"space-between"} item={true}>
+        <Grid className="logoSocials" container rowGap={4} xs={12} md={4} item={true} justifyContent={{ xs: "center", md: "start" }}>
           <LogoGray />
-          <Grid container direction={"row"} justifyContent={"center"}>
+          <Grid container direction={"row"} justifyContent={{ xs: "center", md: "start" }}>
             <IconButton sx={{ pl: "0" }}>
               <FacebookRounded />
             </IconButton>
@@ -27,7 +27,7 @@ function Footer() {
             </IconButton>
           </Grid>
         </Grid>
-        <Grid container direction={"column"} xs={4} rowGap={1} item={true}>
+        <Grid container direction={"column"} xs={12} md={4} rowGap={1} item={true} alignItems={{ xs: "center", md: "start" }}>
           <Typography variant="body2" color={"text.secondary"}>
             CONTACT US
           </Typography>
@@ -41,15 +41,14 @@ function Footer() {
             +34 (555) 555-1212
           </Typography>
         </Grid>
-        <Grid container xs={4} rowGap={1} direction={"column"} sx={{ display: "flex" }} item={true}>
+        <Grid container xs={12} md={4} rowGap={1} direction={"column"} sx={{ display: "flex" }} item={true} alignItems={{ xs: "center", md: "start" }}>
           <Typography variant="body2" color={"text.secondary"}>
             NEWSLETTER
           </Typography>
-          <Typography variant="body2" color={"text.disabled"}>
+          <Typography variant="body2" color={"text.disabled"} align="center">
             Enter your email to get notified about great deals.
           </Typography>
           <TextField
-            fullWidth
             label="Email"
             InputProps={{
               endAdornment: (

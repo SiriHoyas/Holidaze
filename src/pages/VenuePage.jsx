@@ -1,14 +1,13 @@
 import { Divider, Grid, Typography } from "@mui/material";
-import { el } from "date-fns/locale";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import BookingModal from "../components/BookingModal";
 import Button from "../components/Button";
 import EditVenueModal from "../components/EditVenueModal";
-import ImgCarousel from "../components/ImgCarousel";
 import MetaIcons from "../components/MetaIcons";
+import VenueImgCarousel from "../components/VenueImgCarousel";
 import useApi from "../hooks/UseApi";
 
 function VenuePage() {
@@ -38,7 +37,7 @@ function VenuePage() {
     return (
       <Grid container rowGap={2} xs={11} md={7} direction={"column"} sx={{ m: "0 auto", mt: "5rem", mb: "5rem" }} item={true}>
         <Grid container>
-          <ImgCarousel data={data.media} title={data.name} id={data.id} />
+          <VenueImgCarousel data={data.media} title={data.name} id={data.id} />
         </Grid>
         <Grid item>
           <Typography variant="h1">{data.name}</Typography>

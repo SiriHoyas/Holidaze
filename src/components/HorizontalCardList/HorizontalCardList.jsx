@@ -1,4 +1,4 @@
-import { Grid, ImageList, ImageListItem, Typography } from "@mui/material";
+import { Grid, ImageList, ImageListItem, ImageListItemBar, Typography } from "@mui/material";
 
 function HorizontalCardList({ data, heading }) {
   if (data) {
@@ -8,13 +8,15 @@ function HorizontalCardList({ data, heading }) {
         <ImageList
           sx={{
             gridAutoFlow: "column",
-            gridTemplateColumns: "repeat(auto-fill,minmax(160px,1fr)) !important",
-            gridAutoColumns: "minmax(160px, 1fr)",
+            gridTemplateColumns: "repeat(auto-fill,minmax(250px,1fr)) !important",
+            gridAutoColumns: "minmax(250px, 1fr)",
+            height: "200px",
           }}
         >
           {data.map((item) => (
-            <ImageListItem key={item.id}>
+            <ImageListItem sx={{ height: "200px" }} key={item.id}>
               <img src={item.media[0]} alt={item.name} />
+              <ImageListItemBar title={item.name} sx={{ backgroundColor: "#0000009f" }} />
             </ImageListItem>
           ))}
         </ImageList>

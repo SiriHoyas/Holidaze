@@ -3,7 +3,7 @@ import Carousel from "react-material-ui-carousel";
 
 import { theme } from "../../theme";
 
-function ImgCarousel({ data, isError, isLoading, title, id }) {
+function VenueImgCarousel({ data, isError, isLoading, title, id }) {
   const isMobileScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   if (data) {
@@ -33,4 +33,4 @@ function ImgCarousel({ data, isError, isLoading, title, id }) {
   }
 }
 
-export default ImgCarousel;
+export default VenueImgCarousel;

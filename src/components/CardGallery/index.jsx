@@ -28,7 +28,7 @@ function CardGallery({ heading, data }) {
   return (
     <Grid container direction={"column"} item={true} sx={{ mt: "6rem" }}>
       <Typography variant="h5">{heading}</Typography>
-      <ImageList variant="quilted" cols={4} rowHeight={121}>
+      <ImageList variant="quilted" cols={4} rowHeight={121} sx={{ borderRadius: "6px" }}>
         {itemData.map((item) => (
           <ImageListItem key={item.id} component={Link} to={`venues/${item.id}`} cols={item.cols || 1} rows={item.rows || 1}>
             <img {...srcset(item.img, 121, item.rows, item.cols)} alt={item.title} loading="lazy" />

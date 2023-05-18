@@ -1,4 +1,4 @@
-import { Grid, IconButton, TextField, Typography, useMediaQuery, useTheme, useThemeProps } from "@mui/material";
+import { ButtonBase, Grid, IconButton, TextField, Typography, useMediaQuery, useTheme, useThemeProps } from "@mui/material";
 import Link from "@mui/material/Link";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
@@ -62,9 +62,9 @@ function Search({ params }) {
           </IconButton>
         )}
         {mobileScreen && (
-          <Link sx={{ cursor: "pointer" }} variant="body2" onClick={openChoices} alignContent={"flex-start"}>
+          <ButtonBase focusRipple={true} sx={{ cursor: "pointer" }} variant="body2" onClick={openChoices} alignContent={"flex-start"}>
             More choices
-          </Link>
+          </ButtonBase>
         )}
 
         <Button

@@ -1,6 +1,5 @@
-import { ButtonBase, Grid, IconButton, TextField, Typography, useMediaQuery, useTheme, useThemeProps } from "@mui/material";
-import Link from "@mui/material/Link";
-import { motion } from "framer-motion";
+import { ButtonBase, Grid, IconButton, TextField, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -35,6 +34,10 @@ function Search({ params }) {
 
   function openChoices() {
     setShowMoreChoices((prev) => !prev);
+  }
+
+  function closeChoices() {
+    setShowMoreChoices(false);
   }
 
   return (
@@ -77,11 +80,13 @@ function Search({ params }) {
           }}
         />
       </Grid>
-      <Grid>
-        <Grid container direction={{ xs: "column", md: "row" }} sx={{ transition: "ease-in-out, 500ms" }}>
-          {showMoreChoices && <MoreChoices state={searchParams} setSearchParams={setSearchParams} />}
-        </Grid>
-      </Grid>
+      <AnimatePresence>
+        {showMoreChoices && (
+          <motion.div key="moreChoices" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.2 }}>
+            <MoreChoices state={searchParams} setSearchParams={setSearchParams} />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </Grid>
   );
 }

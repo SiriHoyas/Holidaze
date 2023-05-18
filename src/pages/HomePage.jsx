@@ -54,7 +54,7 @@ function HomePage() {
     if (largerScreen) {
       return (
         <Grid container direction={"column"} sx={{ m: "0 auto" }}>
-          <Grid container direction="column" xs={9} sx={{ backgroundImage: `url(${banner})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "bottom", pt: { sm: "6rem", lg: "10rem" } }} item={true}>
+          <Grid container direction="column" xs={9} sx={{ height: "fit-content", backgroundImage: `url(${banner})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "bottom", pt: { sm: "6rem", lg: "10rem" } }} item={true}>
             <Grid container direction="column" xs={9} alignSelf="center">
               <Typography gutterBottom variant="h1" sx={{ color: "text.secondary" }} align="center">
                 We've got your next great adventure!

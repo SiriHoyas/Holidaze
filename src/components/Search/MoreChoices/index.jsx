@@ -1,4 +1,4 @@
-import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
+import { Checkbox, FormControlLabel, FormGroup, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 
 function MoreChoices({ state, setSearchParams }) {
@@ -17,7 +17,7 @@ function MoreChoices({ state, setSearchParams }) {
   }, [parking, pets, wifi, breakfast]);
 
   return (
-    <>
+    <Grid container sx={{ mt: "1rem" }}>
       <FormControlLabel
         onChange={() =>
           setParking((prev) => {
@@ -54,7 +54,7 @@ function MoreChoices({ state, setSearchParams }) {
         control={<Checkbox />}
         label="Breakfast Included"
       />
-    </>
+    </Grid>
   );
 }
 

@@ -1,5 +1,6 @@
 import { Grid, IconButton, TextField, Typography, useMediaQuery, useTheme, useThemeProps } from "@mui/material";
 import Link from "@mui/material/Link";
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -77,7 +78,7 @@ function Search({ params }) {
         />
       </Grid>
       <Grid>
-        <Grid container direction={{ xs: "column", md: "row" }}>
+        <Grid container direction={{ xs: "column", md: "row" }} sx={{ transition: "ease-in-out, 500ms" }}>
           {showMoreChoices && <MoreChoices state={searchParams} setSearchParams={setSearchParams} />}
         </Grid>
       </Grid>

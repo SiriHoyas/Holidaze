@@ -82,7 +82,7 @@ function Search({ params }) {
       </Grid>
       <AnimatePresence>
         {showMoreChoices && (
-          <motion.div key="moreChoices" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.2 }}>
+          <motion.div key="moreChoices" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.35 }}>
             <MoreChoices state={searchParams} setSearchParams={setSearchParams} />
           </motion.div>
         )}

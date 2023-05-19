@@ -1,13 +1,9 @@
-import { EmailOutlined, FacebookRounded, Forward10Outlined, ForwardToInboxOutlined, Send } from "@mui/icons-material";
+import { FacebookRounded, ForwardToInboxOutlined, Send } from "@mui/icons-material";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import { Textarea } from "@mui/joy";
 import { Divider, Grid, IconButton, InputAdornment, TextField, Typography } from "@mui/material";
 
 import LogoGray from "../../../assets/brand/LogoGray";
-import CloseIcon from "../../../assets/icons/CloseIcon";
-import EmailIcon from "../../../assets/icons/EmailIcon";
-import Button from "../../Button";
 
 function Footer() {
   return (

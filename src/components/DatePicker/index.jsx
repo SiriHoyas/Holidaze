@@ -9,8 +9,8 @@ import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 
 function DateRangePicker({ state, setSearchParams }) {
-  const [checkInDate, setcheckInDate] = useState(dayjs);
-  const [checkOutDate, setcheckOutDate] = useState(dayjs);
+  const [checkInDate, setcheckInDate] = useState(null);
+  const [checkOutDate, setcheckOutDate] = useState(null);
 
   useEffect(() => {
     const updatedValue = { dateFrom: checkInDate, dateTo: checkOutDate };
@@ -24,10 +24,10 @@ function DateRangePicker({ state, setSearchParams }) {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Grid item rowGap={2} columnGap={2}>
-        <DatePicker disablePast={true} value={checkInDate} onChange={(date) => setcheckInDate(date.$d)} label="Check in *" slotProps={{ textField: { fullWidth: true } }} />
+        <DatePicker disablePast={true} maxDate={dayjs(checkOutDate)} value={checkInDate} onChange={(date) => setcheckInDate(date.$d)} label="Check in *" slotProps={{ textField: { fullWidth: true } }} />
       </Grid>
       <Grid item rowGap={2} columnGap={2}>
-        <DatePicker disablePast={true} value={checkOutDate} onChange={(date) => setcheckOutDate(date.$d)} label="Check out *" slotProps={{ textField: { fullWidth: true } }} />
+        <DatePicker disablePast={true} minDate={dayjs(checkInDate)} value={checkOutDate} onChange={(date) => setcheckOutDate(date.$d)} label="Check out *" slotProps={{ textField: { fullWidth: true } }} />
       </Grid>
     </LocalizationProvider>
   );

@@ -36,7 +36,7 @@ function Venues() {
         if (parking && !venue.meta.parking) return false;
         if (wifi && !venue.meta.wifi) return false;
         if (breakfast && !venue.meta.breakfast) return false;
-        if (keyword && !venue.name.includes(keyword)) return false;
+        if (keyword.length > 0 && !venue.name.includes(keyword)) return false;
         return areDatesAvailable(venue.bookings, dateFrom, dateTo);
       });
     }

@@ -15,10 +15,16 @@ import CloseIcon from "../../../assets/icons/CloseIcon";
 import HomeIcon from "../../../assets/icons/HomeIcon";
 import MenuIcon from "../../../assets/icons/MenuIcon";
 import VenueIcon from "../../../assets/icons/VenueIcon";
+import useOutsideClick from "../../../hooks/useOutsideClick";
 import NavbarActions from "../NavbarActions";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
+
+  const ref = useOutsideClick(() => {
+    setIsOpen(false);
+  });
+
   const trigger = useScrollTrigger({
     disableHysteresis: true,
   });
@@ -80,6 +86,7 @@ function Header() {
               <Paper
                 elevation={4}
                 square
+                ref={ref}
                 sx={{
                   p: "1rem",
                   backgroundColor: "white",

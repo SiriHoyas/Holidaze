@@ -55,15 +55,17 @@ function HomePage() {
       return (
         <Grid container direction={"column"} sx={{ m: "0 auto" }}>
           <Grid container direction="column" xs={9} sx={{ height: "fit-content", backgroundImage: `url(${banner})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "bottom", pt: { sm: "6rem", lg: "10rem" } }} item={true}>
-            <Grid container direction="column" xs={9} alignSelf="center">
-              <Typography gutterBottom variant="h1" sx={{ color: "text.secondary" }} align="center">
-                We've got your next great adventure!
-              </Typography>
-              <Typography variant="h2" sx={{ mb: "6rem", color: "text.disabled" }} align="center">
-                Explore countless of unforgettable accommodations on Holidaze
-              </Typography>
-              <Grid item sm={6} sx={{ boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.34);", backgroundColor: "white", p: "1rem", borderRadius: "6px", position: "relative", transform: "translateY(40px)" }}>
-                <Search params="true" />
+            <Grid container justifyContent={"center"}>
+              <Grid item={true} container direction="column" xs={9} alignSelf="center">
+                <Typography gutterBottom variant="h1" sx={{ color: "text.secondary" }} align="center">
+                  We've got your next great adventure!
+                </Typography>
+                <Typography variant="h2" sx={{ mb: "6rem", color: "text.disabled" }} align="center">
+                  Explore countless of unforgettable accommodations on Holidaze
+                </Typography>
+                <Grid item sm={6} sx={{ boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.34);", backgroundColor: "white", p: "1rem", borderRadius: "6px", position: "relative", transform: "translateY(40px)" }}>
+                  <Search params="true" />
+                </Grid>
               </Grid>
             </Grid>
           </Grid>

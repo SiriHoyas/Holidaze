@@ -64,7 +64,7 @@ function HomePage() {
                   Explore countless of unforgettable accommodations on Holidaze
                 </Typography>
                 <Grid item sm={6} sx={{ boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.34);", backgroundColor: "white", p: "1rem", borderRadius: "6px", position: "relative", transform: "translateY(40px)" }}>
-                  <Search params="true" />
+                  <Search params="true" navigation={true} />
                 </Grid>
               </Grid>
             </Grid>
@@ -102,7 +102,7 @@ function HomePage() {
 
     return (
       <Grid container xs={11} sx={{ margin: "0 auto", mt: "6rem" }} item={true}>
-        <Search params="true" />
+        <Search params="true" navigate={true} />
         <Grid container sx={{ mt: "4rem" }}>
           <HorizontalCardList data={recommendedData} heading={"Recommended"} />
         </Grid>

@@ -5,36 +5,33 @@ import { Link, useSearchParams } from "react-router-dom";
 
 import Search from "../components/Search";
 import VenueCard from "../components/VenueCard";
-import { searchVenues } from "../js/search";
+import { fetchVenues, hasSetDateRange, searchVenues } from "../js/search";
 
 function Venues() {
   const searchParams = useSelector((state) => state.searchParams);
-  const [searchResults, setSearchResults] = useState();
+  const [venues, setVenues] = useState([]);
   const [isFromSearch, setIsFromSearch] = useState(false);
   const [queryParams, setQueryParams] = useSearchParams();
-  const search = queryParams.get("search");
 
   useEffect(() => {
     async function getVenues() {
-      const venues = await searchVenues(searchParams);
-      setSearchResults(venues);
+      const venues = hasSetDateRange(searchParams) ? await searchVenues(searchParams) : await fetchVenues(0);
+      setVenues(venues);
     }
 
     getVenues();
   }, [searchParams]);
 
-  if (searchResults) {
+  if (venues) {
     return (
       <Grid container xs={11} lg={8} rowGap={2} direction={"column"} sx={{ m: "0 auto", mt: "6rem", mb: "6rem" }} item={true}>
         <Link to={"/"}>Back</Link>
         <Search />
         <Divider />
         <Grid container spacing={2}>
-          {search &&
-            searchResults.map((venue) => {
-              return <VenueCard data={venue} path={venue.id} />;
-            })}
-          {!search && <>IKKE FRA SØK</>}
+          {venues.map((venue) => {
+            return <VenueCard key={venue.id} data={venue} path={venue.id} />;
+          })}
         </Grid>
       </Grid>
     );

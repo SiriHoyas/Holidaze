@@ -5,7 +5,7 @@ export async function searchVenues(searchParams) {
   let venues = [];
   let offset = 0;
   while (venues.length < VENUES_RESULT_SIZE && offset < MAX_SEARCH_OFFSET) {
-    const batch = await getVenues(offset);
+    const batch = await fetchVenues(offset);
     const requiredCount = VENUES_RESULT_SIZE - venues.length;
     venues = [
       ...venues,
@@ -19,7 +19,7 @@ export async function searchVenues(searchParams) {
   return venues;
 }
 
-async function getVenues(offset) {
+export async function fetchVenues(offset = 0) {
   const result = await fetch(`${API_ROOT}/venues?_bookings=true&offset=${offset}&limit=${VENUES_PER_BATCH}`, {
     method: "GET",
     headers: {
@@ -32,14 +32,26 @@ async function getVenues(offset) {
 }
 
 function filterVenues(venues, searchParams) {
-  const { guestCount, pets, parking, wifi, breakfast, keyword, dateFrom, dateTo } = searchParams;
+  const { guestCount = 0, pets, parking, wifi, breakfast, keyword = "", dateFrom, dateTo } = searchParams;
   return venues.filter((venue) => {
     if (venue.maxGuests < guestCount) return false;
     if (pets && !venue.meta.pets) return false;
     if (parking && !venue.meta.parking) return false;
     if (wifi && !venue.meta.wifi) return false;
     if (breakfast && !venue.meta.breakfast) return false;
-    if (keyword.length > 0 && !venue.name.includes(keyword)) return false;
+    if (keyword.length > 0 && !matchesKeyword(venue, keyword.toLowerCase())) return false;
     return areDatesAvailable(venue.bookings, dateFrom, dateTo);
   });
+}
+
+function matchesKeyword(venue, keyword) {
+  if (!venue.location && !venue.name) return false;
+  if (venue.name.includes(keyword)) return true;
+  if (!venue.location) return false;
+  const { city = "" } = venue.location;
+  return city.toLowerCase().includes(keyword);
+}
+
+export function hasSetDateRange({ dateFrom, dateTo }) {
+  return dateFrom && dateTo;
 }

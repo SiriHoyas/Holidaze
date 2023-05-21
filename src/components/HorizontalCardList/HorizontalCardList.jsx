@@ -17,7 +17,7 @@ function HorizontalCardList({ data, heading }) {
           }}
         >
           {data.map((item) => (
-            <Card component={Link} to={`venues/${item.id}`} elevation={0} sx={{ textDecoration: "none", border: "1px solid lightgray" }}>
+            <Card key={item.id} component={Link} to={`venues/${item.id}`} elevation={0} sx={{ textDecoration: "none", border: "1px solid lightgray" }}>
               <CardMedia component="img" sx={{ height: 200 }} image={item.media[0]} title={item.name} />
               <CardContent>
                 <Typography noWrap variant="h5">

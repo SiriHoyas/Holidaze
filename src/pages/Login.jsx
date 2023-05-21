@@ -58,9 +58,13 @@ function Login() {
     try {
       const response = await fetch(url, options);
 
-      if (response.ok) {
-        const json = await response.json();
+      const json = await response.json();
+      console.log(json);
 
+      if (response.status === 401) {
+      }
+
+      if (response.ok) {
         let venueManager = json.venueManager;
         if (json.venueManager === null) {
           venueManager = false;
@@ -80,7 +84,7 @@ function Login() {
     } catch (error) {}
   }
   return (
-    <Grid container rowGap={1} direction={"column"} sx={{ m: "0 auto", mt: "15rem" }} xs={11} lg={4} item={true}>
+    <Grid container rowGap={1} direction={"column"} sx={{ m: "0 auto", mt: "8rem" }} xs={11} lg={4} item={true}>
       <Paper sx={{ p: 6 }}>
         <Typography gutterBottom variant="h1">
           Welcome back!

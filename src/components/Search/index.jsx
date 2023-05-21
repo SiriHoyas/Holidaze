@@ -14,7 +14,7 @@ import MoreChoices from "./MoreChoices";
 function Search({ params }) {
   const [showMoreChoices, setShowMoreChoices] = useState(false);
   const [searchParams, setSearchParams] = useState({});
-  const [location, setLocation] = useState("Anywhere");
+  const [location, setLocation] = useState("");
 
   const theme = useTheme();
   const laptopScreen = useMediaQuery(theme.breakpoints.up("lg"));

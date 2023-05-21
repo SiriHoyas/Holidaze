@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
 
+/**
+ *
+ * @param {*} url
+ * @param {*} options
+ * @returns
+ */
 function useApi(url, options) {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);

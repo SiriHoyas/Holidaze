@@ -8,6 +8,12 @@ const ShapedButton = styled(MuiButton)(({ shape }) => ({
   backgroundColor: "#385E97",
 }));
 
+/**
+ *
+ * @param {*} param
+ * @returns
+ */
+
 function Button({ label, onClick, link, ...props }) {
   if (link) {
     return (

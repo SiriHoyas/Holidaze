@@ -10,6 +10,9 @@ import { setUserInfo } from "./store/UserSlice";
 import { theme } from "./theme";
 
 function App() {
+  /**
+   * eererer
+   */
   useEffect(() => {
     window.addEventListener("beforeunload", handleRefresh);
 

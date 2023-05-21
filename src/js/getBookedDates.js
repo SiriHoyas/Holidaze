@@ -1,5 +1,10 @@
 import { eachDayOfInterval } from "date-fns";
 
+/**
+ *
+ * @param {*} bookings
+ * @returns
+ */
 function getBookedDates(bookings) {
   if (bookings) {
     const bookedDates = bookings.map((booking) => {

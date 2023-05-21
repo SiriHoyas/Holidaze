@@ -10,7 +10,7 @@ import HorizontalCardList from "../components/HorizontalCardList/HorizontalCardL
 import MetaIcons from "../components/MetaIcons";
 import Search from "../components/Search";
 import VenueCard from "../components/VenueCard";
-import useApi from "../hooks/UseApi";
+import useApi from "../hooks/useApi";
 import { API_ROOT } from "../js/constants";
 
 function HomePage() {
@@ -19,6 +19,9 @@ function HomePage() {
   const theme = useTheme();
   const largerScreen = useMediaQuery(theme.breakpoints.up("sm"));
 
+  /**
+   * ??
+   */
   let recommendedData = [];
   let allowPetsData = [];
 

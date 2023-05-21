@@ -6,6 +6,11 @@ import ParkingIcon from "../../assets/icons/ParkingIcon";
 import PetIcon from "../../assets/icons/PetIcon";
 import WifiIcon from "../../assets/icons/WifiIcon";
 
+/**
+ *
+ * @param {*} param0
+ * @returns
+ */
 function MetaIcons({ metaData }) {
   if (metaData) {
     const parking = metaData.parking;

@@ -82,7 +82,12 @@ function filterVenues(venues, searchParams) {
     return areDatesAvailable(venue.bookings, dateFrom, dateTo);
   });
 }
-
+/**
+ *
+ * @param {*} venue
+ * @param {*} keyword
+ * @returns
+ */
 function matchesKeyword(venue, keyword) {
   if (!venue.location && !venue.name) return false;
   if (venue.name.includes(keyword)) return true;

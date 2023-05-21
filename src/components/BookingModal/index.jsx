@@ -8,6 +8,11 @@ import getBookedDates from "../../js/getBookedDates";
 import Button from "../Button";
 import GuestCountPicker from "../GuestCountPicker/GuestCountPicker";
 
+/**
+ *
+ * @param {*} bookings
+ * @returns
+ */
 function getAllBookedDates(bookings) {
   const bookedDates = getBookedDates(bookings ?? []);
   return bookedDates.reduce((dates, booking) => {
@@ -18,9 +23,9 @@ function getAllBookedDates(bookings) {
 function BookingModal({ bookings, open, handleClose }) {
   const [guestCount, setGuestCount] = useState();
   const allBookedDates = getAllBookedDates(bookings);
+
   function disableDates(date) {
     const dateString = date.$d.toDateString();
-
     return allBookedDates.includes(dateString);
   }
   return (

@@ -1,5 +1,13 @@
 import { eachDayOfInterval, isBefore, parseISO } from "date-fns";
 
+/**
+ *
+ * @param {*} bookings
+ * @param {*} requestedFrom
+ * @param {*} requestedTo
+ * @returns
+ */
+
 export function areDatesAvailable(bookings, requestedFrom, requestedTo) {
   const fromDate = new Date(requestedFrom);
   const toDate = new Date(requestedTo);
@@ -9,6 +17,13 @@ export function areDatesAvailable(bookings, requestedFrom, requestedTo) {
   const requestedDates = eachDayOfInterval({ start: parseISO(formattedFrom), end: parseISO(formattedTo) });
   return !bookings.some((booking) => requestedDates.some((date) => isDateDuringBooking(date, booking)));
 }
+
+/**
+ *
+ * @param {*} date
+ * @param {*} booking
+ * @returns
+ */
 
 function isDateDuringBooking(date, booking) {
   const { dateFrom, dateTo } = booking;

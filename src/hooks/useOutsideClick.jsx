@@ -1,5 +1,10 @@
 import { useCallback, useEffect, useRef } from "react";
 
+/**
+ *
+ * @param {*} callback
+ * @returns
+ */
 function useOutsideClick(callback) {
   const ref = useRef(null);
 

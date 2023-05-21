@@ -1,4 +1,7 @@
-import { Grid, ImageList, ImageListItem, ImageListItemBar, Typography } from "@mui/material";
+import { Card, CardContent, CardMedia, Grid, ImageList, ImageListItem, ImageListItemBar, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
+
+import VenueCard from "../VenueCard";
 
 function HorizontalCardList({ data, heading }) {
   if (data) {
@@ -10,14 +13,18 @@ function HorizontalCardList({ data, heading }) {
             gridAutoFlow: "column",
             gridTemplateColumns: "repeat(auto-fill,minmax(250px,1fr)) !important",
             gridAutoColumns: "minmax(250px, 1fr)",
-            height: "200px",
+            pb: "1rem",
           }}
         >
           {data.map((item) => (
-            <ImageListItem sx={{ height: "200px" }} key={item.id}>
-              <img src={item.media[0]} alt={item.name} />
-              <ImageListItemBar title={item.name} sx={{ backgroundColor: "#0000009f" }} />
-            </ImageListItem>
+            <Card component={Link} to={`venues/${item.id}`} elevation={0} sx={{ textDecoration: "none", border: "1px solid lightgray" }}>
+              <CardMedia component="img" sx={{ height: 200 }} image={item.media[0]} title={item.name} />
+              <CardContent>
+                <Typography noWrap variant="h5">
+                  {item.name}
+                </Typography>
+              </CardContent>
+            </Card>
           ))}
         </ImageList>
       </Grid>

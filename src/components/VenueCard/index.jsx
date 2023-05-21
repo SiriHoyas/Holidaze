@@ -28,7 +28,7 @@ function VenueCard({ data, path }) {
             },
           }}
         >
-          <CardMedia sx={{ height: 140 }} image={data.media[0]} title={data.name} />
+          <CardMedia component="img" sx={{ height: 140 }} image={data.media[0]} title={data.name} />
           <CardContent>
             <Typography noWrap variant="h5">
               {data.name}

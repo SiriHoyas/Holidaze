@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+import { hasSetDateRange } from "./../../js/search.js";
 import FilterIcon from "../../assets/icons/FilterIcon";
 import { sendSearchParams } from "../../store/SearchParamsSlice";
 import Button from "../Button";
@@ -34,10 +35,6 @@ function Search({ params }) {
 
   function openChoices() {
     setShowMoreChoices((prev) => !prev);
-  }
-
-  function closeChoices() {
-    setShowMoreChoices(false);
   }
 
   return (
@@ -74,6 +71,7 @@ function Search({ params }) {
           sx={{ flexGrow: 1 }}
           label="Search"
           size={"large"}
+          disabled={!hasSetDateRange(searchParams)}
           onClick={() => {
             dispatch(sendSearchParams(searchParams));
             navigate("/venues");

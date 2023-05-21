@@ -36,17 +36,40 @@ export async function searchVenues(searchParams) {
 }
 
 export async function fetchVenues(offset = 0) {
-  const result = await fetch(`${API_ROOT}/venues?_bookings=true&offset=${offset}&limit=${VENUES_PER_BATCH}`, {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-    },
-  });
-  if (result.ok) {
-    return await result.json();
+  try {
+    const result = await fetch(`${API_ROOT}/venues?_bookings=true&offset=${offset}&limit=${VENUES_PER_BATCH}`, {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+      },
+    });
+    if (result.ok) {
+      return await result.json();
+    }
+  } catch (error) {
+    console.log(error);
   }
 }
-
+/**
+ * Takes in an array of venues and returns a filtered array based on the search params provided by the user in the search bar.
+ *
+ * The function first checks if the venues max guest count is less than requested guest count. If that is the case, the check returns true and will be excluded from the filtered result.
+ * It then checks if pets, parking, wifi and breakfast is true, meaning that the user checked it off in the search bar. And then checks if the venue has the corresponding parameter set to not true.
+ * If either of these conditions is true, the venue does not offer it and it is excluded from the filtered results.
+ *
+ * The function then checks if a keyword is provided. If it is true, the matchesKeyword function is run to determine if the keyword matches the venue. If it does not, it is excluded from the filtered list.
+ *
+ * Lastly, the areDatesAvailable function is called to determine if the dates provided by the user, and all dates between the two is not already booked.
+ * If the venue being checked has dates available in the time interval, the venue is included in the filtered results.
+ *
+ * This function is dependant on the matchesKeyword, and areDatesAvailable function.
+ *
+ * @param {Array} venues - Data from the API. The provided data where this function is used is batches of a number of venues from the Holidaze API.
+ * @param {Object} searchParams - The search params provided by the search bar. The params are stored in the search params slice in Redux Toolkit.
+ *  @returns {Array} - An array of filtered venues based on the search params provided by the user.
+ *
+ *
+ */
 function filterVenues(venues, searchParams) {
   const { guestCount = 0, pets, parking, wifi, breakfast, keyword = "", dateFrom, dateTo } = searchParams;
   return venues.filter((venue) => {

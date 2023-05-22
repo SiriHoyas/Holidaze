@@ -7,7 +7,7 @@ import LogoGray from "../../../assets/brand/LogoGray";
 
 function Footer() {
   return (
-    <Grid container direction={{ xs: "column", md: "row" }} sx={{ backgroundColor: "#f3f3f3", p: "1.5rem", mt: "6rem" }} item={true}>
+    <Grid container direction={{ xs: "column", md: "row" }} sx={{ backgroundColor: "#f3f3f3", p: "1.5rem" }} item={true}>
       <Grid rowGap={2} container justifyContent={"space-between"} item={true}>
         <Grid className="logoSocials" container rowGap={4} xs={12} md={4} item={true} justifyContent={{ xs: "center", md: "start" }}>
           <LogoGray />

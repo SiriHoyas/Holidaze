@@ -3,6 +3,7 @@ import { Box, Grid, ImageList, ImageListItem, Typography } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+import FallbackImage from "./../../assets/placeholder.jpg";
 import MetaIcons from "../MetaIcons";
 
 function CardGallery({ heading, data }) {
@@ -25,13 +26,17 @@ function CardGallery({ heading, data }) {
     return { id: item.id, img: item.media[0], title: item.name, meta: item.meta, description: item.description, rows: 2, cols: cols };
   });
 
+  const handleImageError = (event) => {
+    event.target.src = FallbackImage;
+  };
+
   return (
     <Grid container direction={"column"} item={true} sx={{ mt: "6rem" }}>
       <Typography variant="h5">{heading}</Typography>
       <ImageList variant="quilted" cols={4} rowHeight={121} sx={{ borderRadius: "6px" }}>
         {itemData.map((item) => (
           <ImageListItem key={item.id} component={Link} to={`venues/${item.id}`} cols={item.cols || 1} rows={item.rows || 1}>
-            <img {...srcset(item.img, 121, item.rows, item.cols)} alt={item.title} loading="lazy" />
+            <img onError={handleImageError} {...srcset(item.img, 121, item.rows, item.cols)} alt={item.title} loading="lazy" />
             <CardCover
               className="gradient-cover"
               sx={{

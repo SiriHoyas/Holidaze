@@ -1,12 +1,18 @@
 import { LocationOnOutlined } from "@mui/icons-material";
 import { Box, Button, Card, CardActions, CardContent, CardMedia, Divider, Grid, ImageList, ImageListItem, ImageListItemBar, Paper, Rating, Typography } from "@mui/material";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
+import FallbackImage from "./../../assets/placeholder.jpg";
 import LocationIcon from "../../assets/icons/LocationIcon,";
 import MetaIcons from "../MetaIcons";
 
 function VenueCard({ data, path }) {
+  const [imageError, setImageError] = useState(false);
+
   if (data) {
+    const hasImages = data.media && data.media.length > 0;
+
     let city;
     if (data.location.city !== "") {
       city = data.location.city;
@@ -16,6 +22,10 @@ function VenueCard({ data, path }) {
       // This is just for aesthetic purposes.
       city = "Lockwood Village";
     }
+
+    const handleImageError = () => {
+      setImageError(true);
+    };
     return (
       <Grid item xs={12} sm={6} md={4} component={Link} to={path} sx={{ textDecoration: "none" }}>
         <Card
@@ -28,7 +38,7 @@ function VenueCard({ data, path }) {
             },
           }}
         >
-          <CardMedia component="img" sx={{ height: 140 }} image={data.media[0]} title={data.name} />
+          {hasImages ? <CardMedia component="img" sx={{ height: 140 }} image={imageError ? FallbackImage : data.media[0]} title={data.name} onError={handleImageError} /> : <CardMedia component="img" sx={{ height: 140 }} image={FallbackImage} title={data.name} />}
           <CardContent>
             <Typography noWrap variant="h5">
               {data.name}

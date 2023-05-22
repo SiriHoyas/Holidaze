@@ -80,12 +80,6 @@ function Login() {
     userLogin("https://api.noroff.dev/api/v1/holidaze/auth/login", options);
   }
 
-  useEffect(() => {
-    if (!isLoggedIn) {
-      userLogin();
-    }
-  }, [isLoggedIn]);
-
   return (
     <Grid container direction="column" sx={{ pt: { sm: "6rem", lg: "10rem" } }} item={true}>
       <Grid container textAlign={"center"} direction={"column"} xs={11} lg={4} item={true} alignContent={"center"}>

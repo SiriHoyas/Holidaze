@@ -90,13 +90,13 @@ function Login() {
           Log in to book your next adventure!
         </Typography>
         <Paper elevation={5} sx={{ width: { xs: "90%", md: "50%", lg: "40%" }, p: 6, position: "relative", transform: "translateY(80px)" }}>
-          <Typography align="start" gutterBottom variant="h2" sx={{ mb: ".4rem", fontSize: "1.2rem" }}>
+          <Typography align="left" gutterBottom variant="h2" sx={{ mb: ".4rem", fontSize: "1.2rem" }}>
             Log In
           </Typography>
-          <Typography align="start" gutterBottom variant="body2" color={"text.secondary"} sx={{ mb: "2rem" }}>
+          <Typography align="left" gutterBottom variant="body2" color={"text.secondary"} sx={{ mb: "2rem" }}>
             Don't have an account? Register <Link to={"/register"}>here</Link>
           </Typography>
-          <Typography variant="body2" color={"error.dark"} align="start" sx={{ mb: "1rem" }}>
+          <Typography variant="body2" color={"error.dark"} align="left" sx={{ mb: "1rem" }}>
             {apiError}
           </Typography>
           <form onSubmit={handleSubmit(onSubmit)}>

@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import { API_ROOT } from "./js/constants";
+import getAuth from "./js/getAuth";
 import Router from "./Router/Router.jsx";
 import { setUserInfo } from "./store/UserSlice";
 import { theme } from "./theme";
@@ -13,12 +14,16 @@ function App() {
   /**
    * eererer
    */
-  useEffect(() => {
-    window.addEventListener("beforeunload", handleRefresh);
+  const hasLoggedIn = getAuth();
 
-    return () => {
-      window.removeEventListener("beforeunload", handleRefresh);
-    };
+  useEffect(() => {
+    if (hasLoggedIn) {
+      window.addEventListener("beforeunload", handleRefresh);
+
+      return () => {
+        window.removeEventListener("beforeunload", handleRefresh);
+      };
+    }
   });
 
   const dispatch = useDispatch();
@@ -51,8 +56,6 @@ function App() {
       }
     } catch (error) {}
   }
-
-  getUserInfo();
 
   function handleRefresh() {
     getUserInfo();

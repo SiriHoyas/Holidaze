@@ -2,24 +2,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Checkbox, Grid, TextField } from "@mui/material";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import * as yup from "yup";
 
 import Button from "./../components/Button";
 import UploadProfileImage from "../components/UploadProfileMedia";
-
-const schema = yup.object().shape({
-  name: yup
-    .string()
-    .matches(/^[A-Za-z0-9_]+$/, "Username can only contain letters, numbers and underscore")
-    .required(),
-  email: yup
-    .string()
-    .email()
-    .matches(/^[a-zA-Z0-9._%+-]+@(stud\.)?noroff\.no$/, "Please enter a valid email")
-    .required(),
-  password: yup.string().min(8, "Password must be eight characters or more").required(),
-  venueManager: yup.boolean(),
-});
+import { registerSchema as schema } from "../utils/schema";
 
 function Register() {
   const [registered, setRegistered] = useState(false);

@@ -1,58 +1,23 @@
-import { Box, Divider, Grid, ImageListItem, Skeleton, Typography, useMediaQuery } from "@mui/material";
+import { Grid, Skeleton, Typography, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import Carousel from "react-material-ui-carousel";
-import { Link } from "react-router-dom";
 
 import banner from "./../assets/brand/banner.png";
 import CardGallery from "../components/CardGallery";
 import HeroCarousel from "../components/HeroCarousel";
 import HorizontalCardList from "../components/HorizontalCardList/HorizontalCardList";
-import MetaIcons from "../components/MetaIcons";
 import Search from "../components/Search";
 import VenueCard from "../components/VenueCard";
 import useApi from "../hooks/useApi";
 import { API_ROOT } from "../js/constants";
+import getFeaturedVenues from "../js/getFeaturedVenues";
 
 function HomePage() {
   const { data, isLoading, isError } = useApi(`${API_ROOT}/venues?sortOrder=desc&sort=created`, { method: "GET" });
-
   const theme = useTheme();
   const largerScreen = useMediaQuery(theme.breakpoints.up("sm"));
 
-  /**
-   * ??
-   */
-  let recommendedData = [];
-  let allowPetsData = [];
-
-  if (data && data.length && data.name != "") {
-    const filterByMedia = data.filter((item) => {
-      if (item.media.length > 0) {
-        return item;
-      }
-    });
-
-    for (let i = 0; i < filterByMedia.length; i++) {
-      if (i <= 3 && largerScreen) {
-        recommendedData.push(filterByMedia[i]);
-      }
-      if (i <= 9 && !largerScreen) {
-        recommendedData.push(filterByMedia[i]);
-      }
-    }
-    const filterByPets = data.filter((item) => {
-      if (item.meta.pets) {
-        return item;
-      }
-    });
-    for (let i = 0; i < filterByPets.length; i++) {
-      if (i <= 8 && largerScreen) {
-        allowPetsData.push(filterByPets[i]);
-      }
-      if (i <= 9 && !largerScreen) {
-        allowPetsData.push(filterByPets[i]);
-      }
-    }
+  if (data) {
+    const { recommendedData, allowPetsData } = getFeaturedVenues(data, largerScreen);
 
     if (largerScreen) {
       return (

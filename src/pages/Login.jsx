@@ -4,20 +4,11 @@ import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import * as yup from "yup";
 
 import Button from "./../components/Button";
 import getAuth from "../js/getAuth";
 import { setUserInfo } from "../store/UserSlice";
-
-const schema = yup.object().shape({
-  email: yup
-    .string()
-    .email()
-    .matches(/^[a-zA-Z0-9._%+-]+@(stud\.)?noroff\.no$/, "Please enter a valid email")
-    .required(),
-  password: yup.string().min(8, "Password must be eight characters or more").required(),
-});
+import { loginSchema as schema } from "../utils/schema";
 
 function Login() {
   const dispatch = useDispatch();

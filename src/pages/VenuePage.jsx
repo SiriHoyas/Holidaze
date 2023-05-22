@@ -37,7 +37,6 @@ function VenuePage() {
 
   const { data } = useApi(`https://api.noroff.dev/api/v1/holidaze/venues/${venueID}?_owner=true&_bookings=true`, options);
 
-  console.log(data);
   useEffect(() => {
     if (data) {
       if (data.owner.name === userName) {

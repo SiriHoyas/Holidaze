@@ -1,11 +1,13 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Add, AddToPhotos, Delete, Image } from "@mui/icons-material";
+import AddHomeIcon from "@mui/icons-material/AddHome";
 import ImageIcon from "@mui/icons-material/Image";
 import { Avatar, Checkbox, FormControlLabel, FormGroup, Grid, IconButton, List, ListItem, ListItemAvatar, ListItemText, Modal, Switch, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 
+import PlusIcon from "../../assets/icons/PlusIcon";
 import { ACCESS_TOKEN } from "../../js/constants";
 import Button from "../Button";
 
@@ -91,7 +93,7 @@ function NewVenueModal() {
 
   return (
     <>
-      <Button fullWidth shape="square" onClick={handleOpen} label={"Add new venue"} />
+      <Button size="large" fullWidth shape="square" onClick={handleOpen} label={"Add new venue"} startIcon={<AddHomeIcon sx={{ height: "20px" }} />} />
       <Modal open={open} onClose={handleClose} sx={{ overflow: "scroll", p: "1rem" }}>
         <Grid container rowGap={2} direction={"column"} sx={{ overflow: "scroll", backgroundColor: "white", display: "flex", m: "0 auto", p: "1rem" }}>
           <Typography variant="h2">Add new venue</Typography>

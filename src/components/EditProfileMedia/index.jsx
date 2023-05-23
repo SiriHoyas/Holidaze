@@ -11,6 +11,8 @@ function EditProfileMedia() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  console.log(USER_NAME);
+
   const { control, handleSubmit } = useForm({
     defaultValues: {
       avatar: "",
@@ -42,7 +44,7 @@ function EditProfileMedia() {
   }
   return (
     <>
-      <Tooltip title="Edit" sx={{ position: "absolute", right: "0", mr: "1rem" }} onClick={handleOpen}>
+      <Tooltip title="Edit" onClick={handleOpen}>
         <IconButton>
           <EditIcon />
         </IconButton>

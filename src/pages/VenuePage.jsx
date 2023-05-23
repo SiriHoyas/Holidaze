@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
+import useApi from "./../hooks/useApi";
 import FavouritesFilled from "../assets/icons/FavouritesFilled";
 import FavouritesOutlined from "../assets/icons/FavouritesOutlined";
 import LikeIcon from "../assets/icons/LikeIcon";
@@ -11,7 +12,6 @@ import Button from "../components/Button";
 import EditVenueModal from "../components/EditVenueModal";
 import MetaIcons from "../components/MetaIcons";
 import VenueImgCarousel from "../components/VenueImgCarousel";
-import useApi from "../hooks/UseApi";
 import { addToFavourites, removeFromFavourites } from "../store/FavouritesSlice";
 
 function VenuePage() {
@@ -37,13 +37,16 @@ function VenuePage() {
 
   const { data } = useApi(`https://api.noroff.dev/api/v1/holidaze/venues/${venueID}?_owner=true&_bookings=true`, options);
 
+  console.log(data);
   useEffect(() => {
     if (data) {
       if (data.owner.name === userName) {
-        setIsMyVenue = true;
+        setIsMyVenue(true);
       }
 
-      if (venues.includes(data.id)) {
+      const venueIds = venues.map((venue) => venue.id);
+
+      if (venueIds.includes(data.id)) {
         setIsFavourite(true);
       } else {
         setIsFavourite(false);
@@ -74,7 +77,7 @@ function VenuePage() {
               <Tooltip title="Add to favourites">
                 <IconButton
                   onClick={() => {
-                    dispatch(addToFavourites(data.id));
+                    dispatch(addToFavourites(data));
                     setIsFavourite(true);
                   }}
                 >

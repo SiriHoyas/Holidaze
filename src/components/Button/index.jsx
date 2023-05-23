@@ -6,6 +6,8 @@ const ShapedButton = styled(MuiButton)(({ shape }) => ({
   borderRadius: shape === "square" ? "6px" : "30px",
   boxShadow: "none",
   backgroundColor: "#385E97",
+  display: "flex",
+  alignItems: "flex-start",
 }));
 
 /**

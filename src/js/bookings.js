@@ -10,6 +10,7 @@ import { eachDayOfInterval, isBefore, parseISO } from "date-fns";
 
 export function areDatesAvailable(bookings, requestedFrom, requestedTo) {
   const fromDate = new Date(requestedFrom);
+  console.log(fromDate);
   const toDate = new Date(requestedTo);
   const formattedTo = toDate.toISOString();
   const formattedFrom = fromDate.toISOString();

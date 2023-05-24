@@ -3,7 +3,7 @@ import { Add, AddToPhotos, Delete, Image } from "@mui/icons-material";
 import AddHomeIcon from "@mui/icons-material/AddHome";
 import ImageIcon from "@mui/icons-material/Image";
 import { Avatar, Checkbox, FormControlLabel, FormGroup, Grid, IconButton, List, ListItem, ListItemAvatar, ListItemText, Modal, Switch, TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 
@@ -57,6 +57,7 @@ function NewVenueModal() {
     control,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -73,67 +74,64 @@ function NewVenueModal() {
     },
   });
 
-  const options = {
-    method: "POST",
-    body: JSON.stringify(formData),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-    },
-  };
-
   async function newVenue(url, options) {
     try {
       const response = await fetch(url, options);
 
-      if (response.ok) {
-        const json = await response.json();
+      if (response.status === 201) {
+        console.log(response);
+        handleClose();
+        reset();
+        setAddUrl("");
+        setImageUrls([]);
       }
     } catch (error) {}
+  }
+
+  function postNewVenue(data) {
+    const imageArray = [];
+    imageUrls.forEach((url) => {
+      imageArray.push(url.value);
+    });
+
+    const newFormData = {
+      name: data.name,
+      description: data.description,
+      media: imageArray,
+      price: data.price,
+      maxGuests: data.guests,
+      meta: {
+        wifi: data.wifi,
+        parking: data.parking,
+        breakfast: data.breakfast,
+        pets: data.pets,
+      },
+      location: {
+        address: data.address,
+        city: data.city,
+      },
+    };
+    setFormData(newFormData);
+
+    const options = {
+      method: "POST",
+      body: JSON.stringify(newFormData),
+      headers: {
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    };
+    newVenue("https://api.noroff.dev/api/v1/holidaze/venues", options);
   }
 
   return (
     <>
       <Button size="large" fullWidth shape="square" onClick={handleOpen} label={"Add new venue"} startIcon={<AddHomeIcon sx={{ height: "20px" }} />} />
-      <Modal open={open} onClose={handleClose} sx={{ overflow: "scroll", p: "1rem" }}>
-        <Grid container rowGap={2} direction={"column"} sx={{ overflow: "scroll", backgroundColor: "white", display: "flex", m: "0 auto", p: "1rem" }}>
+      <Modal open={open} onClose={handleClose} sx={{ overflow: "scroll", width: { xs: "90%", md: "70%", lg: "50%" }, m: "0 auto", mt: "2rem" }}>
+        <Grid container rowGap={2} direction={"column"} sx={{ overflow: "scroll", backgroundColor: "white", display: "flex", m: "0 auto", p: "2rem" }}>
           <Typography variant="h2">Add new venue</Typography>
 
-          <form
-            onSubmit={handleSubmit((data) => {
-              const imageArray = [];
-              imageUrls.forEach((url) => {
-                imageArray.push(url.value);
-              });
-
-              setFormData({
-                name: data.name,
-                description: data.description,
-                media: imageArray,
-                price: data.price,
-                maxGuests: data.guests,
-                meta: {
-                  wifi: data.wifi,
-                  parking: data.parking,
-                  breakfast: data.breakfast,
-                  pets: data.pets,
-                },
-                location: {
-                  address: data.address,
-                  city: data.city,
-                },
-              });
-
-              const options = {
-                method: "POST",
-                body: JSON.stringify(formData),
-                headers: {
-                  Authorization: `Bearer ${ACCESS_TOKEN}`,
-                  "Content-type": "application/json; charset=UTF-8",
-                },
-              };
-              newVenue("https://api.noroff.dev/api/v1/holidaze/venues", options);
-            })}
-          >
+          <form onSubmit={handleSubmit(postNewVenue)}>
             <Grid container rowGap={2} direction={"column"}>
               <Controller name="name" control={control} render={({ field }) => <TextField helperText={errors.name?.message} {...field} size="small" fullWidth required id="venueName" label="Venue name" variant="outlined" />} />
               <Controller name="description" control={control} render={({ field }) => <TextField helperText={errors.description?.message} {...field} size="small" fullWidth required id="venueDescription" label="Description" variant="outlined" />} />

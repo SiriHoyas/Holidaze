@@ -89,7 +89,7 @@ function Login() {
         <Typography gutterBottom variant="body2" color={"text.secondary"}>
           Log in to book your next adventure!
         </Typography>
-        <Paper elevation={5} sx={{ width: { xs: "90%", md: "50%", lg: "40%" }, p: 6, position: "relative", transform: "translateY(80px)" }}>
+        <Paper elevation={5} sx={{ width: { xs: "90%", md: "50%", lg: "40%" }, p: 6, mt: "2rem", mb: "5rem" }}>
           <Typography align="left" gutterBottom variant="h2" sx={{ mb: ".4rem", fontSize: "1.2rem" }}>
             Log In
           </Typography>

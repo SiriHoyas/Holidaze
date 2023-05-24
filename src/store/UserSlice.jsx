@@ -17,9 +17,12 @@ const userSlice = createSlice({
       state.avatar = action.payload.avatar;
       state.venueManager = action.payload.venueManager;
     },
+    setProfileMedia: (state, action) => {
+      state.avatar = action.payload;
+    },
   },
 });
 
-export const { setUserInfo } = userSlice.actions;
+export const { setUserInfo, setProfileMedia } = userSlice.actions;
 
 export default userSlice.reducer;

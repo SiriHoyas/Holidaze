@@ -1,13 +1,12 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Add, AddToPhotos, Delete, Image } from "@mui/icons-material";
+import { Add, Delete } from "@mui/icons-material";
 import AddHomeIcon from "@mui/icons-material/AddHome";
 import ImageIcon from "@mui/icons-material/Image";
-import { Avatar, Checkbox, FormControlLabel, FormGroup, Grid, IconButton, List, ListItem, ListItemAvatar, ListItemText, Modal, Switch, TextField, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Checkbox, FormControlLabel, Grid, IconButton, List, ListItem, ListItemAvatar, ListItemText, Modal, TextField, Typography } from "@mui/material";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 
-import PlusIcon from "../../assets/icons/PlusIcon";
 import { ACCESS_TOKEN } from "../../js/constants";
 import Button from "../Button";
 

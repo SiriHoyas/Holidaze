@@ -26,6 +26,6 @@ export const loginSchema = yup.object().shape({
 // Yups .url() is not allowing regular URLs, so i made a slightly wide regex to try to validate in some way,
 // but it is not a perfect solution.
 
-export const UploadProfileImageSchema = yup.object().shape({
+export const uploadProfileImageSchema = yup.object().shape({
   avatar: yup.string().url("Please enter a valid URL"),
 });

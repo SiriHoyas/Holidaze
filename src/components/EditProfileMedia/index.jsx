@@ -1,4 +1,5 @@
-import { FormControl, Grid, IconButton, Modal, TextField, Tooltip, Typography } from "@mui/material";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Grid, IconButton, Modal, TextField, Tooltip, Typography } from "@mui/material";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -6,6 +7,7 @@ import { useDispatch } from "react-redux";
 import EditIcon from "../../assets/icons/EditIcon";
 import { ACCESS_TOKEN, USER_NAME } from "../../js/constants";
 import { setProfileMedia } from "../../store/UserSlice";
+import { uploadProfileImageSchema as schema } from "../../utils/schema";
 import Button from "../Button";
 
 function EditProfileMedia() {
@@ -17,6 +19,7 @@ function EditProfileMedia() {
   console.log(USER_NAME);
 
   const { control, handleSubmit, reset } = useForm({
+    resolver: yupResolver(schema),
     defaultValues: {
       avatar: "",
     },

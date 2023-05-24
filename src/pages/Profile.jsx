@@ -1,20 +1,15 @@
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import HolidayVillageRoundedIcon from "@mui/icons-material/HolidayVillageRounded";
 import RoomPreferencesRoundedIcon from "@mui/icons-material/RoomPreferencesRounded";
-import { Card, CardContent, CardMedia, Chip, Divider, Grid, Button as MuiButton, Typography, useMediaQuery, useTheme } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Card, CardContent, CardMedia, CircularProgress, Divider, Grid, Button as MuiButton, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import FavouritesFilled from "../assets/icons/FavouritesFilled";
-import FavouritesOutlined from "../assets/icons/FavouritesOutlined";
-import LocationIcon from "../assets/icons/LocationIcon,";
-import Button from "../components/Button";
 import EditProfileMedia from "../components/EditProfileMedia";
-import MetaIcons from "../components/MetaIcons";
+import ErrorMessage from "../components/ErrorMessage";
 import NewVenueModal from "../components/NewVenueModal";
 import ProfileCard from "../components/ProfileCard";
-import VenueCard from "../components/VenueCard";
 import useApi from "../hooks/useApi";
 import { ACCESS_TOKEN, USER_NAME } from "../js/constants";
 
@@ -37,7 +32,7 @@ function Profile() {
   const isBiggerScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   const { data, isLoading, isError } = useApi(`https://api.noroff.dev/api/v1/holidaze/profiles/${USER_NAME}?_bookings=true&_venues=true`, options);
-  console.log("data", data);
+
   const { userName, email, avatar, venueManager } = useSelector((store) => {
     return store.user;
   });
@@ -91,6 +86,12 @@ function Profile() {
         <Typography variant="h2">{title}</Typography>
         {venuesActive && (
           <Grid container sx={{ m: "0 auto" }} spacing={2}>
+            {isLoading && (
+              <Grid container justifyContent={"center"} sx={{ mt: "4rem" }}>
+                <CircularProgress />
+              </Grid>
+            )}
+            {isError && <ErrorMessage />}
             {data && data.venues.length > 0 ? (
               data.venues.map((venue) => {
                 return (
@@ -103,18 +104,26 @@ function Profile() {
               })
             ) : (
               <Grid container justifyContent={"center"} sx={{ mt: { xs: "1rem", md: "5rem" } }}>
-                <Card sx={{ p: "2rem" }}>
-                  <Typography gutterBottom align="center" variant="h5">
-                    No venues to manage
-                  </Typography>
-                  <NewVenueModal />
-                </Card>
+                {!isLoading && (
+                  <Card sx={{ p: "2rem" }}>
+                    <Typography gutterBottom align="center" variant="h5">
+                      No venues to manage
+                    </Typography>
+                    <NewVenueModal />
+                  </Card>
+                )}
               </Grid>
             )}
           </Grid>
         )}
         {bookingsActive && (
           <Grid container sx={{ m: "0 auto" }} spacing={2}>
+            {isLoading && (
+              <Grid container justifyContent={"center"} sx={{ mt: "4rem" }}>
+                <CircularProgress />
+              </Grid>
+            )}
+            {isError && <ErrorMessage />}
             {data && data.bookings.length > 0 ? (
               data.bookings.map((booking) => {
                 return (
@@ -141,6 +150,12 @@ function Profile() {
         )}
         {favouritesActive && (
           <Grid container sx={{ m: "0 auto" }} spacing={2}>
+            {isLoading && (
+              <Grid container justifyContent={"center"} sx={{ mt: "4rem" }}>
+                <CircularProgress />
+              </Grid>
+            )}
+            {isError && <ErrorMessage />}
             {venues.length > 0 ? (
               venues.map((data) => {
                 return (

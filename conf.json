@@ -1,6 +1,6 @@
 {
   "source": {
-    "include": ["./src"],
+    "include": ["./src", "./src/App.jsx"],
     "exclude": ["node_modules/"]
   }
 }

@@ -11,26 +11,30 @@ import { setUserInfo } from "./store/UserSlice";
 import { theme } from "./theme";
 
 function App() {
-  /**
-   * eererer
-   */
   const hasLoggedIn = getAuth();
-  const isReloading = (() => {
-    const isReload = performance.getEntriesByType("navigation")[0].type === "reload";
+  const dispatch = useDispatch();
+
+  /**
+   * Checks if page is being reloaded.
+   * App.jsx has a useEffect hook that listens for isReloading in dependancy array.
+   * If the page is reloading, it fires a function (handleRefresh), that calls API to get user info.
+   * The response from the API is being dispatched to the user slice in Redux Toolkit, and can be accessed sitewide.
+   * @returns {boolean} Returns true if page is being reloaded
+   */
+  function isReloading() {
+    performance.getEntriesByType("navigation")[0].type === "reload";
     if (isReload) {
       return true;
     } else {
       return false;
     }
-  })();
+  }
 
   useEffect(() => {
     if (hasLoggedIn) {
       handleRefresh();
     }
   }, [isReloading]);
-
-  const dispatch = useDispatch();
 
   async function getUserInfo() {
     const options = {

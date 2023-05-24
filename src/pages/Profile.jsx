@@ -155,9 +155,11 @@ function Profile() {
             {isError && <ErrorMessage />}
 
             {venues.length > 0 ? (
-              venues.map((venue) => {
-                return <MyFavourites data={data} />;
-              })
+              <Grid container>
+                {venues.map((venue) => {
+                  return <MyFavourites data={venue} />;
+                })}
+              </Grid>
             ) : (
               <Grid container justifyContent={"center"} sx={{ mt: { xs: "1rem", md: "5rem" } }}>
                 <Card sx={{ p: "2rem" }}>

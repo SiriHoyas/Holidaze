@@ -37,7 +37,7 @@ export async function searchVenues(searchParams) {
 
 export async function fetchVenues(offset = 0) {
   try {
-    const result = await fetch(`${API_ROOT}/venues?_bookings=true&offset=${offset}&limit=${VENUES_PER_BATCH}`, {
+    const result = await fetch(`${API_ROOT}/venues?_bookings=true&sort=created&sortOrder=desc&offset=${offset}&limit=${VENUES_PER_BATCH}`, {
       method: "GET",
       headers: {
         accept: "application/json",

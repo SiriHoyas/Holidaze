@@ -1,9 +1,10 @@
-import { Divider, Grid, Typography } from "@mui/material";
+import { CircularProgress, Divider, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useSearchParams } from "react-router-dom";
 
 import banner from "./../assets/brand/bannerVenues.avif";
+import ErrorMessage from "../components/ErrorMessage";
 import Search from "../components/Search";
 import VenueCard from "../components/VenueCard";
 import { fetchVenues, hasSetDateRange, searchVenues } from "../js/search";
@@ -13,11 +14,21 @@ function Venues() {
   const [venues, setVenues] = useState([]);
   const [isFromSearch, setIsFromSearch] = useState(false);
   const [queryParams, setQueryParams] = useSearchParams();
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     async function getVenues() {
-      const venues = hasSetDateRange(searchParams) ? await searchVenues(searchParams) : await fetchVenues(0);
-      setVenues(venues);
+      try {
+        setIsLoading(true);
+        setIsError(false);
+        const venues = hasSetDateRange(searchParams) ? await searchVenues(searchParams) : await fetchVenues(0);
+        setVenues(venues);
+      } catch (error) {
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
+      }
     }
 
     getVenues();
@@ -38,16 +49,25 @@ function Venues() {
             </Grid>
           </Grid>
         </Grid>
-        <Grid container xs={11} lg={9} xl={7} rowGap={4} sx={{ m: "0 auto", mt: "6rem", width: "100%" }}>
-          <Typography>25 results</Typography>
-          <Grid container sx={{ m: "0 auto", width: "100%", justifyContent: "space-between", gap: "1rem" }}>
-            {venues.map((venue) => {
-              return (
-                <Grid item key={venue.id} sx={{ width: "30%" }}>
-                  <VenueCard data={venue} path={venue.id} />
+        <Grid container rowGap={4} sx={{ m: "0 auto", mt: "6rem", width: "100%" }}>
+          <Grid item xs={11} lg={9} xl={7} sx={{ m: "0 auto" }}>
+            <Typography>25 results</Typography>
+            <Grid container sx={{ m: "0 auto", width: "100%", justifyContent: "space-between", gap: "1rem" }}>
+              {isLoading && (
+                <Grid container justifyContent={"center"} sx={{ mt: "4rem" }}>
+                  <CircularProgress />
                 </Grid>
-              );
-            })}
+              )}
+              {isError && <ErrorMessage />}
+
+              {venues.map((venue) => {
+                return (
+                  <Grid item key={venue.id} sx={{ width: "30%" }}>
+                    <VenueCard data={venue} path={venue.id} />
+                  </Grid>
+                );
+              })}
+            </Grid>
           </Grid>
         </Grid>
       </Grid>

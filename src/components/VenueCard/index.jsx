@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 import FallbackImage from "./../../assets/placeholder.jpg";
 import LocationIcon from "../../assets/icons/LocationIcon,";
+import { locationConverter } from "../../js/locationConverter";
 import MetaIcons from "../MetaIcons";
 
 function VenueCard({ data, path }) {
@@ -13,15 +14,8 @@ function VenueCard({ data, path }) {
   if (data) {
     const hasImages = data.media && data.media.length > 0;
 
-    let city;
-    if (data.location.city !== "") {
-      city = data.location.city;
-    } else {
-      // Just a placeholder if venue city is not defined. In my own solution, city is of course required
-      // to provide if registering a new venue, but I can't control what other people do.
-      // This is just for aesthetic purposes.
-      city = "Lockwood Village";
-    }
+    const city = locationConverter(data);
+    console.log(data);
 
     const handleImageError = () => {
       setImageError(true);

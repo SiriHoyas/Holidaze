@@ -1,12 +1,12 @@
-import { Divider, Grid, IconButton, Tooltip, Typography } from "@mui/material";
+import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
+import { Divider, Grid, IconButton, Button as MuiButton, Tooltip, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import useApi from "./../hooks/useApi";
 import FavouritesFilled from "../assets/icons/FavouritesFilled";
 import FavouritesOutlined from "../assets/icons/FavouritesOutlined";
-import LikeIcon from "../assets/icons/LikeIcon";
 import BookingModal from "../components/BookingModal";
 import Button from "../components/Button";
 import EditVenueModal from "../components/EditVenueModal";
@@ -20,6 +20,8 @@ function VenuePage() {
   const handleClose = () => setOpen(false);
   const { venueID } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { userName } = useSelector((store) => store.user);
   const [isFavourite, setIsFavourite] = useState(false);
   const [isMyVenue, setIsMyVenue] = useState(false);
@@ -56,6 +58,9 @@ function VenuePage() {
   if (data) {
     return (
       <Grid container rowGap={2} xs={11} md={7} direction={"column"} sx={{ m: "0 auto", mt: "5rem", mb: "5rem" }} item={true}>
+        <MuiButton onClick={() => navigate(-1)} size="small" startIcon={<ArrowBackIosNewRoundedIcon sx={{ width: "12px" }} />} sx={{ width: "fit-content", display: "flex", fontWeight: "700" }}>
+          BACK
+        </MuiButton>
         <Grid container>
           <VenueImgCarousel data={data.media} title={data.name} id={data.id} />
         </Grid>

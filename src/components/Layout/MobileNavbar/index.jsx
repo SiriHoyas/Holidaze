@@ -2,7 +2,7 @@ import { LoginOutlined, LogoutOutlined, PersonAdd } from "@mui/icons-material";
 import { AppBar, Avatar, Box, Button, Divider, Drawer, Grid, IconButton, List, ListItem, ListItemText, Paper, Toolbar, Typography } from "@mui/material";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 import LogoHorizontal from "../../../assets/brand/LogoHorizontal";
 import LogoInverted from "../../../assets/brand/LogoInverted";
@@ -11,14 +11,17 @@ import HomeIcon from "../../../assets/icons/HomeIcon";
 import MenuIcon from "../../../assets/icons/MenuIcon";
 import VenueIcon from "../../../assets/icons/VenueIcon";
 import useOutsideClick from "../../../hooks/useOutsideClick";
+import getAuth from "../../../js/getAuth";
 
 const slideVariants = {
   open: { x: 0, transition: { duration: 0.2 } },
   closed: { x: "100%", transition: { duration: 0.2 } },
 };
 
-function MobileNavbar({ isLoggedIn, userName, avatar }) {
+function MobileNavbar({ userName, avatar }) {
   const [isOpen, setIsOpen] = useState(false);
+  const isLoggedIn = getAuth();
+  const navigate = useNavigate();
 
   const ref = useOutsideClick(() => {
     setIsOpen(false);

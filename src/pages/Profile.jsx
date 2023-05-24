@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 
 import EditProfileMedia from "../components/EditProfileMedia";
 import ErrorMessage from "../components/ErrorMessage";
+import MyFavourites from "../components/MyFavourites";
+import MyVenues from "../components/MyVenues";
 import NewVenueModal from "../components/NewVenueModal";
 import ProfileCard from "../components/ProfileCard";
 import useApi from "../hooks/useApi";
@@ -94,13 +96,7 @@ function Profile() {
             {isError && <ErrorMessage />}
             {data && data.venues.length > 0 ? (
               data.venues.map((venue) => {
-                return (
-                  <Grid item xs={12} md={4}>
-                    <Card sx={{ p: "2rem" }}>
-                      <CardContent>{venue.name}</CardContent>
-                    </Card>
-                  </Grid>
-                );
+                return <MyVenues venue={venue} />;
               })
             ) : (
               <Grid container justifyContent={"center"} sx={{ mt: { xs: "1rem", md: "5rem" } }}>
@@ -158,14 +154,7 @@ function Profile() {
             {isError && <ErrorMessage />}
             {venues.length > 0 ? (
               venues.map((data) => {
-                return (
-                  <Grid item xs={12} md={4}>
-                    <Card sx={{ p: "2rem" }}>
-                      <CardMedia component="img" sx={{ height: 140 }} image={data.media[0]} title={data.name} />
-                      <CardContent>{data.name}</CardContent>
-                    </Card>
-                  </Grid>
-                );
+                return <MyFavourites data={data} />;
               })
             ) : (
               <Grid container justifyContent={"center"} sx={{ mt: { xs: "1rem", md: "5rem" } }}>

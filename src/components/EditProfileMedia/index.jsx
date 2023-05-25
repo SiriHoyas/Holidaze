@@ -16,8 +16,6 @@ function EditProfileMedia() {
   const handleClose = () => setOpen(false);
   const dispatch = useDispatch();
 
-  console.log(USER_NAME);
-
   const { control, handleSubmit, reset } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {

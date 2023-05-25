@@ -83,7 +83,6 @@ function BookingModal({ bookings, id, name, pricePerNight }) {
     };
     try {
       const response = await fetch(`${API_ROOT}/bookings`, options);
-      console.log(response);
       if (response.ok) {
         setBookingSuccess(true);
       }

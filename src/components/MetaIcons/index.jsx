@@ -17,7 +17,6 @@ function MetaIcons({ metaData, fullList }) {
     const breakfast = metaData.breakfast;
     const pets = metaData.pets;
     const wifi = metaData.wifi;
-    console.log(fullList);
 
     if (fullList) {
       return (

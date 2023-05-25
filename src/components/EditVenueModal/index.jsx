@@ -28,16 +28,13 @@ function EditVenueModal({ venue, open, handleClose, id }) {
     async function editVenue(url, options) {
       try {
         const response = await fetch(url, options);
-        console.log(response);
 
         if (response.ok) {
-          console.log(object);
         }
       } catch (error) {}
     }
 
     function submitHandler(data) {
-      console.log(data);
       const options = {
         method: "PUT",
         body: JSON.stringify(data),

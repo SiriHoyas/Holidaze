@@ -9,7 +9,6 @@ import { intervalToDuration } from "date-fns";
 export function getTotalPrice(pricePerNight, dateFrom, dateTo) {
   const totalNights = getTotalNights(dateFrom, dateTo);
   const totalPrice = pricePerNight * totalNights;
-  console.log(totalPrice);
   return totalPrice;
 }
 
@@ -22,7 +21,6 @@ export function getTotalPrice(pricePerNight, dateFrom, dateTo) {
 function getTotalNights(dateFrom, dateTo) {
   if (dateFrom !== null && dateTo !== null) {
     const totalNights = intervalToDuration({ start: new Date(dateFrom), end: new Date(dateTo) });
-    console.log(totalNights.days);
     return totalNights.days;
   }
   return 0;

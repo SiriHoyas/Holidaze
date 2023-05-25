@@ -10,7 +10,6 @@ import { locationConverter } from "../../js/locationConverter";
 
 function MyBookings({ booking }) {
   const [imageError, setImageError] = useState(false);
-  console.log(booking);
   const hasImages = booking.venue.media && booking.venue.media.length > 0;
   const handleImageError = () => {
     setImageError(true);
@@ -34,7 +33,6 @@ function MyBookings({ booking }) {
     };
     try {
       const response = await fetch(`${API_ROOT}/bookings/${booking.id}`, options);
-      console.log(response);
     } catch (error) {}
   }
 

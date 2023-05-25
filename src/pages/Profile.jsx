@@ -37,8 +37,6 @@ function Profile() {
 
   const { data, isLoading, isError } = useApi(`https://api.noroff.dev/api/v1/holidaze/profiles/${USER_NAME}?_bookings=true&_venues=true`, options);
 
-  console.log(data);
-
   const { userName, email, avatar, venueManager } = useSelector((store) => {
     return store.user;
   });

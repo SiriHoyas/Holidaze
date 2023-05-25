@@ -40,7 +40,6 @@ function Login() {
     try {
       const response = await fetch(url, options);
       const json = await response.json();
-      console.log(json);
 
       if (response.status === 401) {
         setApiError(json.errors[0].message);

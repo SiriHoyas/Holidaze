@@ -25,7 +25,6 @@ function NewVenueModal() {
 
   function addItem() {
     if (!addUrl) {
-      console.log("empty field");
       return;
     }
 
@@ -78,7 +77,6 @@ function NewVenueModal() {
       const response = await fetch(url, options);
 
       if (response.status === 201) {
-        console.log(response);
         handleClose();
         reset();
         setAddUrl("");

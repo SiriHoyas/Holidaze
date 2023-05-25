@@ -29,3 +29,14 @@ export const loginSchema = yup.object().shape({
 export const uploadProfileImageSchema = yup.object().shape({
   avatar: yup.string().url("Please enter a valid URL"),
 });
+
+export const editVenueSchema = yup.object().shape({
+  name: yup.string().required(),
+  description: yup.string().required().min(10),
+  price: yup.number().required().min(1),
+  guests: yup.number().required().min(1),
+  wifi: yup.boolean(),
+  parking: yup.boolean(),
+  breakfast: yup.boolean(),
+  pets: yup.boolean(),
+});

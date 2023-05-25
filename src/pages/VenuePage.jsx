@@ -123,7 +123,7 @@ function VenuePage() {
           <Grid container sx={{ mt: "1rem" }}>
             <Grid item>
               <Button shape="square" onClick={handleOpen} label={"Edit venue"} />
-              <EditVenueModal venue={data} handleClose={handleClose} open={open} />
+              <EditVenueModal venue={data} handleClose={handleClose} open={open} id={data.id} />
             </Grid>
           </Grid>
         )}

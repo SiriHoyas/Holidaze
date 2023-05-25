@@ -11,7 +11,7 @@ import { setUserInfo } from "./store/UserSlice";
 import { theme } from "./theme";
 
 function App() {
-  const hasLoggedIn = getAuth();
+  const isLoggedIn = getAuth();
   const dispatch = useDispatch();
 
   /**
@@ -31,7 +31,7 @@ function App() {
   }
 
   useEffect(() => {
-    if (hasLoggedIn) {
+    if (isLoggedIn) {
       handleRefresh();
     }
   }, [isReloading]);

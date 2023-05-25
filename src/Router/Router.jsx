@@ -1,15 +1,18 @@
+import { Grid } from "@mui/material";
 import { Link, Route, Routes } from "react-router-dom";
 
-import { Grid } from "@mui/material";
-import HomePage from "../pages/HomePage";
 import Layout from "../components/Layout";
+import getAuth from "../js/getAuth";
+import HomePage from "../pages/HomePage";
 import Login from "../pages/Login";
 import Profile from "../pages/Profile";
 import Register from "../pages/Register";
 import VenuePage from "../pages/VenuePage";
 import Venues from "../pages/Venues";
+import ProtectedRoute from "./ProtectedRoute";
 
 function Router() {
+  const isLoggedIn = getAuth();
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
@@ -18,7 +21,9 @@ function Router() {
         <Route path="venues/:venueID" element={<VenuePage />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
-        <Route path="profile" element={<Profile />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="profile" element={<Profile />} />
+        </Route>
         <Route
           path="*"
           element={

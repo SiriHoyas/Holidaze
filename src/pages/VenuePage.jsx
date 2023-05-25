@@ -1,5 +1,5 @@
 import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
-import { Divider, Grid, IconButton, Button as MuiButton, Tooltip, Typography } from "@mui/material";
+import { Avatar, Divider, Grid, IconButton, Button as MuiButton, Tooltip, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -57,15 +57,15 @@ function VenuePage() {
   }, [data, venues, userName]);
   if (data) {
     return (
-      <Grid container rowGap={2} xs={11} md={7} direction={"column"} sx={{ m: "0 auto", mt: "5rem", mb: "5rem" }} item={true}>
-        <MuiButton onClick={() => navigate(-1)} size="small" startIcon={<ArrowBackIosNewRoundedIcon sx={{ width: "12px" }} />} sx={{ width: "fit-content", display: "flex", fontWeight: "700" }}>
+      <Grid container xs={11} md={7} direction={"column"} sx={{ m: "0 auto", mt: "5rem", mb: "5rem" }} item={true}>
+        <MuiButton onClick={() => navigate(-1)} size="small" startIcon={<ArrowBackIosNewRoundedIcon sx={{ width: "12px" }} />} sx={{ width: "fit-content", display: "flex", fontWeight: "700", mb: ".3rem" }}>
           BACK
         </MuiButton>
         <Grid container>
           <VenueImgCarousel data={data.media} title={data.name} id={data.id} />
         </Grid>
         <Grid item>
-          <Grid container direction={"row"} justifyContent={"space-between"}>
+          <Grid container direction={"row"} justifyContent={"space-between"} sx={{ mt: "1rem" }}>
             <Typography variant="h1">{data.name}</Typography>
             {isFavourite ? (
               <Tooltip title="Remove from favourites">
@@ -91,31 +91,48 @@ function VenuePage() {
               </Tooltip>
             )}
           </Grid>
-          <Typography variant="body1" sx={{ fontSize: "1.4rem" }}>
+          <Typography variant="body1" sx={{ fontSize: "1.4rem", mt: ".4rem" }}>
             € {data.price} / night
           </Typography>
         </Grid>
         {!isMyVenue && (
-          <Grid item>
-            <Button shape="square" onClick={handleOpen} label={"Book"} />
-            <BookingModal handleClose={handleClose} open={open} bookings={data.bookings} />
+          <Grid container alignItems={"center"} direction={{ xs: "column", lg: "row" }} rowGap={2} sx={{ mt: "1rem", justifyContent: "space-between" }}>
+            <Grid container direction={"column"}>
+              <Button shape="square" onClick={handleOpen} label={"Book"} sx={{ width: "fit-content" }} />
+              <BookingModal handleClose={handleClose} open={open} bookings={data.bookings} />
+            </Grid>
           </Grid>
         )}
         {isMyVenue && (
-          <Grid item>
-            <Button shape="square" onClick={handleOpen} label={"Edit venue"} />
-            <EditVenueModal venue={data} handleClose={handleClose} open={open} />
+          <Grid container sx={{ mt: "1rem" }}>
+            <Grid item>
+              <Button shape="square" onClick={handleOpen} label={"Edit venue"} />
+              <EditVenueModal venue={data} handleClose={handleClose} open={open} />
+            </Grid>
           </Grid>
         )}
         <Divider sx={{ mt: "1rem" }} />
         <Grid item>
-          <Typography variant="h5">Description</Typography>
-          <Typography paragraph variant="body1"></Typography>
+          <Typography variant="h5" sx={{ mt: "1rem" }}>
+            Description
+          </Typography>
+          <Typography paragraph variant="body1">
+            {data.description}
+          </Typography>
+          <Grid item sx={{ mb: "1rem" }}>
+            <Typography variant="body1">Managed by:</Typography>
+            <Grid container alignItems={"center"} direction={"row"}>
+              <Avatar alt={data.owner.name} src={data.owner.avatar} sx={{ width: "30px", height: "30px", mr: ".4rem" }} />
+              <Typography variant="body2">{data.owner.name}</Typography>
+            </Grid>
+          </Grid>
         </Grid>
         <Divider />
         <Grid>
-          <Typography variant="h5">We offer</Typography>
-          <MetaIcons metaData={data.meta} />
+          <Typography variant="h5" sx={{ mt: "1rem", mb: ".4rem" }}>
+            We offer
+          </Typography>
+          <MetaIcons metaData={data.meta} fullList={true} />
         </Grid>
       </Grid>
     );

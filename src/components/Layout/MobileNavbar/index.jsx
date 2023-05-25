@@ -34,7 +34,7 @@ function MobileNavbar({ userName, avatar }) {
   return (
     <AppBar elevation={1} sx={{ backgroundColor: isOpen ? "primary.dark" : "rgba(255, 255, 255, 0.95)", transition: "background-color 200ms ease-in-out" }}>
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Grid component={NavLink} to={"/"} item sx={{ width: "33%", display: "flex", justifyContent: "center" }}>
+        <Grid component={NavLink} to={"/"} item sx={{ width: "33%", display: "flex", justifyContent: "start" }}>
           {isOpen ? <LogoInverted /> : <LogoHorizontal />}
         </Grid>
         <IconButton

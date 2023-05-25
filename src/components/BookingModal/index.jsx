@@ -24,7 +24,7 @@ function getAllBookedDates(bookings) {
   }, []);
 }
 
-function BookingModal({ bookings, id, name }) {
+function BookingModal({ bookings, id, name, pricePerNight }) {
   const [guestCount, setGuestCount] = useState();
   const [checkInDate, setcheckInDate] = useState(null);
   const [checkOutDate, setcheckOutDate] = useState(null);
@@ -54,7 +54,7 @@ function BookingModal({ bookings, id, name }) {
 
   useEffect(() => {
     if (checkInDate !== null && checkOutDate !== null) {
-      const price = getTotalPrice(300, checkInDate, checkOutDate);
+      const price = getTotalPrice(pricePerNight, checkInDate, checkOutDate);
       const formattedFrom = dateFormatter(checkInDate);
       const formattedTo = dateFormatter(checkOutDate);
       setConvertedFromDate(formattedFrom);

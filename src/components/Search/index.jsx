@@ -45,6 +45,7 @@ function Search({ params }) {
         </Grid>
         <TextField
           sx={{ flexGrow: 1 }}
+          autoComplete="off"
           id="outlined-basic"
           label="Where to?"
           onChange={(e) => {

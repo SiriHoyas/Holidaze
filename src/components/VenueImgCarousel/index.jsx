@@ -12,7 +12,7 @@ function VenueImgCarousel({ data, isError, isLoading, title, id }) {
         <Grid item xs={12} md={12}>
           <Carousel duration={600} height={isMobileScreen ? "200px" : "400px"} indicators={false} autoPlay={false} navButtonsAlwaysVisible={true} navButtonsAlwaysInvisible={data.length > 0 ? false : true}>
             {data.map((item) => (
-              <Grid key={id}>
+              <Grid item key={id}>
                 <ImageListItem>
                   <img src={`${item}`} alt={title} loading="lazy" />
                 </ImageListItem>

@@ -1,5 +1,6 @@
 import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
-import { Avatar, Divider, Grid, IconButton, Button as MuiButton, Tooltip, Typography } from "@mui/material";
+import BedRoundedIcon from "@mui/icons-material/BedRounded";
+import { Avatar, Card, Divider, Grid, IconButton, Button as MuiButton, Tooltip, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -7,11 +8,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import useApi from "./../hooks/useApi";
 import FavouritesFilled from "../assets/icons/FavouritesFilled";
 import FavouritesOutlined from "../assets/icons/FavouritesOutlined";
+import LocationIcon from "../assets/icons/LocationIcon,";
 import BookingModal from "../components/BookingModal";
 import Button from "../components/Button";
 import EditVenueModal from "../components/EditVenueModal";
 import MetaIcons from "../components/MetaIcons";
 import VenueImgCarousel from "../components/VenueImgCarousel";
+import { dateFormatter } from "../js/dateFormatter";
+import { locationConverter } from "../js/locationConverter";
 import { addToFavourites, removeFromFavourites } from "../store/FavouritesSlice";
 
 function VenuePage() {
@@ -39,7 +43,6 @@ function VenuePage() {
 
   const { data } = useApi(`https://api.noroff.dev/api/v1/holidaze/venues/${venueID}?_owner=true&_bookings=true`, options);
 
-  console.log(data);
   useEffect(() => {
     if (data) {
       if (data.owner.name === userName) {
@@ -56,6 +59,8 @@ function VenuePage() {
     }
   }, [data, venues, userName]);
   if (data) {
+    const city = locationConverter(data);
+
     return (
       <Grid container xs={11} md={7} direction={"column"} sx={{ m: "0 auto", mt: "5rem", mb: "5rem" }} item={true}>
         <MuiButton onClick={() => navigate(-1)} size="small" startIcon={<ArrowBackIosNewRoundedIcon sx={{ width: "12px" }} />} sx={{ width: "fit-content", display: "flex", fontWeight: "700", mb: ".3rem" }}>
@@ -91,15 +96,26 @@ function VenuePage() {
               </Tooltip>
             )}
           </Grid>
+          <Grid container alignItems="baseline" sx={{ mt: ".5rem", mb: "3rem" }}>
+            <LocationIcon />
+            <Typography gutterBottom variant="body1" component="div" color="primary.main" sx={{ fontSize: "1rem", ml: ".3rem" }}>
+              {city}
+            </Typography>
+          </Grid>
           <Typography variant="body1" sx={{ fontSize: "1.4rem", mt: ".4rem" }}>
             € {data.price} / night
           </Typography>
+          <Grid container>
+            <BedRoundedIcon />
+            <Typography variant="body1" sx={{ ml: ".5rem" }}>
+              {data.maxGuests}
+            </Typography>
+          </Grid>
         </Grid>
         {!isMyVenue && (
           <Grid container alignItems={"center"} direction={{ xs: "column", lg: "row" }} rowGap={2} sx={{ mt: "1rem", justifyContent: "space-between" }}>
             <Grid container direction={"column"}>
-              <Button shape="square" onClick={handleOpen} label={"Book"} sx={{ width: "fit-content" }} />
-              <BookingModal handleClose={handleClose} open={open} bookings={data.bookings} />
+              <BookingModal id={data.id} name={data.name} bookings={data.bookings} />
             </Grid>
           </Grid>
         )}
@@ -119,7 +135,7 @@ function VenuePage() {
           <Typography paragraph variant="body1">
             {data.description}
           </Typography>
-          <Grid item sx={{ mb: "1rem" }}>
+          <Grid item sx={{ mb: "1rem", mt: "3rem" }}>
             <Typography variant="body1">Managed by:</Typography>
             <Grid container alignItems={"center"} direction={"row"}>
               <Avatar alt={data.owner.name} src={data.owner.avatar} sx={{ width: "30px", height: "30px", mr: ".4rem" }} />
@@ -134,6 +150,39 @@ function VenuePage() {
           </Typography>
           <MetaIcons metaData={data.meta} fullList={true} />
         </Grid>
+        {isMyVenue && (
+          <>
+            <Divider sx={{ mt: "2rem", mb: "1rem" }} />
+            <Grid>
+              <Typography variant="h5" sx={{ mt: "1rem", mb: ".4rem" }}>
+                Bookings
+              </Typography>
+              <Grid container spacing={2}>
+                {data.bookings.length > 0 &&
+                  data.bookings.map((booking) => {
+                    const fromDate = dateFormatter(booking.dateFrom);
+                    const toDate = dateFormatter(booking.dateTo);
+                    return (
+                      <Grid key={booking.id} item xs={4}>
+                        <Card sx={{ p: "1rem", height: "150px" }}>
+                          <Typography variant="body1">{data.name} is booked: </Typography>
+                          <Typography variant="body2">
+                            {fromDate} - {toDate}
+                          </Typography>
+                          <Typography>Guests: {booking.guests}</Typography>
+                        </Card>
+                      </Grid>
+                    );
+                  })}
+              </Grid>
+              {data.bookings.length === 0 && (
+                <Grid item>
+                  <Card>No bookings</Card>
+                </Grid>
+              )}
+            </Grid>
+          </>
+        )}
       </Grid>
     );
   }

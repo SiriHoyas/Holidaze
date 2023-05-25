@@ -15,7 +15,6 @@ function VenueCard({ data, path }) {
     const hasImages = data.media && data.media.length > 0;
 
     const city = locationConverter(data);
-    console.log(data);
 
     const handleImageError = () => {
       setImageError(true);

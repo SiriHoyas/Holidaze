@@ -1,8 +1,6 @@
 import PersonAddAlt1RoundedIcon from "@mui/icons-material/PersonAddAlt1Rounded";
-import { Checkbox, Divider, FormControlLabel, Grid, IconButton, Menu, Typography } from "@mui/material";
-import { Button as MuiButton } from "@mui/material";
+import { Checkbox, Divider, FormControlLabel, Grid, IconButton, Menu, Button as MuiButton, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 
 import MinusIcon from "../../assets/icons/MinusIcon";
 import PlusIcon from "../../assets/icons/PlusIcon";
@@ -55,7 +53,7 @@ function GuestCountPicker({ state, setSearchParams }) {
               <Grid item sx={{ display: "flex", alignItems: "center" }}>
                 <IconButton
                   onClick={() => {
-                    if (adultCount !== 0) {
+                    if (adultCount > 1) {
                       setAdultCount(adultCount - 1);
                     }
                   }}

@@ -13,7 +13,7 @@ const favouritesSlice = createSlice({
     },
     removeFromFavourites: (state, action) => {
       state.venues = state.venues.filter((venue) => {
-        return venue !== action.payload;
+        return venue.id !== action.payload;
       });
     },
   },

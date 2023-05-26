@@ -6,7 +6,7 @@ import MinusIcon from "../../assets/icons/MinusIcon";
 import PlusIcon from "../../assets/icons/PlusIcon";
 import Button from "../Button";
 
-function GuestCountPicker({ state, setSearchParams }) {
+function GuestCountPicker({ state, setSearchParams, maxGuests = 10 }) {
   const [adultCount, setAdultCount] = useState(2);
   const [childrenCount, setChildrenCount] = useState(0);
   const [bringPet, setBringPet] = useState(false);
@@ -32,6 +32,30 @@ function GuestCountPicker({ state, setSearchParams }) {
     setAnchorEl(null);
   };
 
+  const incrementAdultCount = () => {
+    if (guestCountSum + 1 <= maxGuests) {
+      setAdultCount(adultCount + 1);
+    }
+  };
+
+  const decrementAdultCount = () => {
+    if (adultCount > 1) {
+      setAdultCount(adultCount - 1);
+    }
+  };
+
+  const incrementChildrenCount = () => {
+    if (guestCountSum + 1 <= maxGuests) {
+      setChildrenCount(childrenCount + 1);
+    }
+  };
+
+  const decrementChildrenCount = () => {
+    if (childrenCount > 0) {
+      setChildrenCount(childrenCount - 1);
+    }
+  };
+
   return (
     <Grid container>
       <MuiButton sx={{ height: "56px" }} fullWidth variant="outlined" startIcon={<PersonAddAlt1RoundedIcon />} size="large" id="guest-picker" aria-controls={open ? "guest-picker" : undefined} aria-haspopup="true" aria-expanded={open ? "true" : undefined} onClick={handleClick}>
@@ -51,21 +75,11 @@ function GuestCountPicker({ state, setSearchParams }) {
             <Grid item sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
               <Typography>Adults</Typography>
               <Grid item sx={{ display: "flex", alignItems: "center" }}>
-                <IconButton
-                  onClick={() => {
-                    if (adultCount > 1) {
-                      setAdultCount(adultCount - 1);
-                    }
-                  }}
-                >
+                <IconButton onClick={decrementAdultCount}>
                   <MinusIcon />
                 </IconButton>
                 <Typography variant="body1">{adultCount}</Typography>
-                <IconButton
-                  onClick={() => {
-                    setAdultCount(adultCount + 1);
-                  }}
-                >
+                <IconButton onClick={incrementAdultCount}>
                   <PlusIcon />
                 </IconButton>
               </Grid>
@@ -73,21 +87,11 @@ function GuestCountPicker({ state, setSearchParams }) {
             <Grid item sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
               <Typography>Children</Typography>
               <Grid item sx={{ display: "flex", alignItems: "center" }}>
-                <IconButton
-                  onClick={() => {
-                    if (childrenCount !== 0) {
-                      setChildrenCount(childrenCount - 1);
-                    }
-                  }}
-                >
+                <IconButton onClick={decrementChildrenCount}>
                   <MinusIcon />
                 </IconButton>
                 <Typography variant="body1">{childrenCount}</Typography>
-                <IconButton
-                  onClick={() => {
-                    setChildrenCount(childrenCount + 1);
-                  }}
-                >
+                <IconButton onClick={incrementChildrenCount}>
                   <PlusIcon />
                 </IconButton>
               </Grid>

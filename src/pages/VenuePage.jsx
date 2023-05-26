@@ -117,7 +117,7 @@ function VenuePage() {
         {!isMyVenue && isLoggedIn && (
           <Grid container alignItems={"center"} direction={{ xs: "column", lg: "row" }} rowGap={2} sx={{ mt: "1rem", justifyContent: "space-between" }}>
             <Grid container direction={"column"}>
-              <BookingModal id={data.id} name={data.name} bookings={data.bookings} pricePerNight={data.price} />
+              <BookingModal id={data.id} name={data.name} bookings={data.bookings} pricePerNight={data.price} maxGuestCount={data.maxGuests} />
             </Grid>
           </Grid>
         )}

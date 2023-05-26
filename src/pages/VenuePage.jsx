@@ -3,7 +3,7 @@ import BedRoundedIcon from "@mui/icons-material/BedRounded";
 import { Avatar, Card, Divider, Grid, IconButton, Button as MuiButton, Tooltip, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import useApi from "./../hooks/useApi";
 import FavouritesFilled from "../assets/icons/FavouritesFilled";
@@ -15,6 +15,7 @@ import EditVenueModal from "../components/EditVenueModal";
 import MetaIcons from "../components/MetaIcons";
 import VenueImgCarousel from "../components/VenueImgCarousel";
 import { dateFormatter } from "../js/dateFormatter";
+import getAuth from "../js/getAuth";
 import { locationConverter } from "../js/locationConverter";
 import { addToFavourites, removeFromFavourites } from "../store/FavouritesSlice";
 
@@ -29,6 +30,7 @@ function VenuePage() {
   const { userName } = useSelector((store) => store.user);
   const [isFavourite, setIsFavourite] = useState(false);
   const [isMyVenue, setIsMyVenue] = useState(false);
+  const isLoggedIn = getAuth();
 
   const { venues } = useSelector((store) => {
     return store.favourites;
@@ -112,12 +114,17 @@ function VenuePage() {
             </Typography>
           </Grid>
         </Grid>
-        {!isMyVenue && (
+        {!isMyVenue && isLoggedIn && (
           <Grid container alignItems={"center"} direction={{ xs: "column", lg: "row" }} rowGap={2} sx={{ mt: "1rem", justifyContent: "space-between" }}>
             <Grid container direction={"column"}>
               <BookingModal id={data.id} name={data.name} bookings={data.bookings} pricePerNight={data.price} />
             </Grid>
           </Grid>
+        )}
+        {!isLoggedIn && (
+          <Typography variant="body2" sx={{ fontSize: "1.3rem", mt: "2rem" }}>
+            <Link to={"/login"}>Log in</Link> to book this venue
+          </Typography>
         )}
         {isMyVenue && (
           <Grid container sx={{ mt: "1rem" }}>
@@ -127,6 +134,7 @@ function VenuePage() {
             </Grid>
           </Grid>
         )}
+
         <Divider sx={{ mt: "1rem" }} />
         <Grid item>
           <Typography variant="h5" sx={{ mt: "1rem" }}>

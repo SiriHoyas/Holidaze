@@ -34,7 +34,7 @@ function NavbarActions() {
 
   return (
     <Grid container columnGap={1} sx={{ justifyContent: "flex-end", width: "33%" }}>
-      <IconButton>
+      <IconButton component={Link} to="/profile?favourites=true">
         <LikeIcon />
       </IconButton>
       <IconButton id="basic-button" aria-controls={open ? "basic-menu" : undefined} aria-haspopup="true" aria-expanded={open ? "true" : undefined} onClick={handleClick}>

@@ -4,7 +4,7 @@ import RoomPreferencesRoundedIcon from "@mui/icons-material/RoomPreferencesRound
 import { Card, CircularProgress, Divider, Grid, Button as MuiButton, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 import EditProfileMedia from "../components/EditProfileMedia";
 import ErrorMessage from "../components/ErrorMessage";
@@ -25,7 +25,18 @@ function Profile() {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  const [searchParams] = useSearchParams();
+  const renderFavourites = searchParams.get("favourites");
   const { accessToken, userName } = getLocalStorage();
+
+  useEffect(() => {
+    if (renderFavourites) {
+      setFavouritesActive(true);
+      setTitle("Favourites");
+      setVenuesActive(false);
+      setBookingsActive(false);
+    }
+  }, [renderFavourites]);
 
   const theme = useTheme();
 

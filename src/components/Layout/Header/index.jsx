@@ -1,20 +1,10 @@
-import { LoginOutlined, LogoutOutlined, PersonAdd } from "@mui/icons-material";
-import { AppBar, Avatar, Button, ButtonBase, Divider, Grid, IconButton, Paper, Slide, Toolbar, Typography, useMediaQuery, useScrollTrigger } from "@mui/material";
-import { set } from "date-fns";
-import { is } from "date-fns/locale";
-import { useState } from "react";
+import { AppBar, Grid, Toolbar, Typography, useMediaQuery, useScrollTrigger } from "@mui/material";
 import { useSelector } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
-import { useTheme } from "styled-components";
+import { NavLink } from "react-router-dom";
 
-import LogoGray from "../../../assets/brand/LogoGray";
 import LogoHorizontal from "../../../assets/brand/LogoHorizontal";
-import LogoInverted from "../../../assets/brand/LogoInverted";
-import CloseIcon from "../../../assets/icons/CloseIcon";
 import HomeIcon from "../../../assets/icons/HomeIcon";
-import MenuIcon from "../../../assets/icons/MenuIcon";
 import VenueIcon from "../../../assets/icons/VenueIcon";
-import useOutsideClick from "../../../hooks/useOutsideClick";
 import MobileNavbar from "../MobileNavbar";
 import NavbarActions from "../NavbarActions";
 

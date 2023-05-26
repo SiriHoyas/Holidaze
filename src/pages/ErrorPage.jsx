@@ -1,6 +1,7 @@
 import { Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
+import BrokenHouseIcon from "../assets/icons/BrokenHouseIcon";
 import Button from "../components/Button";
 
 function ErrorPage() {
@@ -18,7 +19,7 @@ function ErrorPage() {
       <Typography sx={{ mb: "2rem" }} variant="h2">
         We couldn't find what you were looking for.
       </Typography>
-      {/* <BrokenHouse size={isMobileScreen ? 100 : 400} /> */}
+      <BrokenHouseIcon size={isMobileScreen ? 100 : 400} />
       <Grid container direction={{ xs: "column", md: "row" }} sx={{ mt: "2rem", mb: "3rem" }} justifyContent={"center"} columnGap={3} rowGap={1} item={true}>
         <Button sx={{ width: { xs: "100%", md: "30%" } }} label={"Go back"} onClick={() => navigate(-1)} shape={"square"} />
         <Button link="/venues" sx={{ width: { xs: "100%", md: "30%" } }} label={"Browse venues"} onClick={() => navigate(-1)} shape={"square"} />

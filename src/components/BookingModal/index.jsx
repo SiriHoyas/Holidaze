@@ -25,7 +25,7 @@ function getAllBookedDates(bookings) {
 }
 const { accessToken } = getLocalStorage();
 
-function BookingModal({ bookings, id, name, pricePerNight }) {
+function BookingModal({ bookings, id, name, pricePerNight, maxGuestCount }) {
   const [guestCount, setGuestCount] = useState();
   const [checkInDate, setcheckInDate] = useState(null);
   const [checkOutDate, setcheckOutDate] = useState(null);
@@ -101,7 +101,7 @@ function BookingModal({ bookings, id, name, pricePerNight }) {
               <DatePicker maxDate={checkOutDate !== null ? dayjs(checkOutDate) : undefined} disablePast={true} shouldDisableDate={disableDates} value={checkInDate} onChange={(date) => setcheckInDate(date.$d)} label="Check in *" />
               <DatePicker minDate={checkInDate !== null ? dayjs(checkInDate) : undefined} disablePast={true} shouldDisableDate={disableDates} value={checkOutDate} onChange={(date) => setcheckOutDate(date.$d)} label="Check out *" />
             </LocalizationProvider>
-            <GuestCountPicker state={guestCount} setSearchParams={setGuestCount} />
+            <GuestCountPicker maxGuests={maxGuestCount} state={guestCount} setSearchParams={setGuestCount} />
             <Divider />
             {checkInDate !== null && checkOutDate !== null && (
               <Typography>

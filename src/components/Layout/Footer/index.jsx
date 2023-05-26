@@ -60,7 +60,7 @@ function Footer() {
         </Grid>
       </Grid>
       <Divider sx={{ mt: "1rem" }} />
-      <Typography variant="body2" color={"text.disabled"} sx={{ display: "flex", justifyContent: "end", mt: "1rem", mr: "1rem" }}>
+      <Typography variant="body2" color={"text.disabled"} sx={{ display: "flex", justifyContent: { md: "end", xs: "center" }, mt: "1rem", mr: "1rem" }}>
         © 2023 Holidaze. All rights reserved
       </Typography>
     </Grid>

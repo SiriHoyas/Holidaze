@@ -35,24 +35,24 @@ function Venues() {
   if (venues) {
     return (
       <Grid container xs={12} lg={12} rowGap={2} direction={"column"} sx={{ m: "0 auto", mb: "6rem" }} item={true}>
-        <Grid container direction="column" xs={11} lg={9} xl={7} sx={{ height: "fit-content", backgroundImage: `url(${banner})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "top", pt: { sm: "6rem", lg: "10rem" } }} item={true}>
+        <Grid container direction="column" xs={11} sm={9} xl={7} sx={{ height: "fit-content", backgroundImage: `url(${banner})`, backgroundRepeat: "no-repeat", backgroundSize: { xs: "500%", md: "cover" }, backgroundPosition: "top", pt: { xs: "8rem", lg: "10rem" } }} item={true}>
           <Grid container justifyContent={"center"}>
-            <Grid item={true} container direction="column" xs={11} lg={9} xl={7} alignSelf="center">
-              <Typography gutterBottom variant="h1" sx={{ color: "text.secondary", mb: "5rem" }} align="center">
+            <Grid item={true} container direction="column" xs={11} sm={9} alignSelf="center">
+              <Typography gutterBottom variant="h1" sx={{ color: "text.secondary", mb: "6rem" }} align="center">
                 Let the adventure begin
               </Typography>
-              <Grid item xs={11} lg={9} xl={7} sx={{ boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.34);", backgroundColor: "white", p: "1rem", borderRadius: "6px", position: "relative", transform: "translateY(40px)" }}>
+              <Grid item xs={11} sm={9} sx={{ boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.34);", backgroundColor: "white", p: "1rem", borderRadius: "6px", position: "relative", transform: "translateY(40px)" }}>
                 <Search params="true" navigation={true} />
               </Grid>
             </Grid>
           </Grid>
         </Grid>
         <Grid container rowGap={4} sx={{ m: "0 auto", mt: "6rem", width: "100%" }}>
-          <Grid item xs={11} lg={9} xl={7} sx={{ m: "0 auto" }}>
+          <Grid item xs={11} sm={9} sx={{ m: "0 auto" }}>
             <Typography variant="body1" sx={{ fontSize: "1.2rem", mb: ".7rem" }}>
               Showing {venues.length} venues
             </Typography>
-            <Grid container sx={{ m: "0 auto", width: "100%", justifyContent: "space-between", gap: "1rem" }}>
+            <Grid container spacing={4}>
               {isLoading && (
                 <Grid container justifyContent={"center"} sx={{ mt: "4rem" }}>
                   <CircularProgress />
@@ -62,7 +62,7 @@ function Venues() {
 
               {venues.map((venue) => {
                 return (
-                  <Grid item key={venue.id} sx={{ width: "30%" }}>
+                  <Grid item key={venue.id} xs={12} sm={6} md={4}>
                     <VenueCard data={venue} path={venue.id} />
                   </Grid>
                 );

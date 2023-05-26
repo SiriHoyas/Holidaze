@@ -116,8 +116,8 @@ function NewVenueModal({ setUpdateInfo }) {
   return (
     <>
       <Button size="large" fullWidth shape="square" onClick={handleOpen} label={"Add new venue"} startIcon={<AddHomeIcon sx={{ height: "20px" }} />} />
-      <Modal open={open} onClose={handleClose} sx={{ width: { xs: "90%", md: "70%", lg: "50%" }, m: "0 auto", mt: "2rem" }}>
-        <Grid container rowGap={2} direction={"column"} sx={{ backgroundColor: "white", display: "flex", m: "0 auto", p: "2rem" }}>
+      <Modal open={open} onClose={handleClose} sx={{ overflow: "scroll", width: { xs: "90%", md: "70%", lg: "50%" }, m: "0 auto", mt: "2rem" }}>
+        <Grid container rowGap={2} direction={"column"} sx={{ overflow: "scroll", backgroundColor: "white", display: "flex", m: "0 auto", p: "2rem" }}>
           {venueCreated ? (
             <Grid container direction={"column"} rowGap={3} alignItems={"center"}>
               <Typography variant="h2">New venue added!</Typography>
@@ -140,9 +140,9 @@ function NewVenueModal({ setUpdateInfo }) {
                   <Controller name="guests" control={control} render={({ field }) => <TextField helperText={errors.guests?.message} {...field} size="small" fullWidth type="number" required id="venueMaxGuest" label="Max Guests" variant="outlined" />} />
                   <Controller name="address" control={control} render={({ field }) => <TextField helperText={errors.address?.message} {...field} size="small" fullWidth required id="venueAddress" label="Address" variant="outlined" />} />
                   <Controller name="city" control={control} render={({ field }) => <TextField helperText={errors.city?.message} {...field} size="small" fullWidth required id="venueCity" label="City" variant="outlined" />} />
-                  <Grid container columnGap={2} direction={"row"}>
+                  <Grid container columnGap={2} rowGap={2} direction={"row"}>
                     <TextField placeholder="Add an image..." value={addUrl} onChange={(e) => setAddUrl(e.target.value)} size="small" variant="outlined" label="Image URL" sx={{ flexGrow: 1 }} />
-                    <Button disabled={imageUrls.length === 8 ? true : false} onClick={() => addItem()} label={<Add />} shape="square" />
+                    <Button sx={{ flexGrow: { xs: 1, sm: 0 } }} disabled={imageUrls.length === 8 ? true : false} onClick={() => addItem()} label={<Add />} shape="square" />
                   </Grid>
                   <List>
                     {imageUrls.map((url) => {

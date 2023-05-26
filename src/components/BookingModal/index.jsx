@@ -5,6 +5,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 
+import { API_ROOT } from "../../js/constants";
 import { dateFormatter } from "../../js/dateFormatter";
 import getBookedDates from "../../js/getBookedDates";
 import getLocalStorage from "../../js/getLocalStorage";
@@ -84,10 +85,13 @@ function BookingModal({ bookings, id, name, pricePerNight, maxGuestCount }) {
     };
     try {
       const response = await fetch(`${API_ROOT}/bookings`, options);
+      console.log(response);
       if (response.ok) {
         setBookingSuccess(true);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -112,7 +116,14 @@ function BookingModal({ bookings, id, name, pricePerNight, maxGuestCount }) {
               <Typography>Total</Typography>
               <Typography>€{totalPrice}</Typography>
             </Grid>
-            <Button onClick={handleBooking} label={"Confirm booking"} shape={"square"} disabled={isButtonDisabled} />
+            <Button
+              onClick={() => {
+                handleBooking();
+              }}
+              label={"Confirm booking"}
+              shape={"square"}
+              disabled={isButtonDisabled}
+            />
           </Grid>
         ) : (
           <Grid container rowGap={2} alignItems={"center"} direction={"column"} sx={{ backgroundColor: "white", p: "3rem" }}>

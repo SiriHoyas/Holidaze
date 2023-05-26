@@ -72,32 +72,34 @@ function VenuePage() {
           <VenueImgCarousel data={data.media} title={data.name} id={data.id} />
         </Grid>
         <Grid item>
-          <Grid container direction={"row"} justifyContent={"space-between"} sx={{ mt: "1rem" }}>
-            <Typography variant="h1">{data.name}</Typography>
-            {isFavourite ? (
-              <Tooltip title="Remove from favourites">
-                <IconButton
-                  onClick={() => {
-                    dispatch(removeFromFavourites(data.id));
-                    setIsFavourite(false);
-                  }}
-                >
-                  <FavouritesFilled />
-                </IconButton>
-              </Tooltip>
-            ) : (
-              <Tooltip title="Add to favourites">
-                <IconButton
-                  onClick={() => {
-                    dispatch(addToFavourites(data));
-                    setIsFavourite(true);
-                  }}
-                >
-                  <FavouritesOutlined />
-                </IconButton>
-              </Tooltip>
-            )}
-          </Grid>
+          {isLoggedIn && (
+            <Grid container direction={"row"} justifyContent={"space-between"} sx={{ mt: "1rem" }}>
+              <Typography variant="h1">{data.name}</Typography>
+              {isFavourite ? (
+                <Tooltip title="Remove from favourites">
+                  <IconButton
+                    onClick={() => {
+                      dispatch(removeFromFavourites(data.id));
+                      setIsFavourite(false);
+                    }}
+                  >
+                    <FavouritesFilled />
+                  </IconButton>
+                </Tooltip>
+              ) : (
+                <Tooltip title="Add to favourites">
+                  <IconButton
+                    onClick={() => {
+                      dispatch(addToFavourites(data));
+                      setIsFavourite(true);
+                    }}
+                  >
+                    <FavouritesOutlined />
+                  </IconButton>
+                </Tooltip>
+              )}
+            </Grid>
+          )}
           <Grid container alignItems="baseline" sx={{ mt: ".5rem", mb: "3rem" }}>
             <LocationIcon />
             <Typography gutterBottom variant="body1" component="div" color="primary.main" sx={{ fontSize: "1rem", ml: ".3rem" }}>

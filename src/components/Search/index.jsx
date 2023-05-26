@@ -63,7 +63,7 @@ function Search({ params }) {
           </IconButton>
         )}
         {mobileScreen && (
-          <ButtonBase focusRipple={true} sx={{ cursor: "pointer" }} variant="body2" onClick={openChoices}>
+          <ButtonBase focusRipple={true} sx={{ cursor: "pointer", fontSize: "1rem", p: "1rem" }} variant="body2" onClick={openChoices}>
             More choices
           </ButtonBase>
         )}

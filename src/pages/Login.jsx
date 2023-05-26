@@ -1,12 +1,10 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Grid, Paper, TextField, Typography } from "@mui/material";
-import { set } from "date-fns";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
-import banner from "./../assets/brand/bannerLogin.avif";
 import Button from "./../components/Button";
 import getAuth from "../js/getAuth";
 import { setUserInfo } from "../store/UserSlice";

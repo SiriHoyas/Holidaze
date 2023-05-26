@@ -18,6 +18,7 @@ function EditVenueModal({ venue, open, handleClose, id }) {
     const [parking, setparking] = useState(venue.meta.parking);
     const [breakfast, setBreakfast] = useState(venue.meta.breakfast);
     const [pets, setPets] = useState(venue.meta.pets);
+    const [editSuccess, setEditSuccess] = useState(false);
     const { accessToken } = getLocalStorage();
 
     const [isDeleted, setIsDeleted] = useState(false);
@@ -27,8 +28,9 @@ function EditVenueModal({ venue, open, handleClose, id }) {
     async function editVenue(url, options) {
       try {
         const response = await fetch(url, options);
-
+        console.log(response);
         if (response.ok) {
+          setEditSuccess(true);
         }
       } catch (error) {}
     }
@@ -88,33 +90,48 @@ function EditVenueModal({ venue, open, handleClose, id }) {
       <Modal open={open} onClose={handleClose} sx={{ overflow: "scroll", p: "1rem" }}>
         <Grid container rowGap={2} direction={"column"} sx={{ p: "2rem", backgroundColor: "white" }}>
           <Typography variant="h2">Edit venue</Typography>
-          <form onSubmit={handleSubmit(submitHandler)}>
-            <Grid container rowGap={2} direction={"column"}>
-              <Controller name="name" control={control} render={({ field }) => <TextField helperText={errors.name?.message} {...field} size="small" fullWidth required id="venueName" label="Venue name" variant="outlined" />} />
-              <Controller name="description" control={control} render={({ field }) => <TextField helperText={errors.description?.message} {...field} size="small" fullWidth required id="venueDescription" label="Description" variant="outlined" />} />
-              <Controller name="price" control={control} render={({ field }) => <TextField type="number" helperText={errors.name?.message} {...field} size="small" fullWidth required id="venuePrice" label="Price per night" variant="outlined" />} />
-              <Controller name="guests" control={control} render={({ field }) => <TextField type="number" helperText={errors.name?.message} {...field} size="small" fullWidth required id="venueGuests" label="Max guests" variant="outlined" />} />
-              <Grid container rowGap={2} direction={"column"}>
-                <FormGroup>
-                  <FormControlLabel control={<Controller name={"wifi"} control={control} render={({ field: props }) => <Switch defaultChecked={wifi} {...props} />} />} label={"Wifi"} />
-                  <FormControlLabel control={<Controller name={"parking"} control={control} render={({ field: props }) => <Switch defaultChecked={parking} {...props} />} />} label={"Parking"} />
-                  <FormControlLabel control={<Controller name={"breakfast"} control={control} render={({ field: props }) => <Switch defaultChecked={breakfast} {...props} />} />} label={"Breakfast"} />
-                  <FormControlLabel control={<Controller name={"pets"} control={control} render={({ field: props }) => <Switch defaultChecked={pets} {...props} />} />} label={"Pets allowed"} />
-                </FormGroup>
-              </Grid>
-            </Grid>
-            <Grid container columnGap={2} sx={{ mt: "2rem" }}>
-              <Button type="submit" label={"Confirm"} shape={"square"} sx={{ backgroundColor: "secondary.main" }} />
+          {editSuccess ? (
+            <Grid>
+              <Typography variant="h6">Successfully updated venue</Typography>
               <Button
                 onClick={() => {
-                  setIsDeleted(true);
+                  handleClose();
+                  setEditSuccess(false);
                 }}
-                label={"Delete"}
-                shape={"square"}
-                sx={{ backgroundColor: "error.main" }}
+                label="Close"
+                fullWidth
+                sx={{ mt: "2rem" }}
               />
             </Grid>
-          </form>
+          ) : (
+            <form onSubmit={handleSubmit(submitHandler)}>
+              <Grid container rowGap={2} direction={"column"}>
+                <Controller name="name" control={control} render={({ field }) => <TextField helperText={errors.name?.message} {...field} size="small" fullWidth required id="venueName" label="Venue name" variant="outlined" />} />
+                <Controller name="description" control={control} render={({ field }) => <TextField helperText={errors.description?.message} {...field} size="small" fullWidth required id="venueDescription" label="Description" variant="outlined" />} />
+                <Controller name="price" control={control} render={({ field }) => <TextField type="number" helperText={errors.name?.message} {...field} size="small" fullWidth required id="venuePrice" label="Price per night" variant="outlined" />} />
+                <Controller name="guests" control={control} render={({ field }) => <TextField type="number" helperText={errors.name?.message} {...field} size="small" fullWidth required id="venueGuests" label="Max guests" variant="outlined" />} />
+                <Grid container rowGap={2} direction={"column"}>
+                  <FormGroup>
+                    <FormControlLabel control={<Controller name={"wifi"} control={control} render={({ field: props }) => <Switch defaultChecked={wifi} {...props} />} />} label={"Wifi"} />
+                    <FormControlLabel control={<Controller name={"parking"} control={control} render={({ field: props }) => <Switch defaultChecked={parking} {...props} />} />} label={"Parking"} />
+                    <FormControlLabel control={<Controller name={"breakfast"} control={control} render={({ field: props }) => <Switch defaultChecked={breakfast} {...props} />} />} label={"Breakfast"} />
+                    <FormControlLabel control={<Controller name={"pets"} control={control} render={({ field: props }) => <Switch defaultChecked={pets} {...props} />} />} label={"Pets allowed"} />
+                  </FormGroup>
+                </Grid>
+              </Grid>
+              <Grid container columnGap={2} sx={{ mt: "2rem" }}>
+                <Button type="submit" label={"Confirm"} shape={"square"} sx={{ backgroundColor: "secondary.main" }} />
+                <Button
+                  onClick={() => {
+                    setIsDeleted(true);
+                  }}
+                  label={"Delete"}
+                  shape={"square"}
+                  sx={{ backgroundColor: "error.main" }}
+                />
+              </Grid>
+            </form>
+          )}
         </Grid>
       </Modal>
     );

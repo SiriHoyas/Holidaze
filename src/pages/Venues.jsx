@@ -49,9 +49,11 @@ function Venues() {
         </Grid>
         <Grid container rowGap={4} sx={{ m: "0 auto", mt: "6rem", width: "100%" }}>
           <Grid item xs={11} sm={9} sx={{ m: "0 auto" }}>
-            <Typography variant="body1" sx={{ fontSize: "1.2rem", mb: ".7rem" }}>
-              Showing {venues.length} venues
-            </Typography>
+            {venues.length > 0 && (
+              <Typography variant="body1" sx={{ fontSize: "1.2rem", mb: ".7rem" }}>
+                Showing {venues.length} venues
+              </Typography>
+            )}
             <Grid container spacing={4}>
               {isLoading && (
                 <Grid container justifyContent={"center"} sx={{ mt: "4rem" }}>

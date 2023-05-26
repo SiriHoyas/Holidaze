@@ -8,7 +8,7 @@ import { ACCESS_TOKEN, API_ROOT } from "../../js/constants";
 import { dateFormatter } from "../../js/dateFormatter";
 import { locationConverter } from "../../js/locationConverter";
 
-function MyBookings({ booking }) {
+function MyBookings({ booking, setUpdateInfo }) {
   const [imageError, setImageError] = useState(false);
   const hasImages = booking.venue.media && booking.venue.media.length > 0;
   const handleImageError = () => {
@@ -18,10 +18,6 @@ function MyBookings({ booking }) {
   const city = locationConverter(booking.venue);
   const formattedFrom = dateFormatter(booking.dateFrom);
   const formattedTo = dateFormatter(booking.dateTo);
-
-  useEffect(() => {
-    handleDelete();
-  }, [handleDelete]);
 
   async function handleDelete() {
     const options = {
@@ -33,6 +29,9 @@ function MyBookings({ booking }) {
     };
     try {
       const response = await fetch(`${API_ROOT}/bookings/${booking.id}`, options);
+      if (response.ok) {
+        setUpdateInfo(0);
+      }
     } catch (error) {}
   }
 

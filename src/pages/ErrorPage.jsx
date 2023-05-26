@@ -1,7 +1,6 @@
 import { Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-import banner from "./../assets/errorPageImage.jpg";
 import BrokenHouse from "../assets/icons/brokenHouse";
 import Button from "../components/Button";
 

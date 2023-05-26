@@ -12,7 +12,7 @@ import LogoHorizontal from "../../assets/brand/LogoHorizontal";
 import { ACCESS_TOKEN } from "../../js/constants";
 import Button from "../Button";
 
-function NewVenueModal() {
+function NewVenueModal({ setUpdateInfo }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -85,6 +85,7 @@ function NewVenueModal() {
         reset();
         setAddUrl("");
         setImageUrls([]);
+        setUpdateInfo(0);
       }
     } catch (error) {}
   }

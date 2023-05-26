@@ -1,8 +1,8 @@
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import HolidayVillageRoundedIcon from "@mui/icons-material/HolidayVillageRounded";
 import RoomPreferencesRoundedIcon from "@mui/icons-material/RoomPreferencesRounded";
-import { Card, CardContent, CircularProgress, Divider, Grid, Button as MuiButton, Typography, useMediaQuery, useTheme } from "@mui/material";
-import { useState } from "react";
+import { Card, CircularProgress, Divider, Grid, Button as MuiButton, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -13,8 +13,6 @@ import MyFavourites from "../components/MyFavourites";
 import MyVenues from "../components/MyVenues";
 import NewVenueModal from "../components/NewVenueModal";
 import ProfileCard from "../components/ProfileCard";
-import VenueCard from "../components/VenueCard";
-import useApi from "../hooks/useApi";
 import { ACCESS_TOKEN, USER_NAME } from "../js/constants";
 
 function Profile() {
@@ -23,6 +21,11 @@ function Profile() {
   const [bookingsActive, setBookingsActive] = useState(false);
   const [favouritesActive, setFavouritesActive] = useState(false);
   const [title, setTitle] = useState("My Venues");
+  const [updateInfo, setUpdateInfo] = useState();
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+
   const theme = useTheme();
 
   const options = {
@@ -35,7 +38,25 @@ function Profile() {
 
   const isBiggerScreen = useMediaQuery(theme.breakpoints.down("md"));
 
-  const { data, isLoading, isError } = useApi(`https://api.noroff.dev/api/v1/holidaze/profiles/${USER_NAME}?_bookings=true&_venues=true`, options);
+  useEffect(() => {
+    async function getData() {
+      try {
+        setIsLoading(true);
+        setIsError(false);
+        const response = await fetch(`https://api.noroff.dev/api/v1/holidaze/profiles/${USER_NAME}?_bookings=true&_venues=true`, options);
+
+        if (response.ok) {
+          const result = await response.json();
+          setData(result);
+        }
+      } catch (error) {
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    getData();
+  }, [updateInfo]);
 
   const { userName, email, avatar, venueManager } = useSelector((store) => {
     return store.user;
@@ -68,8 +89,8 @@ function Profile() {
     <Grid container columnGap={2} rowGap={1} xs={11} md={12} direction={{ xs: "column", md: "row" }} sx={{ justifyContent: "space-evenly", m: "0 auto", mt: "6rem" }} item={true}>
       <Grid container xs={12} md={3} item={true} rowGap={2} sx={{ height: "fit-content", position: { md: "sticky", xs: "static" }, top: "6rem" }}>
         <Typography variant="h1">Hello, {userName}!</Typography>
-        <ProfileCard userName={userName} email={email} avatar={avatar} onClick={() => setEditMediaActive((prev) => !prev)} />
-        <NewVenueModal />
+        <ProfileCard setUpdateInfo={setUpdateInfo} userName={userName} email={email} avatar={avatar} onClick={() => setEditMediaActive((prev) => !prev)} />
+        <NewVenueModal setUpdateInfo={setUpdateInfo} />
         {editMediaActive && <EditProfileMedia />}
         <Grid container direction={"column"} rowGap={2} columnGap={2} sx={{ mt: "2rem" }}>
           {venueManager && (
@@ -127,7 +148,7 @@ function Profile() {
             {isError && <ErrorMessage />}
             {data && data.bookings.length > 0 ? (
               data.bookings.map((booking) => {
-                return <MyBookings booking={booking} />;
+                return <MyBookings setUpdateInfo={setUpdateInfo} booking={booking} />;
               })
             ) : (
               <Grid container justifyContent={"center"} sx={{ mt: { xs: "1rem", md: "5rem" } }}>

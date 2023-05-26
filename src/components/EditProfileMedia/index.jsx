@@ -10,7 +10,7 @@ import { setProfileMedia } from "../../store/UserSlice";
 import { uploadProfileImageSchema as schema } from "../../utils/schema";
 import Button from "../Button";
 
-function EditProfileMedia() {
+function EditProfileMedia({ setUpdateInfo }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -42,9 +42,10 @@ function EditProfileMedia() {
 
       if (response.ok) {
         const json = await response.json();
-        dispatch(setProfileMedia(json.avatar));
         reset();
         handleClose();
+        dispatch(setProfileMedia(json.avatar));
+        setUpdateInfo(0);
       }
     } catch (error) {}
   }

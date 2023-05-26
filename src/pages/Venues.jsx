@@ -22,6 +22,7 @@ function Venues() {
       try {
         setIsLoading(true);
         setIsError(false);
+        setVenues([]);
         const venues = hasSetDateRange(searchParams) ? await searchVenues(searchParams) : await fetchVenues(0);
         setVenues(venues);
       } catch (error) {

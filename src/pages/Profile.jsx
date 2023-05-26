@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useSearchParams } from "react-router-dom";
 
+import CalendarIcon from "../assets/icons/CalendarIcon";
+import FavouritesFilled from "../assets/icons/FavouritesFilled";
 import EditProfileMedia from "../components/EditProfileMedia";
 import ErrorMessage from "../components/ErrorMessage";
 import MyBookings from "../components/MyBookings";
@@ -166,10 +168,13 @@ function Profile() {
             ) : (
               <Grid container justifyContent={"center"} sx={{ mt: { xs: "1rem", md: "5rem" } }}>
                 <Card sx={{ p: "2rem" }}>
-                  <Typography gutterBottom align="center" variant="h5">
+                  <Typography gutterBottom align="center" variant="h5" sx={{ mb: "2rem" }}>
                     You have no bookings
                   </Typography>
-                  <Typography align="center">
+                  <Grid container justifyContent={"center"}>
+                    <CalendarIcon size={100} />
+                  </Grid>
+                  <Typography align="center" sx={{ mt: "2rem" }}>
                     Visit our <Link to="/venues">venues</Link> to find your next place to stay!
                   </Typography>
                 </Card>
@@ -195,10 +200,13 @@ function Profile() {
             ) : (
               <Grid container justifyContent={"center"} sx={{ mt: { xs: "1rem", md: "5rem" } }}>
                 <Card sx={{ p: "2rem" }}>
-                  <Typography gutterBottom align="center" variant="h5">
+                  <Typography gutterBottom align="center" variant="h5" sx={{ mb: "2rem" }}>
                     Favorurites is empty.
                   </Typography>
-                  <Typography align="center">
+                  <Grid container justifyContent={"center"}>
+                    <FavouritesFilled size={100} />
+                  </Grid>
+                  <Typography align="center" sx={{ mt: "2rem" }}>
                     Visit our <Link to="/venues">venues</Link> to find your next place to stay!
                   </Typography>
                 </Card>

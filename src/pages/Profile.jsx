@@ -120,7 +120,7 @@ function Profile() {
             )}
             {isError && <ErrorMessage />}
             {data && data.venues.length > 0 ? (
-              <Grid container>
+              <Grid container spacing={3}>
                 {data.venues.map((venue) => {
                   return <MyVenues venue={venue} />;
                 })}

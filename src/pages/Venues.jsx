@@ -1,7 +1,6 @@
-import { CircularProgress, Divider, Grid, Typography } from "@mui/material";
+import { CircularProgress, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, useSearchParams } from "react-router-dom";
 
 import banner from "./../assets/brand/bannerVenues.avif";
 import ErrorMessage from "../components/ErrorMessage";
@@ -12,8 +11,6 @@ import { fetchVenues, hasSetDateRange, searchVenues } from "../js/search";
 function Venues() {
   const searchParams = useSelector((state) => state.searchParams);
   const [venues, setVenues] = useState([]);
-  const [isFromSearch, setIsFromSearch] = useState(false);
-  const [queryParams, setQueryParams] = useSearchParams();
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
@@ -41,8 +38,8 @@ function Venues() {
         <Grid container direction="column" xs={11} lg={9} xl={7} sx={{ height: "fit-content", backgroundImage: `url(${banner})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "top", pt: { sm: "6rem", lg: "10rem" } }} item={true}>
           <Grid container justifyContent={"center"}>
             <Grid item={true} container direction="column" xs={11} lg={9} xl={7} alignSelf="center">
-              <Typography gutterBottom variant="h1" sx={{ color: "text.secondary" }} align="center">
-                Something cool!
+              <Typography gutterBottom variant="h1" sx={{ color: "text.secondary", mb: "5rem" }} align="center">
+                Let the adventure begin
               </Typography>
               <Grid item xs={11} lg={9} xl={7} sx={{ boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.34);", backgroundColor: "white", p: "1rem", borderRadius: "6px", position: "relative", transform: "translateY(40px)" }}>
                 <Search params="true" navigation={true} />

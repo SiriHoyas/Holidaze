@@ -3,6 +3,7 @@ import { Link, Route, Routes } from "react-router-dom";
 
 import Layout from "../components/Layout";
 import getAuth from "../js/getAuth";
+import ErrorPage from "../pages/ErrorPage";
 import HomePage from "../pages/HomePage";
 import Login from "../pages/Login";
 import Profile from "../pages/Profile";
@@ -24,14 +25,7 @@ function Router() {
         <Route element={<ProtectedRoute />}>
           <Route path="profile" element={<Profile />} />
         </Route>
-        <Route
-          path="*"
-          element={
-            <Grid sx={{ mt: "10rem" }}>
-              <Link to={"/"}>LINK</Link>
-            </Grid>
-          }
-        />
+        <Route path="*" element={<ErrorPage />} />
       </Route>
     </Routes>
   );

@@ -147,6 +147,7 @@ function Profile() {
               </Grid>
             )}
             {isError && <ErrorMessage />}
+
             {data && data.bookings.length > 0 ? (
               data.bookings.map((booking) => {
                 return <MyBookings setUpdateInfo={setUpdateInfo} booking={booking} />;
@@ -175,9 +176,9 @@ function Profile() {
             {isError && <ErrorMessage />}
 
             {venues.length > 0 ? (
-              <Grid container>
+              <Grid container spacing={3}>
                 {venues.map((venue) => {
-                  return <MyFavourites data={venue} />;
+                  return <MyFavourites venue={venue} />;
                 })}
               </Grid>
             ) : (

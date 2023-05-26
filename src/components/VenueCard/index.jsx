@@ -23,7 +23,7 @@ function VenueCard({ data, path }) {
       <Grid item xs={12} sm={6} md={4} component={Link} to={path} sx={{ textDecoration: "none" }}>
         <Card
           sx={{
-            height: 300,
+            height: 360,
             transition: "transform 300ms ease-out, box-shadow 300ms ease-in-out",
             "&:hover": {
               transform: "translate(0, -3px)",
@@ -42,9 +42,12 @@ function VenueCard({ data, path }) {
                 {city}
               </Typography>
             </Grid>
-            <Divider />
+            <Divider sx={{ mt: "1rem" }} />
             <Typography noWrap variant="body2" color="text.secondary" sx={{ mt: ".7rem", mb: ".7rem" }}>
               {data.description}
+            </Typography>
+            <Typography variant="body1" sx={{ fontSize: "1.2rem", mb: "1rem" }}>
+              € {data.price} / night
             </Typography>
             <MetaIcons metaData={data.meta} />
           </CardContent>

@@ -49,7 +49,9 @@ function Venues() {
         </Grid>
         <Grid container rowGap={4} sx={{ m: "0 auto", mt: "6rem", width: "100%" }}>
           <Grid item xs={11} lg={9} xl={7} sx={{ m: "0 auto" }}>
-            <Typography>25 results</Typography>
+            <Typography variant="body1" sx={{ fontSize: "1.2rem", mb: ".7rem" }}>
+              Showing {venues.length} venues
+            </Typography>
             <Grid container sx={{ m: "0 auto", width: "100%", justifyContent: "space-between", gap: "1rem" }}>
               {isLoading && (
                 <Grid container justifyContent={"center"} sx={{ mt: "4rem" }}>

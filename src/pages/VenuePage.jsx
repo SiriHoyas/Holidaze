@@ -185,7 +185,12 @@ function VenuePage() {
               </Grid>
               {data.bookings.length === 0 && (
                 <Grid item>
-                  <Card>No bookings</Card>
+                  <Typography variant="body2" sx={{ fontSize: "1.3rem", mt: "1rem" }}>
+                    This venue has no bookings yet.
+                  </Typography>
+                  <Typography variant="body2" sx={{ fontSize: "1rem", mt: "1rem" }}>
+                    Explore our diverse promotion packages to elevate your venue. Contact our sales department for the best deal for you!
+                  </Typography>
                 </Grid>
               )}
             </Grid>

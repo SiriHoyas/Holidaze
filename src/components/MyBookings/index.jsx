@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 
 import FallbackImage from "./../../assets/placeholder.jpg";
 import LocationIcon from "../../assets/icons/LocationIcon,";
-import { ACCESS_TOKEN, API_ROOT } from "../../js/constants";
+import { API_ROOT } from "../../js/constants";
 import { dateFormatter } from "../../js/dateFormatter";
+import getLocalStorage from "../../js/getLocalStorage";
 import { locationConverter } from "../../js/locationConverter";
 
 function MyBookings({ booking, setUpdateInfo }) {
@@ -18,12 +19,13 @@ function MyBookings({ booking, setUpdateInfo }) {
   const city = locationConverter(booking.venue);
   const formattedFrom = dateFormatter(booking.dateFrom);
   const formattedTo = dateFormatter(booking.dateTo);
+  const { accessToken, userName } = getLocalStorage();
 
   async function handleDelete() {
     const options = {
       method: "DELETE",
       headers: {
-        Authorization: `Bearer ${ACCESS_TOKEN}`,
+        Authorization: `Bearer ${accessToken}`,
         "Content-type": "application/json; charset=UTF-8",
       },
     };

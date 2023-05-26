@@ -13,7 +13,7 @@ import MyFavourites from "../components/MyFavourites";
 import MyVenues from "../components/MyVenues";
 import NewVenueModal from "../components/NewVenueModal";
 import ProfileCard from "../components/ProfileCard";
-import { ACCESS_TOKEN, USER_NAME } from "../js/constants";
+import getLocalStorage from "../js/getLocalStorage";
 
 function Profile() {
   const [editMediaActive, setEditMediaActive] = useState(false);
@@ -25,13 +25,14 @@ function Profile() {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  const { accessToken, userName } = getLocalStorage();
 
   const theme = useTheme();
 
   const options = {
     method: "GET",
     headers: {
-      Authorization: `Bearer ${ACCESS_TOKEN}`,
+      Authorization: `Bearer ${accessToken}`,
       "Content-type": "application/json; charset=UTF-8",
     },
   };
@@ -43,7 +44,7 @@ function Profile() {
       try {
         setIsLoading(true);
         setIsError(false);
-        const response = await fetch(`https://api.noroff.dev/api/v1/holidaze/profiles/${USER_NAME}?_bookings=true&_venues=true`, options);
+        const response = await fetch(`https://api.noroff.dev/api/v1/holidaze/profiles/${userName}?_bookings=true&_venues=true`, options);
 
         if (response.ok) {
           const result = await response.json();
@@ -58,7 +59,7 @@ function Profile() {
     getData();
   }, [updateInfo]);
 
-  const { userName, email, avatar, venueManager } = useSelector((store) => {
+  const { email, avatar, venueManager } = useSelector((store) => {
     return store.user;
   });
 

@@ -5,7 +5,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 
 import EditIcon from "../../assets/icons/EditIcon";
-import { ACCESS_TOKEN, USER_NAME } from "../../js/constants";
+import getLocalStorage from "../../js/getLocalStorage";
 import { setProfileMedia } from "../../store/UserSlice";
 import { uploadProfileImageSchema as schema } from "../../utils/schema";
 import Button from "../Button";
@@ -15,6 +15,7 @@ function EditProfileMedia({ setUpdateInfo }) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const dispatch = useDispatch();
+  const { accessToken, userName } = getLocalStorage();
 
   const { control, handleSubmit, reset } = useForm({
     resolver: yupResolver(schema),
@@ -29,11 +30,11 @@ function EditProfileMedia({ setUpdateInfo }) {
       body: JSON.stringify(data),
 
       headers: {
-        Authorization: `Bearer ${ACCESS_TOKEN}`,
+        Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
     };
-    editProfileImage(`https://api.noroff.dev/api/v1/holidaze/profiles/${USER_NAME}/media`, options);
+    editProfileImage(`https://api.noroff.dev/api/v1/holidaze/profiles/${userName}/media`, options);
   }
 
   async function editProfileImage(url, options) {

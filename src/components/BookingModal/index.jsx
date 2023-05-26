@@ -5,9 +5,9 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 
-import { ACCESS_TOKEN, API_ROOT } from "../../js/constants";
 import { dateFormatter } from "../../js/dateFormatter";
 import getBookedDates from "../../js/getBookedDates";
+import getLocalStorage from "../../js/getLocalStorage";
 import { getTotalPrice } from "../../js/getTotalPrice";
 import Button from "../Button";
 import GuestCountPicker from "../GuestCountPicker/GuestCountPicker";
@@ -23,6 +23,7 @@ function getAllBookedDates(bookings) {
     return [...dates, ...booking];
   }, []);
 }
+const { accessToken } = getLocalStorage();
 
 function BookingModal({ bookings, id, name, pricePerNight }) {
   const [guestCount, setGuestCount] = useState();
@@ -77,7 +78,7 @@ function BookingModal({ bookings, id, name, pricePerNight }) {
       method: "POST",
       body: JSON.stringify(body),
       headers: {
-        Authorization: `Bearer ${ACCESS_TOKEN}`,
+        Authorization: `Bearer ${accessToken}`,
         "Content-type": "application/json; charset=UTF-8",
       },
     };

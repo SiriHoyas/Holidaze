@@ -9,7 +9,7 @@ import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 
 import LogoHorizontal from "../../assets/brand/LogoHorizontal";
-import { ACCESS_TOKEN } from "../../js/constants";
+import getLocalStorage from "../../js/getLocalStorage";
 import Button from "../Button";
 
 function NewVenueModal({ setUpdateInfo }) {
@@ -20,6 +20,7 @@ function NewVenueModal({ setUpdateInfo }) {
   const [imageUrls, setImageUrls] = useState([]);
   const [formData, setFormData] = useState([]);
   const [venueCreated, setVenueCreated] = useState(false);
+  const { accessToken } = getLocalStorage();
 
   function deleteItem(id) {
     const newArray = imageUrls.filter((item) => item.id !== id);
@@ -119,7 +120,7 @@ function NewVenueModal({ setUpdateInfo }) {
       method: "POST",
       body: JSON.stringify(newFormData),
       headers: {
-        Authorization: `Bearer ${ACCESS_TOKEN}`,
+        Authorization: `Bearer ${accessToken}`,
         "Content-type": "application/json; charset=UTF-8",
       },
     };

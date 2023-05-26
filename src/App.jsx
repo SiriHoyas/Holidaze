@@ -1,11 +1,12 @@
 import "./fonts.css";
 
-import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-import { ACCESS_TOKEN, API_ROOT, USER_NAME } from "./js/constants";
+import { API_ROOT } from "./js/constants";
 import getAuth from "./js/getAuth";
+import getLocalStorage from "./js/getLocalStorage";
 import Router from "./Router/Router.jsx";
 import { setUserInfo } from "./store/UserSlice";
 import { theme } from "./theme";
@@ -14,6 +15,7 @@ function App() {
   const isLoggedIn = getAuth();
   const dispatch = useDispatch();
 
+  const { accessToken, userName } = getLocalStorage();
   /**
    * Checks if page is being reloaded.
    * App.jsx has a useEffect hook that listens for isReloading in dependancy array.
@@ -40,19 +42,19 @@ function App() {
     const options = {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${ACCESS_TOKEN}`,
+        Authorization: `Bearer ${accessToken}`,
         "Content-type": "application/json; charset=UTF-8",
       },
     };
 
     try {
-      const response = await fetch(`${API_ROOT}/profiles/${USER_NAME}`, options);
+      const response = await fetch(`${API_ROOT}/profiles/${userName}`, options);
 
       if (response.ok) {
         const json = await response.json();
 
         const userInfo = {
-          userName: USER_NAME,
+          userName: userName,
           email: json.email,
           avatar: json.avatar,
           venueManager: json.venueManager,

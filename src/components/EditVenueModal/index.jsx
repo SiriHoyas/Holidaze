@@ -1,12 +1,9 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FormControlLabel, FormGroup, Grid, IconButton, InputAdornment, Modal, Switch, TextField, Typography } from "@mui/material";
+import { FormControlLabel, FormGroup, Grid, Modal, Switch, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import * as yup from "yup";
 
-import CloseIcon from "../../assets/icons/CloseIcon";
-import { ACCESS_TOKEN } from "../../js/constants";
 import { editVenueSchema as schema } from "../../utils/schema";
 import Button from "../Button";
 
@@ -20,6 +17,7 @@ function EditVenueModal({ venue, open, handleClose, id }) {
     const [parking, setparking] = useState(venue.meta.parking);
     const [breakfast, setBreakfast] = useState(venue.meta.breakfast);
     const [pets, setPets] = useState(venue.meta.pets);
+    const { accessToken } = getLocalStorage();
 
     const [isDeleted, setIsDeleted] = useState(false);
 
@@ -39,7 +37,7 @@ function EditVenueModal({ venue, open, handleClose, id }) {
         method: "PUT",
         body: JSON.stringify(data),
         headers: {
-          Authorization: `Bearer ${ACCESS_TOKEN}`,
+          Authorization: `Bearer ${accessToken}`,
           "Content-Type": "application/json",
         },
       };
@@ -67,7 +65,7 @@ function EditVenueModal({ venue, open, handleClose, id }) {
       const options = {
         method: "DELETE",
         headers: {
-          Authorization: `Bearer ${ACCESS_TOKEN}`,
+          Authorization: `Bearer ${accessToken}`,
           "Content-Type": "application/json",
         },
       };

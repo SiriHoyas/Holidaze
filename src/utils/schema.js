@@ -40,3 +40,17 @@ export const editVenueSchema = yup.object().shape({
   breakfast: yup.boolean(),
   pets: yup.boolean(),
 });
+
+export const newVenueSchema = yup.object().shape({
+  name: yup.string().required(),
+  description: yup.string().required().min(10),
+  price: yup.number().required().min(1),
+  guests: yup.number().required().min(1),
+  rating: yup.number().min(1).max(5),
+  address: yup.string().required(),
+  city: yup.string().required(),
+  wifi: yup.boolean(),
+  parking: yup.boolean(),
+  breakfast: yup.boolean(),
+  pets: yup.boolean(),
+});

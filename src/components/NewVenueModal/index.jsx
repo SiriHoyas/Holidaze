@@ -6,10 +6,10 @@ import OtherHousesRoundedIcon from "@mui/icons-material/OtherHousesRounded";
 import { Checkbox, FormControlLabel, Grid, IconButton, List, ListItem, ListItemAvatar, ListItemText, Modal, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import * as yup from "yup";
 
 import LogoHorizontal from "../../assets/brand/LogoHorizontal";
 import getLocalStorage from "../../js/getLocalStorage";
+import { newVenueSchema as schema } from "../../utils/schema";
 import Button from "../Button";
 
 function NewVenueModal({ setUpdateInfo }) {
@@ -40,20 +40,6 @@ function NewVenueModal({ setUpdateInfo }) {
     setImageUrls((list) => [...list, item]);
     setAddUrl("");
   }
-
-  const schema = yup.object().shape({
-    name: yup.string().required(),
-    description: yup.string().required().min(10),
-    price: yup.number().required().min(1),
-    guests: yup.number().required().min(1),
-    rating: yup.number().min(1).max(5),
-    address: yup.string().required(),
-    city: yup.string().required(),
-    wifi: yup.boolean(),
-    parking: yup.boolean(),
-    breakfast: yup.boolean(),
-    pets: yup.boolean(),
-  });
 
   const {
     control,

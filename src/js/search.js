@@ -68,7 +68,7 @@ export async function fetchVenues(offset = 0) {
  *
  *
  */
-function filterVenues(venues, searchParams) {
+export function filterVenues(venues, searchParams) {
   const { guestCount = 0, pets, parking, wifi, breakfast, keyword = "", dateFrom, dateTo } = searchParams;
   return venues.filter((venue) => {
     if (venue.maxGuests < guestCount) return false;
@@ -80,18 +80,19 @@ function filterVenues(venues, searchParams) {
     return areDatesAvailable(venue.bookings, dateFrom, dateTo);
   });
 }
+
 /**
  *
  * @param {*} venue
  * @param {*} keyword
  * @returns
  */
-function matchesKeyword(venue, keyword) {
+export function matchesKeyword(venue, keyword) {
   if (!venue.location && !venue.name) return false;
-  if (venue.name.includes(keyword)) return true;
+  if (venue.name.toLowerCase().includes(keyword.toLowerCase())) return true;
   if (!venue.location) return false;
-  const { city = "" } = venue.location;
-  return city.toLowerCase().includes(keyword);
+  const city = venue.location.city || "";
+  return city.toLowerCase().includes(keyword.toLowerCase());
 }
 
 export function hasSetDateRange({ dateFrom, dateTo }) {

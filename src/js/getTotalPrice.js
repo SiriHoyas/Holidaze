@@ -18,7 +18,7 @@ export function getTotalPrice(pricePerNight, dateFrom, dateTo) {
  * @param {*} dateTo
  * @returns
  */
-function getTotalNights(dateFrom, dateTo) {
+export function getTotalNights(dateFrom, dateTo) {
   if (dateFrom !== null && dateTo !== null) {
     const totalNights = intervalToDuration({ start: new Date(dateFrom), end: new Date(dateTo) });
     return totalNights.days;

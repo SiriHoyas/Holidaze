@@ -77,6 +77,7 @@ export function filterVenues(venues, searchParams) {
     if (wifi && !venue.meta.wifi) return false;
     if (breakfast && !venue.meta.breakfast) return false;
     if (keyword.length > 0 && !matchesKeyword(venue, keyword.toLowerCase())) return false;
+    console.log(venue.bookings);
     return areDatesAvailable(venue.bookings, dateFrom, dateTo);
   });
 }

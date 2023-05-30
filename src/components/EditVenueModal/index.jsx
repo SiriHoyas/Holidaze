@@ -19,6 +19,7 @@ function EditVenueModal({ venue, open, handleClose, id }) {
     const [breakfast, setBreakfast] = useState(venue.meta.breakfast);
     const [pets, setPets] = useState(venue.meta.pets);
     const [editSuccess, setEditSuccess] = useState(false);
+    const [error, setError] = useState(false);
     const { accessToken } = getLocalStorage();
 
     const [isDeleted, setIsDeleted] = useState(false);
@@ -31,8 +32,13 @@ function EditVenueModal({ venue, open, handleClose, id }) {
         console.log(response);
         if (response.ok) {
           setEditSuccess(true);
+          setError(false);
+        } else {
+          setError(true);
         }
-      } catch (error) {}
+      } catch (error) {
+        setError(true);
+      }
     }
 
     function submitHandler(data) {
@@ -88,14 +94,20 @@ function EditVenueModal({ venue, open, handleClose, id }) {
 
     return (
       <Modal open={open} onClose={handleClose} sx={{ overflow: "scroll", p: "1rem" }}>
-        <Grid container rowGap={2} direction={"column"} sx={{ p: "2rem", backgroundColor: "white" }}>
+        <Grid container md={6} rowGap={2} direction={"column"} sx={{ p: "2rem", backgroundColor: "white", m: "0 auto" }} item={true}>
           <Typography variant="h2">Edit venue</Typography>
+          {error && (
+            <Typography variant="body2" color={"error.main"}>
+              Something went wrong, please try again later
+            </Typography>
+          )}
           {editSuccess ? (
             <Grid>
               <Typography variant="h6">Successfully updated venue</Typography>
               <Button
                 onClick={() => {
                   handleClose();
+                  setError(false);
                   setEditSuccess(false);
                 }}
                 label="Close"

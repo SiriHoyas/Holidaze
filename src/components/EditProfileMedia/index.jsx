@@ -58,8 +58,9 @@ function EditProfileMedia({ setUpdateInfo }) {
         dispatch(setProfileMedia(json.avatar));
         setUpdateInfo(0);
         setError(false);
+      } else {
+        setError(true);
       }
-      setError(true);
     } catch (error) {
       setError(true);
     }

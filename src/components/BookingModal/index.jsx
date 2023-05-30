@@ -90,8 +90,9 @@ function BookingModal({ bookings, id, name, pricePerNight, maxGuestCount }) {
       if (response.ok) {
         setBookingSuccess(true);
         setError(false);
+      } else {
+        setError(true);
       }
-      setError(true);
     } catch (error) {
       setError(true);
     }

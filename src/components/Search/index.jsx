@@ -15,11 +15,8 @@ import MoreChoices from "./MoreChoices";
 function Search() {
   const [showMoreChoices, setShowMoreChoices] = useState(false);
   const [searchParams, setSearchParams] = useState({});
-  const [location, setLocation] = useState("");
 
-  const { keyword, dateFrom, dateTo } = useSelector((store) => {
-    return store.searchParams;
-  });
+  const usedSearchParams = useSelector((store) => store.searchParams);
 
   const theme = useTheme();
   const laptopScreen = useMediaQuery(theme.breakpoints.up("lg"));
@@ -28,14 +25,16 @@ function Search() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const updatedValue = { keyword: location };
+  function setLocation(event) {
+    setSearchParams((current) => ({ ...current, keyword: event.target.value }));
+  }
 
-    setSearchParams((input) => ({
-      ...input,
-      ...updatedValue,
+  useEffect(() => {
+    setSearchParams((current) => ({
+      ...current,
+      ...usedSearchParams,
     }));
-  }, [location, keyword]);
+  }, [usedSearchParams]);
 
   function openChoices() {
     setShowMoreChoices((prev) => !prev);
@@ -47,17 +46,7 @@ function Search() {
         <Grid container direction={"column"}>
           <Typography variant="h6">Where do you want to go?</Typography>
         </Grid>
-        <TextField
-          sx={{ flexGrow: 1 }}
-          autoComplete="off"
-          id="outlined-basic"
-          label="Where to?"
-          value={keyword ? keyword : ""}
-          onChange={(e) => {
-            setLocation(e.target.value);
-          }}
-          variant="outlined"
-        />
+        <TextField sx={{ flexGrow: 1 }} autoComplete="off" id="outlined-basic" label="Where to?" value={searchParams.keyword ?? ""} onChange={setLocation} variant="outlined" />
         <Grid item>
           <GuestCountPicker state={searchParams} setSearchParams={setSearchParams} />
         </Grid>

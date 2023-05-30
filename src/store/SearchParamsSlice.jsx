@@ -1,6 +1,6 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 
-const initialState = {
+export const initialState = {
   keyword: "",
   dateFrom: "",
   dateTo: "",
@@ -25,9 +25,10 @@ const searchParamsSlice = createSlice({
       state.breakfast = action.payload.breakfast;
       state.pets = action.payload.pets;
     },
+    clearSearchParams: () => initialState,
   },
 });
 
-export const { sendSearchParams } = searchParamsSlice.actions;
+export const { sendSearchParams, clearSearchParams } = searchParamsSlice.actions;
 
 export default searchParamsSlice.reducer;

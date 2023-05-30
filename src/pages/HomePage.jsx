@@ -1,5 +1,7 @@
 import { CircularProgress, Grid, Typography, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import banner from "./../assets/brand/banner.png";
 import CardGallery from "../components/CardGallery";
@@ -10,11 +12,17 @@ import VenueCard from "../components/VenueCard";
 import useApi from "../hooks/useApi";
 import { API_ROOT } from "../js/constants";
 import getFeaturedVenues from "../js/getFeaturedVenues";
+import { clearSearchParams } from "../store/SearchParamsSlice";
 
 function HomePage() {
   const { data, isLoading, isError } = useApi(`${API_ROOT}/venues?sortOrder=desc&sort=created`, { method: "GET" });
   const theme = useTheme();
   const largerScreen = useMediaQuery(theme.breakpoints.up("sm"));
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(clearSearchParams());
+  }, []);
 
   if (data) {
     const { recommendedData, allowPetsData } = getFeaturedVenues(data, largerScreen);
@@ -32,7 +40,7 @@ function HomePage() {
                   Explore countless of unforgettable accommodations on Holidaze
                 </Typography>
                 <Grid item sm={6} sx={{ boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.34);", backgroundColor: "white", p: "1rem", borderRadius: "6px", position: "relative", transform: "translateY(40px)" }}>
-                  <Search params="true" navigation={true} />
+                  <Search />
                 </Grid>
               </Grid>
             </Grid>
@@ -74,7 +82,7 @@ function HomePage() {
 
     return (
       <Grid container xs={11} sx={{ margin: "0 auto", mt: "6rem" }} item={true}>
-        <Search params="true" navigate={true} />
+        <Search navigate={true} />
         <Grid container sx={{ mt: "4rem" }}>
           <HorizontalCardList data={recommendedData} heading={"Recommended"} />
         </Grid>

@@ -42,7 +42,7 @@ function Venues() {
                 Let the adventure begin
               </Typography>
               <Grid item xs={11} sm={9} sx={{ boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.34);", backgroundColor: "white", p: "1rem", borderRadius: "6px", position: "relative", transform: "translateY(40px)" }}>
-                <Search params="true" navigation={true} />
+                <Search />
               </Grid>
             </Grid>
           </Grid>

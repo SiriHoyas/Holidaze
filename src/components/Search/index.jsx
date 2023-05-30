@@ -16,19 +16,10 @@ function Search() {
   const [showMoreChoices, setShowMoreChoices] = useState(false);
   const [searchParams, setSearchParams] = useState({});
   const [location, setLocation] = useState("");
-  const [definedSearchParams, setDefinedSearchParams] = useState(false);
 
   const { keyword, dateFrom, dateTo } = useSelector((store) => {
     return store.searchParams;
   });
-
-  useEffect(() => {
-    if (dateFrom && dateTo) {
-      setDefinedSearchParams(true);
-    } else {
-      setDefinedSearchParams(false);
-    }
-  }, [dateFrom, dateTo]);
 
   const theme = useTheme();
   const laptopScreen = useMediaQuery(theme.breakpoints.up("lg"));
@@ -61,7 +52,7 @@ function Search() {
           autoComplete="off"
           id="outlined-basic"
           label="Where to?"
-          value={definedSearchParams ? keyword : location || ""}
+          value={keyword ? keyword : ""}
           onChange={(e) => {
             setLocation(e.target.value);
           }}

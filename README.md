@@ -59,3 +59,16 @@ Feel free to contact me here:
 [My LinkedIn page](https://www.linkedin.com/in/siri-h%C3%B8y%C3%A5s-2bb74b1a2/)
 
 [My Instagram](https://www.instagram.com/sirihoyas/)
+
+## To Do's or nice-to-have's
+
+- Refactoring existing code.
+- Add Google Maps API on Venue page.
+- Add an "Are you sure" message on all deletings on page. (Delete booking, delete own venue).
+- Loading animations on cards, or skeleton loaders.
+- Call API on "My bookings" to get more information about the booking.
+- Add pagination on venues page.
+- The API allows for users to book from date, before to date, and this breaks my code. Implement logic to prevent.
+- Add price total on venue cards if dates are defined in Redux store.
+- Close button on all modals.
+- Test site with E2E tests using Cypress.

@@ -1,57 +1,63 @@
 import { Checkbox, FormControlLabel, FormGroup, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 function MoreChoices({ state, setSearchParams }) {
-  const [parking, setParking] = useState(false);
-  const [pets, setPets] = useState(false);
-  const [wifi, setWifi] = useState(false);
-  const [breakfast, setBreakfast] = useState(false);
+  const [parkingInput, setParkingInput] = useState(false);
+  const [petsInput, setPetsInput] = useState(false);
+  const [wifiInput, setWifiInput] = useState(false);
+  const [breakfastInput, setBreakfastInput] = useState(false);
 
-  const updatedValue = { wifi: wifi, parking: parking, breakfast: breakfast, pets: pets };
+  const updatedValue = { wifi: wifiInput, parking: parkingInput, breakfast: breakfastInput, pets: petsInput };
+
+  const { keyword, dateFrom, dateTo, guestCount, wifi, parking, breakfast, pets } = useSelector((store) => {
+    return store.searchParams;
+  });
+  console.log(parking);
 
   useEffect(() => {
     setSearchParams((choices) => ({
       ...choices,
       ...updatedValue,
     }));
-  }, [parking, pets, wifi, breakfast]);
+  }, [parkingInput, petsInput, wifiInput, breakfastInput]);
 
   return (
     <Grid container sx={{ mt: "1rem" }}>
       <FormControlLabel
         onChange={() =>
-          setParking((prev) => {
+          setParkingInput((prev) => {
             return !prev;
           })
         }
-        control={<Checkbox />}
+        control={<Checkbox defaultChecked={parking} />}
         label="Parking"
       />
       <FormControlLabel
         onChange={() =>
-          setPets((prev) => {
+          setPetsInput((prev) => {
             return !prev;
           })
         }
-        control={<Checkbox />}
+        control={<Checkbox defaultChecked={pets} />}
         label="Pets allowed"
       />
       <FormControlLabel
         onChange={() =>
-          setWifi((prev) => {
+          setWifiInput((prev) => {
             return !prev;
           })
         }
-        control={<Checkbox />}
+        control={<Checkbox defaultChecked={wifi} />}
         label="WiFi"
       />
       <FormControlLabel
         onChange={() =>
-          setBreakfast((prev) => {
+          setBreakfastInput((prev) => {
             return !prev;
           })
         }
-        control={<Checkbox />}
+        control={<Checkbox defaultChecked={breakfast} />}
         label="Breakfast Included"
       />
     </Grid>

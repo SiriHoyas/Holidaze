@@ -72,9 +72,9 @@ function VenuePage() {
           <VenueImgCarousel data={data.media} title={data.name} id={data.id} />
         </Grid>
         <Grid item>
+          <Typography variant="h1">{data.name}</Typography>
           {isLoggedIn && (
             <Grid container direction={"row"} justifyContent={"space-between"} sx={{ mt: "1rem" }}>
-              <Typography variant="h1">{data.name}</Typography>
               {isFavourite ? (
                 <Tooltip title="Remove from favourites">
                   <IconButton

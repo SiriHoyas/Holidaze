@@ -1,4 +1,4 @@
-import { Grid, Skeleton, Typography, useMediaQuery } from "@mui/material";
+import { CircularProgress, Grid, Typography, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 import banner from "./../assets/brand/banner.png";
@@ -59,10 +59,10 @@ function HomePage() {
             )}
             {isLoading && (
               <Grid container>
-                <Skeleton variant="rectangular" width={210} height={118} />
+                <CircularProgress />
               </Grid>
             )}
-            {isError && <Grid>ERROR</Grid>}
+            {isError && <Grid sx={{ mt: "10rem" }}>ERROR</Grid>}
           </Grid>
         </Grid>
       );

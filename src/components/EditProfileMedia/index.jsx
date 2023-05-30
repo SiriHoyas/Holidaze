@@ -13,11 +13,21 @@ import Button from "../Button";
 function EditProfileMedia({ setUpdateInfo }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    setError(false);
+    reset();
+  };
   const dispatch = useDispatch();
   const { accessToken, userName } = getLocalStorage();
+  const [error, setError] = useState(false);
 
-  const { control, handleSubmit, reset } = useForm({
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
       avatar: "",
@@ -47,8 +57,12 @@ function EditProfileMedia({ setUpdateInfo }) {
         handleClose();
         dispatch(setProfileMedia(json.avatar));
         setUpdateInfo(0);
+        setError(false);
       }
-    } catch (error) {}
+      setError(true);
+    } catch (error) {
+      setError(true);
+    }
   }
   return (
     <>
@@ -63,11 +77,17 @@ function EditProfileMedia({ setUpdateInfo }) {
           <form onSubmit={handleSubmit(submitHandler)}>
             <Grid container gap={2}>
               <Grid item xs={12}>
-                <Controller name="avatar" control={control} render={({ field }) => <TextField {...field} size="small" fullWidth id="imageUrl" label="Image URL" variant="outlined" />} />
+                <Controller name="avatar" control={control} render={({ field }) => <TextField helperText={errors.avatar?.message} {...field} fullWidth required id="avatar" label="Image URL" variant="outlined" />} />
               </Grid>
+              {error && (
+                <Typography variant="body2" color={"error.main"}>
+                  Something went wrong, please try again later
+                </Typography>
+              )}
               <Grid item xs={12}>
                 <Button fullWidth size="large" type="submit" label={"Set profile image"} />
               </Grid>
+
               <Grid item xs={12}>
                 <Button fullWidth type="submit" label={"Cancel"} />
               </Grid>

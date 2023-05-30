@@ -27,7 +27,7 @@ export const loginSchema = yup.object().shape({
 // but it is not a perfect solution.
 
 export const uploadProfileImageSchema = yup.object().shape({
-  avatar: yup.string().url("Please enter a valid URL"),
+  avatar: yup.string().required().min(5).url("Please enter a valid URL"),
 });
 
 export const editVenueSchema = yup.object().shape({

@@ -29,7 +29,6 @@ function EditVenueModal({ venue, open, handleClose, id }) {
     async function editVenue(url, options) {
       try {
         const response = await fetch(url, options);
-        console.log(response);
         if (response.ok) {
           setEditSuccess(true);
           setError(false);

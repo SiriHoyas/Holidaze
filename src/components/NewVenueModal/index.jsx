@@ -66,7 +66,6 @@ function NewVenueModal({ setUpdateInfo }) {
   async function newVenue(url, options) {
     try {
       const response = await fetch(url, options);
-      console.log(response);
 
       if (response.status === 201) {
         setVenueCreated(true);

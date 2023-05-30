@@ -13,7 +13,6 @@ function MoreChoices({ state, setSearchParams }) {
   const { keyword, dateFrom, dateTo, guestCount, wifi, parking, breakfast, pets } = useSelector((store) => {
     return store.searchParams;
   });
-  console.log(parking);
 
   useEffect(() => {
     setSearchParams((choices) => ({

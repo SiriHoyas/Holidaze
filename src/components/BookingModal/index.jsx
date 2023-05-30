@@ -35,6 +35,7 @@ function BookingModal({ bookings, id, name, pricePerNight, maxGuestCount }) {
   const [convertedToDate, setConvertedToDate] = useState();
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [bookingSuccess, setBookingSuccess] = useState(false);
+  const [error, setError] = useState(false);
 
   const allBookedDates = getAllBookedDates(bookings);
   const [open, setOpen] = useState(false);
@@ -84,13 +85,15 @@ function BookingModal({ bookings, id, name, pricePerNight, maxGuestCount }) {
       },
     };
     try {
-      const response = await fetch(`${API_ROOT}/bookings`, options);
+      const response = await fetch(`${API_ROOT}/booddkings`, options);
       console.log(response);
       if (response.ok) {
         setBookingSuccess(true);
+        setError(false);
       }
+      setError(true);
     } catch (error) {
-      console.log(error);
+      setError(true);
     }
   }
 
@@ -99,13 +102,14 @@ function BookingModal({ bookings, id, name, pricePerNight, maxGuestCount }) {
       <Button shape="square" onClick={handleOpen} label={"Book"} sx={{ width: "fit-content" }} />
       <Modal open={open} onClose={handleClose} sx={{ overflow: "scroll", p: "1rem" }}>
         {!bookingSuccess ? (
-          <Grid container rowGap={2} direction={"column"} sx={{ overflow: "scroll", backgroundColor: "white", display: "flex", m: "0 auto", p: "1rem" }}>
+          <Grid container rowGap={2} md={5} direction={"column"} sx={{ overflow: "scroll", backgroundColor: "white", display: "flex", m: "0 auto", p: "1rem" }} item={true}>
             <Typography variant="h2">Booking</Typography>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker maxDate={checkOutDate !== null ? dayjs(checkOutDate) : undefined} disablePast={true} shouldDisableDate={disableDates} value={checkInDate} onChange={(date) => setcheckInDate(date.$d)} label="Check in *" />
               <DatePicker minDate={checkInDate !== null ? dayjs(checkInDate) : undefined} disablePast={true} shouldDisableDate={disableDates} value={checkOutDate} onChange={(date) => setcheckOutDate(date.$d)} label="Check out *" />
             </LocalizationProvider>
             <GuestCountPicker maxGuests={maxGuestCount} state={guestCount} setSearchParams={setGuestCount} />
+            {error && <Typography color={"error.main"}>Something went wrong, please try again later</Typography>}
             <Divider />
             {checkInDate !== null && checkOutDate !== null && (
               <Typography>

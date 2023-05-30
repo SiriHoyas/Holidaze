@@ -201,7 +201,7 @@ function Profile() {
               <Grid container justifyContent={"center"} sx={{ mt: { xs: "1rem", md: "5rem" } }}>
                 <Card sx={{ p: "2rem" }}>
                   <Typography gutterBottom align="center" variant="h5" sx={{ mb: "2rem" }}>
-                    Favorurites is empty.
+                    Favourites is empty.
                   </Typography>
                   <Grid container justifyContent={"center"}>
                     <FavouritesFilled size={100} />

@@ -6,7 +6,6 @@ import LocationIcon from "../../assets/icons/LocationIcon,";
 import { locationConverter } from "../../js/locationConverter";
 
 function MyVenues({ venue }) {
-  console.log(venue);
   const city = locationConverter(venue);
   return (
     <Grid item xs={12} sm={6} xl={4} sx={{ textDecoration: "none" }} component={Link} to={`/venues/${venue.id}`}>

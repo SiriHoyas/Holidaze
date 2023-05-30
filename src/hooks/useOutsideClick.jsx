@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useRef } from "react";
 
 /**
+ * Custom hook for detecting clicks outside of a specified element
  *
- * @param {*} callback
- * @returns
+ * @param {function} callback - The function that is being fired when click is detected outside
+ * @returns {Object} - A React ref object for the element being watched
  */
 function useOutsideClick(callback) {
   const ref = useRef(null);

@@ -9,9 +9,13 @@ const ShapedButton = styled(MuiButton)(({ shape }) => ({
 }));
 
 /**
- *
- * @param {*} param
- * @returns
+ * A button component that can be customized with props
+ * @component
+ * @param {Object} props - Props for the component
+ * @param {string} props.label - The label (What is being showed on the button)
+ * @param {function} [props.onClick] - The on click function
+ * @param {string} [props.link] - If provided, the button navigates to the given path
+ * @returns {JSX.Element} - The rendered button component
  */
 
 function Button({ label, onClick, link, ...props }) {

@@ -85,10 +85,11 @@ export function filterVenues(venues, searchParams) {
 }
 
 /**
+ * Checks if a venue matches a keyword by comparing its name and location city.
  *
- * @param {*} venue
- * @param {*} keyword
- * @returns
+ * @param {Object} venue - The venue from the API
+ * @param {string} keyword - The keyword to check, from search field or Redux store
+ * @returns {boolean} - Returns true if the venue matches the keyword, false if not.
  */
 export function matchesKeyword(venue, keyword) {
   if (!venue.location && !venue.name) return false;

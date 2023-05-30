@@ -14,9 +14,9 @@ import Button from "../Button";
 import GuestCountPicker from "../GuestCountPicker/GuestCountPicker";
 
 /**
- *
- * @param {*} bookings
- * @returns
+ * Gets all dates from an array of bookings
+ * @param {Array} bookings - An array of booking objects
+ * @returns {Array} - An array containing all the booked dates
  */
 function getAllBookedDates(bookings) {
   const bookedDates = getBookedDates(bookings ?? []);

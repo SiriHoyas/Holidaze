@@ -1,8 +1,9 @@
 /**
- *
- * @param {*} data
- * @param {*} largerScreen
- * @returns
+ * Returns filtered data from API for home page to make sure it is populated with the correct objects
+ * @param {Array} data - Array of venues from API
+ * @param {boolean} largerScreen - Checks screen size
+ * @returns {Object}   - recommendedData: Array of venues where array of media is not empty
+ *                     - allowPetsData: array of venues where array of media is not empty, and meta tag for pets is true
  */
 
 function getFeaturedVenues(data, largerScreen) {

@@ -1,10 +1,12 @@
 import { eachDayOfInterval } from "date-fns";
 
 /**
+ * Takes bookings from the API and gets all dates between startt and end date
  *
- * @param {*} bookings
- * @returns
+ * @param {Array} bookings - The array of bookings from API
+ * @returns {Array} - An array of booked dates, formatted as a date sting
  */
+
 function getBookedDates(bookings) {
   if (bookings) {
     const bookedDates = bookings.map((booking) => {

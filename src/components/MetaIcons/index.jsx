@@ -7,9 +7,13 @@ import PetIcon from "../../assets/icons/PetIcon";
 import WifiIcon from "../../assets/icons/WifiIcon";
 
 /**
+ * Component for rendering icons for parking, wifi, pets and breakfast
  *
- * @param {*} param0
- * @returns
+ * @component
+ * @param {Object} props - Props for the component
+ * @param {Object} props.metaData - Object from API containing meta values
+ * @param {boolean} [props.fullList] - Indicates whether to render the full list of icons with labels
+ * @returns {JSX.Element} - The rendered component
  */
 function MetaIcons({ metaData, fullList }) {
   if (metaData) {

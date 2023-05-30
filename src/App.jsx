@@ -3,6 +3,7 @@ import "./fonts.css";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { API_ROOT } from "./js/constants";
 import getAuth from "./js/getAuth";
@@ -14,6 +15,7 @@ import { theme } from "./theme";
 function App() {
   const isLoggedIn = getAuth();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { accessToken, userName } = getLocalStorage();
   /**
@@ -61,7 +63,11 @@ function App() {
         };
         dispatch(setUserInfo(userInfo));
       }
-    } catch (error) {}
+    } catch (error) {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("userName");
+      navigate("/login");
+    }
   }
 
   function handleRefresh() {

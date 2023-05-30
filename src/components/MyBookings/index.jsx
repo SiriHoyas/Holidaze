@@ -12,6 +12,7 @@ import { locationConverter } from "../../js/locationConverter";
 function MyBookings({ booking, setUpdateInfo }) {
   const [imageError, setImageError] = useState(false);
   const hasImages = booking.venue.media && booking.venue.media.length > 0;
+  const [error, setError] = useState(false);
   const handleImageError = () => {
     setImageError(true);
   };
@@ -30,11 +31,16 @@ function MyBookings({ booking, setUpdateInfo }) {
       },
     };
     try {
-      const response = await fetch(`${API_ROOT}/bookings/${booking.id}`, options);
+      const response = await fetch(`${API_ROOT}/boo   kings/${booking.id}`, options);
       if (response.ok) {
         setUpdateInfo(0);
+        setError(false);
+      } else {
+        setError(true);
       }
-    } catch (error) {}
+    } catch (error) {
+      setError(true);
+    }
   }
 
   return (
@@ -56,6 +62,11 @@ function MyBookings({ booking, setUpdateInfo }) {
           <Typography variant="body1">
             {formattedFrom} - {formattedTo}
           </Typography>
+          {error && (
+            <Typography variant="body2" color={"error.main"}>
+              Something went wrong, please try again later
+            </Typography>
+          )}
           <Button onClick={handleDelete} fullWidth size="small" variant="outlined" startIcon={<DisabledByDefaultIcon />} sx={{ borderColor: "error.dark", color: "error.dark", mt: "2rem" }}>
             Delete booking
           </Button>

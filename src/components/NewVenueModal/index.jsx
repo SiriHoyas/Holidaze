@@ -20,6 +20,7 @@ function NewVenueModal({ setUpdateInfo }) {
   const [imageUrls, setImageUrls] = useState([]);
   const [formData, setFormData] = useState([]);
   const [venueCreated, setVenueCreated] = useState(false);
+  const [error, setError] = useState(false);
   const { accessToken } = getLocalStorage();
 
   function deleteItem(id) {
@@ -73,8 +74,13 @@ function NewVenueModal({ setUpdateInfo }) {
         setAddUrl("");
         setImageUrls([]);
         setUpdateInfo(0);
+        setError(false);
+      } else {
+        setError(true);
       }
-    } catch (error) {}
+    } catch (error) {
+      setError(true);
+    }
   }
 
   function postNewVenue(data) {
@@ -132,6 +138,11 @@ function NewVenueModal({ setUpdateInfo }) {
           ) : (
             <>
               <Typography variant="h2">Add new venue</Typography>
+              {error && (
+                <Typography variant="body2" color={"error.main"}>
+                  Something went wrong, please try again later
+                </Typography>
+              )}
               <form onSubmit={handleSubmit(postNewVenue)}>
                 <Grid container rowGap={2} direction={"column"}>
                   <Controller name="name" control={control} render={({ field }) => <TextField autoComplete="off" helperText={errors.name?.message} {...field} size="small" fullWidth required id="venueName" label="Venue name" variant="outlined" />} />

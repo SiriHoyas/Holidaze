@@ -1,7 +1,7 @@
 import { ButtonBase, Grid, IconButton, TextField, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { hasSetDateRange } from "./../../js/search.js";
@@ -12,10 +12,23 @@ import DateRangePicker from "../DatePicker";
 import GuestCountPicker from "../GuestCountPicker/GuestCountPicker";
 import MoreChoices from "./MoreChoices";
 
-function Search({ params }) {
+function Search() {
   const [showMoreChoices, setShowMoreChoices] = useState(false);
   const [searchParams, setSearchParams] = useState({});
   const [location, setLocation] = useState("");
+  const [definedSearchParams, setDefinedSearchParams] = useState(false);
+
+  const { keyword, dateFrom, dateTo } = useSelector((store) => {
+    return store.searchParams;
+  });
+
+  useEffect(() => {
+    if (dateFrom && dateTo) {
+      setDefinedSearchParams(true);
+    } else {
+      setDefinedSearchParams(false);
+    }
+  }, [dateFrom, dateTo]);
 
   const theme = useTheme();
   const laptopScreen = useMediaQuery(theme.breakpoints.up("lg"));
@@ -24,14 +37,18 @@ function Search({ params }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const updatedValue = { keyword: location };
+  useEffect(
+    () => {
+      const updatedValue = { keyword: location };
 
-    setSearchParams((input) => ({
-      ...input,
-      ...updatedValue,
-    }));
-  }, [location]);
+      setSearchParams((input) => ({
+        ...input,
+        ...updatedValue,
+      }));
+    },
+    [location],
+    keyword
+  );
 
   function openChoices() {
     setShowMoreChoices((prev) => !prev);
@@ -48,6 +65,7 @@ function Search({ params }) {
           autoComplete="off"
           id="outlined-basic"
           label="Where to?"
+          value={definedSearchParams ? keyword : location || ""}
           onChange={(e) => {
             setLocation(e.target.value);
           }}

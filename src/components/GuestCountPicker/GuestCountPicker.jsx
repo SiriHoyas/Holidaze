@@ -98,19 +98,6 @@ function GuestCountPicker({ state, setSearchParams, maxGuests = 10 }) {
             </Grid>
           </Grid>
         </Grid>
-        <Divider variant="middle" />
-        <Grid container direction={"column"} sx={{ padding: "1rem" }}>
-          <FormControlLabel
-            control={<Checkbox />}
-            onClick={() => {
-              setBringPet((prev) => {
-                return !prev;
-              });
-            }}
-            label="I'm bringing a pet"
-          />
-          <Button label={"Done"} onClick={handleClose} />
-        </Grid>
       </Menu>
     </Grid>
   );

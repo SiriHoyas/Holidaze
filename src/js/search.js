@@ -46,7 +46,9 @@ export async function fetchVenues(offset = 0) {
     if (result.ok) {
       return await result.json();
     }
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 }
 /**
  * Takes in an array of venues and returns a filtered array based on the search params provided by the user in the search bar.

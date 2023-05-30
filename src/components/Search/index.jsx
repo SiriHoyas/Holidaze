@@ -37,18 +37,14 @@ function Search() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(
-    () => {
-      const updatedValue = { keyword: location };
+  useEffect(() => {
+    const updatedValue = { keyword: location };
 
-      setSearchParams((input) => ({
-        ...input,
-        ...updatedValue,
-      }));
-    },
-    [location],
-    keyword
-  );
+    setSearchParams((input) => ({
+      ...input,
+      ...updatedValue,
+    }));
+  }, [location, keyword]);
 
   function openChoices() {
     setShowMoreChoices((prev) => !prev);

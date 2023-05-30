@@ -50,9 +50,13 @@ function HomePage() {
                 <Typography variant="h5" sx={{ mt: "4rem", mb: "1rem" }}>
                   Bring your furry friends!
                 </Typography>
-                <Grid container spacing={6}>
+                <Grid container spacing={6} sx={{ mb: "8rem" }}>
                   {allowPetsData.map((venue) => {
-                    return <VenueCard key={venue.id} data={venue} path={`venues/${venue.id}`} />;
+                    return (
+                      <Grid item key={venue.id} xs={12} sm={6} md={4}>
+                        <VenueCard data={venue} path={venue.id} />
+                      </Grid>
+                    );
                   })}
                 </Grid>
               </Grid>

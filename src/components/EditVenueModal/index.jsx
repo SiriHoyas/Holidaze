@@ -82,8 +82,13 @@ function EditVenueModal({ venue, open, handleClose, id }) {
         const response = await fetch(`https://api.noroff.dev/api/v1/holidaze/venues/${id}`, options);
         if (response.ok) {
           navigate(-1);
+          setError(false);
+        } else {
+          setError(true);
         }
-      } catch (error) {}
+      } catch (error) {
+        setError(true);
+      }
     }
 
     useEffect(() => {

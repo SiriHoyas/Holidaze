@@ -62,7 +62,7 @@ function HomePage() {
                   {allowPetsData.map((venue) => {
                     return (
                       <Grid item key={venue.id} xs={12} sm={6} md={4}>
-                        <VenueCard data={venue} path={venue.id} />
+                        <VenueCard data={venue} path={`venues/${venue.id}`} />
                       </Grid>
                     );
                   })}

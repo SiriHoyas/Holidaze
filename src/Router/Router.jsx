@@ -1,8 +1,5 @@
-import { Grid } from "@mui/material";
-import { Link, Route, Routes } from "react-router-dom";
-
+import { Route, Routes } from "react-router-dom";
 import Layout from "../components/Layout";
-import getAuth from "../js/getAuth";
 import ErrorPage from "../pages/ErrorPage";
 import HomePage from "../pages/HomePage";
 import Login from "../pages/Login";
@@ -13,7 +10,6 @@ import Venues from "../pages/Venues";
 import ProtectedRoute from "./ProtectedRoute";
 
 function Router() {
-  const isLoggedIn = getAuth();
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
